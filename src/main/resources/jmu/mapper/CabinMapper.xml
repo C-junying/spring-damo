@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jmu.mapper.CabinMapper">
+
+    <insert id="insertCabin">
+        insert into cabin VALUES (#{cabinID},#{cabinClass})
+    </insert>
+
+    <update id="updateCabin">
+        update cabin set cabin_class=#{cabinClass} where cabin_id=#{cabinID}
+    </update>
+
+    <delete id="deleteByID">
+        delete from cabin where cabin_id=#{cabinID}
+    </delete>
+
+    <select id="selectByID" resultType="jmu.pojo.Cabin">
+        select * from cabin where cabin_id=#{cabinID}
+    </select>
+    <select id="selectAllCabins" resultType="java.util.Map">
+        select * from cabin
+    </select>
+
+</mapper>

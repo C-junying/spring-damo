@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jmu.mapper.OrderMapper">
+
+    <insert id="insertOrder">
+        insert into `order`(order_id,user_id,order_costs,payment_status)
+        VALUES (#{orderID},#{userID},#{orderCosts},#{paymentStatus})
+    </insert>
+
+    <update id="updateOrder">
+        update `order` set user_id=#{userID},order_costs=#{orderCosts}
+                         ,payment_status=#{paymentStatus} where order_id=#{orderID}
+    </update>
+
+    <delete id="deleteByID">
+        delete from `order` where order_id=#{orderID}
+    </delete>
+
+    <select id="selectByID" resultType="jmu.pojo.Order">
+        select * from `order` where order_id=#{orderID}
+    </select>
+
+    <select id="selectByUserID" resultType="jmu.pojo.Order">
+        select * from `order` where user_id=#{userID}
+    </select>
+</mapper>
+

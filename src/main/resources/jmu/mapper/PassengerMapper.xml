@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jmu.mapper.PassengerMapper">
+
+    <insert id="insertPassenger">
+        insert into passenger(user_id,passenger_id, passenger_name, sex, phone)
+        VALUES (#{userID},#{passengerID}, #{passengerName}, #{sex}, #{phone})
+    </insert>
+
+    <update id="updatePassenger">
+        update passenger
+        set passenger_name=#{passengerName},
+            sex=#{sex},
+            phone=#{phone}
+        where passenger_id = #{passengerID} and user_id=#{userID}
+    </update>
+
+    <delete id="deleteByID">
+        delete from passenger where passenger_id = #{passengerID} and user_id=#{userID}
+    </delete>
+
+    <select id="selectByID" resultType="jmu.pojo.Passenger">
+        select *
+        from passenger
+        where passenger_id = #{passengerID} and user_id=#{userID}
+    </select>
+
+    <select id="selectUserByID" resultType="jmu.pojo.Passenger">
+        select * from passenger where user_id=#{userID}
+    </select>
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jmu.mapper.CityMapper">
+
+    <select id="selectAllCities" resultType="java.util.Map">
+        select *
+        from city
+    </select>
+
+    <select id="queryCityByID" resultType="jmu.pojo.City">
+        select *
+        from city
+        <where>
+            <if test="city_id != null and city_id !=''">city_id = #{cityID}</if>
+        </where>
+    </select>
+
+    <select id="queryCityByName" resultType="jmu.pojo.City">
+        select *
+        from city
+        <where>
+            <if test="city_Name != null and city_Name !=''">city_Name like concat('%',#{cityName},'%')</if>
+        </where>
+    </select>
+
+    <insert id="insertCity">
+        insert into city values (#{cityID},#{cityName})
+    </insert>
+
+    <update id="updateCity">
+        update city set city_name = #{cityName} where city_id = #{cityID}
+    </update>
+
+    <delete id="deleteCityByID">
+        delete from city where city_id = #{cityID}
+    </delete>
+</mapper>

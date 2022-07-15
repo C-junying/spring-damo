@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jmu.mapper.AirportMapper">
+
+    <resultMap id="airportMap" type="jmu.pojo.Airport">
+        <id column="airport_id" property="airportID"/>
+        <result column="city_id" property="cityID"/>
+        <result column="airport_name" property="airportName"/>
+        <collection property="terminals" ofType="jmu.pojo.Terminal">
+            <id column="terminal_id" property="terminalID"/>
+            <result column="airport_id" property="airportID"/>
+            <result column="terminal_name" property="terminalName"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectAllAirports" resultMap="airportMap">
+        select *
+        from airport,terminal
+        where airport.airport_id = terminal.airport_id
+    </select>
+
+    <select id="queryAirportByID" resultType="jmu.pojo.Airport">
+        select *
+        from airport
+        where airport_id = #{airportID}
+    </select>
+
+    <delete id="deleteAirportByID">
+        delete
+        from airport
+        where airport_id = #{airportID}
+    </delete>
+    <insert id="insertAirport">
+        insert into airport(airport_id, city_id, airport_name)
+        VALUES (#{airportID}, #{cityID}, #{airportName})
+    </insert>
+    <update id="updateAirport">
+        update airport
+        set city_id=#{cityID},
+            airport_name=#{airportName}
+        where airport_id = #{airportID}
+    </update>
+
+</mapper>

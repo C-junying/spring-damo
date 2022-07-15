@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jmu.mapper.TicketTypeMapper">
+
+    <insert id="insertTicketType">
+        insert into tickettype(ticket_type_id, start_airport_id, start_station_id, end_airport_id, end_station_id, ticket_pricing,
+                               discount, insurance_costs,ticket_count,remaining_tickets)
+        VALUES (#{ticketTypeID}, #{startAirportID}, #{startStationID}, #{endAirportID}, #{endStationID},
+                #{ticketPricing}, #{discount}, #{insuranceCosts},#{ticketCount},#{remainingTickets})
+    </insert>
+
+    <update id="updateTicketType">
+        update tickettype
+        set start_airport_id=#{startAirportID},
+            start_station_id=#{startStationID},
+            end_airport_id=#{endAirportID},
+            end_station_id=#{endStationID},
+            ticket_pricing=#{ticketPricing},
+            discount=#{discount},
+            insurance_costs=#{insuranceCosts},
+            ticket_count=#{ticketCount},
+            remaining_tickets=#{remainingTickets}
+        where ticket_type_id = #{ticketTypeID}
+    </update>
+
+    <delete id="deleteByID">
+        delete
+        from tickettype
+        where ticket_type_id = #{ticketTypeID}
+    </delete>
+
+    <select id="selectByID" resultType="jmu.pojo.TicketType">
+        select *
+        from tickettype
+        where ticket_type_id = #{ticketTypeID}
+    </select>
+
+    <select id="selectAll" resultType="java.util.Map">
+        select *
+        from tickettype
+    </select>
+    
+    <resultMap id="ticketpassenger" type="jmu.vo.TicketName">
+        <id column="ticket_type_id" property="ticketTypeID"/>
+        <result column="start_city" property="startCityName"/>
+        <result column="start_airport" property="startAirportName"/>
+        <result column="start_terminal" property="startStationName"/>
+        <result column="end_city" property="endCityName"/>
+        <result column="end_airport" property="endAirportName"/>
+        <result column="end_terminal" property="endStationName"/>
+        <result column="ticket_pricing" property="ticketPricing"/>
+        <result column="discount" property="discount"/>
+        <result column="insurance_costs" property="insuranceCosts"/>
+        <result column="ticket_count" property="ticketCount"/>
+        <result column="remaining_tickets" property="remainingTickets"/>
+        <collection property="airTickets" ofType="jmu.pojo.AirTicket">
+            <id column="user_id" property="airTicketID" />
+            <id column="book_time" property="bookTime" />
+            <result column="passenger_id" property="passengerID" />
+            <result column="order_id" property="orderID" />
+            <result column="ticket_type_id" property="ticketTypeID" />
+            <result column="total_costs" property="totalCosts" />
+            <result column="seat_number" property="seatNumber" />
+            <result column="cabin_id" property="cabinID" />
+            <association property="passenger" javaType="jmu.pojo.Passenger">
+                <id column="passenger_id" property="passengerID" />
+                <result column="passenger_name" property="passengerName" />
+                <result column="sex" property="sex" />
+                <result column="phone" property="phone" />
+            </association>
+            <association property="cabin" javaType="jmu.pojo.Cabin">
+                <id column="cabin_id" property="cabinID" />
+                <result column="cabin_class" property="cabinClass" />
+            </association>
+        </collection>
+    </resultMap>
+
+    <select id="queryTicketPassenger" resultMap="ticketpassenger">
+        select ti.*,end_city,end_airport,end_terminal
+        from (select a.*,air.order_id,air.total_costs,air.seat_number,air.book_time,p.*,c.*
+              from air_start_airport a ,airticket air,passenger p,cabin c
+              where a.ticket_type_id=air.ticket_type_id and air.passenger_id=p.passenger_id and air.cabin_id=c.cabin_id) ti left join air_end_airport b on ti.ticket_type_id = b.ticket_type_id
+        where ti.ticket_type_id=#{ticketTypeID}
+    </select>
+
+
+</mapper>

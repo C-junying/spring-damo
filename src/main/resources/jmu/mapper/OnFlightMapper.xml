@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jmu.mapper.OnFlightMapper">
+
+    <select id="selectAllOnFlights" resultType="jmu.pojo.OnFlight">
+        select * from onflight
+    </select>
+
+    <select id="selectByID" resultType="jmu.pojo.OnFlight">
+        select * from onflight
+        where on_flight_id = #{onFlightID}
+    </select>
+
+    <select id="selectByIDTime" resultType="jmu.pojo.OnFlight">
+        select * from onflight
+        where on_flight_id = #{onFlightID} and
+              estimated_takeoff_time = #{takeoff}
+    </select>
+
+    <insert id="insertOnFlight">
+        insert into onflight values (#{onFlightID},#{typeID},#{ticketTypeID},#{currentStatus},#{estimatedTakeoffTime},
+                                     #{actualTakeoffTime},#{estimatedArrivalTime},#{actualArrivalTime},#{boardingGate});
+    </insert>
+
+    <update id="updateOnFlight">
+        update onflight
+        <set>
+            <if test="onFlight.typeID!=null">type_id=#{onFlight.typeID},</if>
+            <if test="onFlight.ticketTypeID!=null">ticket_type_id=#{onFlight.ticketTypeID},</if>
+            <if test="onFlight.currentStatus!=null">current_status=#{onFlight.currentStatus},</if>
+            <if test="onFlight.estimatedTakeoffTime!=null">estimated_takeoff_time=#{onFlight.estimatedTakeoffTime},</if>
+            <if test="onFlight.actualTakeoffTime!=null">actual_takeoff_time=#{onFlight.actualTakeoffTime},</if>
+            <if test="onFlight.estimatedArrivalTime!=null">estimated_arrival_time=#{onFlight.estimatedArrivalTime},</if>
+            <if test="onFlight.actualArrivalTime!=null">actual_arrival_time=#{onFlight.actualArrivalTime},</if>
+            <if test="onFlight.boardingGate!=null">boarding_gate=#{onFlight.boardingGate}</if>
+        </set>
+        where on_flight_id = #{onFlightID} and
+        estimated_takeoff_time = #{takeoff}
+    </update>
+    <delete id="deleteByIDTime">
+        delete from onflight where on_flight_id = #{onFlightID} and
+            estimated_takeoff_time = #{takeoff}
+    </delete>
+
+    <resultMap id="onfligthAndTicket" type="jmu.pojo.OnFlight">
+        <id column="on_flight_id" property="onFlightID"/>
+        <id column="estimated_takeoff_time" property="estimatedTakeoffTime"/>
+        <result column="type_name" property="typeID"/>
+        <result column="ticket_type_id" property="ticketTypeID"/>
+        <result column="current_status" property="currentStatus"/>
+        <result column="actual_takeoff_time" property="actualTakeoffTime"/>
+        <result column="estimated_arrival_time" property="estimatedArrivalTime"/>
+        <result column="actual_arrival_time" property="actualArrivalTime"/>
+        <result column="boarding_gate" property="boardingGate"/>
+        <association property="ticketType" javaType="jmu.vo.TicketName">
+            <id column="ticket_type_id" property="ticketTypeID"/>
+            <result column="start_city" property="startCityName"/>
+            <result column="start_airport" property="startAirportName"/>
+            <result column="start_terminal" property="startStationName"/>
+            <result column="end_city" property="endCityName"/>
+            <result column="end_airport" property="endAirportName"/>
+            <result column="end_terminal" property="endStationName"/>
+            <result column="ticket_pricing" property="ticketPricing"/>
+            <result column="discount" property="discount"/>
+            <result column="insurance_costs" property="insuranceCosts"/>
+            <result column="ticket_count" property="ticketCount"/>
+            <result column="remaining_tickets" property="remainingTickets"/>
+        </association>
+    </resultMap>
+
+    <select id="queryOnfligthAndTicket" resultMap="onfligthAndTicket">
+        select air_onflight.*,start_city,start_airport,start_terminal,end_city,end_airport,end_terminal
+             ,ticket_pricing,discount,insurance_costs,ticket_count,remaining_tickets
+        from air_onflight left join air_start_airport on air_onflight.ticket_type_id = air_start_airport.ticket_type_id
+            left join air_end_airport on air_start_airport.ticket_type_id = air_end_airport.ticket_type_id
+        <where>
+            <if test="startCityName!=null and startCityName!=''">and start_city =#{startCityName}</if>
+            <if test="endCityName!=null and endCityName!=''">and end_city=#{endCityName}</if>
+        </where>
+    </select>
+</mapper>

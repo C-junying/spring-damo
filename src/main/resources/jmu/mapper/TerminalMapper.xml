@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jmu.mapper.TerminalMapper">
+    <select id="selectAll" resultType="java.util.Map">
+        select *
+        from terminal
+    </select>
+
+    <select id="queryTerminalByTAID" resultType="jmu.pojo.Terminal">
+        select *
+        from terminal
+        where terminal_id = #{terminalID} and airport_id = #{airportID}
+    </select>
+
+    <insert id="insertTerminal">
+        insert into terminal(terminal_id,airport_id, terminal_name)
+        VALUES (#{terminalID},#{airportID}, #{terminalName})
+    </insert>
+
+    <update id="updateTerminal">
+        update terminal
+        set <if test="airportID!=null">airport_id=#{airportID},</if>
+        terminal_name=#{terminalName}
+        where terminal_id = #{terminalID}
+    </update>
+    <delete id="deleteTerminalByID">
+        delete
+        from terminal
+        where terminal_id = #{terminalID} and airport_id = #{airportID}
+    </delete>
+</mapper>
