@@ -15,7 +15,9 @@ public interface UserMapper {
 
     int insertUser(User user);          //插入用户
 
-    User selectUser(String userID);     //根据ID返回用户
+    User selectID(String userID);     //根据ID返回用户
+
+    User selectUser(String userID,String userPassword);     //判断用户是否存在
 
     int updateUser(User user);          //更新用户
 }

@@ -1,0 +1,351 @@
+:root{
+    /* border-radius */
+    --border-radius:10px;
+
+    /* box-shadow color */
+    --box-color:#88888880;
+}
+body{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background: #fff;
+}
+/* 容器宽 */
+#home_container{
+    width: 100%;
+    margin: 0 auto;
+}
+#home_container .home_box{
+    width: 100%;
+    margin: 0 auto;
+}
+/* 主体控件宽 */
+header,figure,main{
+    width: 980px;
+    margin: 0 auto;
+}
+/* header内容设置 */
+header{
+    position: relative;
+    height: 90px;
+    background-color: #fff;
+    padding-top: 1px;
+}
+/* 设置log与项目名 */
+header section.title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 300px;
+    left: -25px;
+    top: 15px;
+}
+/* log */
+section.title embed{
+    width: 100px;
+    height: 60px;
+}
+/* 项目名 */
+section.title h2{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2rem;
+    color: #4eb8ea;
+    letter-spacing: 0.2rem;
+}
+/* 导航菜单栏 */
+header nav.menu{
+    margin: 19px auto;
+    padding: 5px;
+    font-size: 1.2rem;
+    text-align: center;
+}
+/* 清除之后的浮动 */
+header nav.menu::after{
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+/* 设置ul为行内块元素 */
+nav.menu > ul{
+    display: inline-block;
+}
+/* header下的所有li设置左浮动 */
+header li{
+    float: left;
+    position: relative;
+    z-index: 2;
+}
+/* li中的a */
+header li a{
+    display: block;
+    padding:.25em .8em;
+	font-family:"Source Sans Pro", helvetica, sans-serif;
+	font-style: normal;
+	font-weight:600;
+	font-size:1.2rem;
+    line-height: 2rem;
+	color:#000;
+	text-decoration:none; /* removes link underlining */
+}
+/* 设置a标签高度 */
+nav.menu li a{
+    height: 55px;
+}
+/* 鼠标悬浮在a标签的效果 */
+nav.menu li a:hover{
+    font-size: 1.4rem;
+    color: #00BFFF96;
+    /* border-bottom: 5px solid #00BFFF; */
+}
+/* 鼠标点击a标签效果 */
+nav.menu li a:active{
+    font-size: 1.4rem;
+    color: red;
+}
+/* 菜单栏的登录注册 */
+header aside.login_register{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    height: 30px;
+    top: 28px;
+    right: 20px;
+    border-radius: 15px 0 15px 0;
+    border: 1px solid burlywood;
+    overflow: hidden;
+}
+/* 设置菜单栏登录注册的位置 */
+aside.login_register li{
+    float: right;
+}
+/* a标签样式 */
+aside.login_register li a{
+    font-family:"Source Sans Pro", helvetica, sans-serif;
+	font-style: normal;
+    font-weight: 400; 
+    font-size:0.9rem;
+	color:#888;
+}
+/* a标签右边框 */
+aside.login_register li:last-child a{
+    border-right: 2px solid red;
+}
+/* li悬浮效果 */
+aside.login_register li:last-child:hover{
+    background-color: #EE7600A0;
+}
+/* li点击效果 */
+aside.login_register li:last-child:active{
+    background-color: #EE7600A0;
+}
+/* li悬浮效果 */
+aside.login_register li:first-child:hover{
+    background-color: #00FF7FA0;
+}
+/* li点击效果 */
+aside.login_register li:first-child:active{
+    background-color: #00FF7FA0;
+}
+/* a标签点击效果 */
+aside.login_register li a:active{
+    font-weight: 600;
+    font-size: 1rem;
+    color: #FF0000;
+}
+/* 菜单栏下的阴影 */
+#home_container .box-shadow{
+    width: 100%;
+    height: 0px;
+    box-shadow: 0px 3px 5px 2px var(--box-color);
+}
+/* 背景幻灯片 */
+#home_container figure{
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    height: 590px;
+    margin-top: 4px;
+    clear: both;
+}
+/* 背景图片大小 */
+#home_container figure img{
+    width: 100%;
+    height: 100%;
+}
+/* 点 */
+#home_container .dots{
+    margin-top: -40px;
+    margin-right: 50px;
+}
+/* 标记符号 */
+#home_container .dot {
+    display: inline-block;
+    cursor:pointer;
+    height: 13px;
+    width: 13px;
+    margin: 0 5px;
+    background-color: #FFF;
+    border-radius: 50%;
+    transition: background-color 0.6s ease;
+}
+#home_container .active, #home_container .dot:hover {
+    background-color: #717171;
+}
+/* 淡出动画 */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+  
+@-webkit-keyframes fade {
+from {opacity: .4} 
+to {opacity: 1}
+}
+
+@keyframes fade {
+from {opacity: .4} 
+to {opacity: 1}
+}
+
+#home_container main{
+    position: relative;
+    margin-top: 10px;
+    height: 590px;
+    z-index: 2;
+}
+#home_container main .query{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    min-width: 300px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.8rem;
+    padding-right: 10px;
+    box-shadow: 3px 2px 5px 1px var(--box-color);
+    border-radius: var(--border-radius);
+    background-color: #fff;
+}
+#home_container main .query::after{
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+.query section.query_float{
+    float: left;
+    margin-right: 10px;
+}
+section.query_float ul{
+    color: #fff;
+    background:linear-gradient(#1741A5,#2E6FD2);
+}
+section.query_float li.select_service{
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+section.query_float ul,section.query_float li:first-child.select_service{
+    border-top-left-radius: var(--border-radius) ;
+}
+section.query_float ul,section.query_float li:last-child.select_service{
+    border-bottom-left-radius: var(--border-radius);
+}
+section.query_float li.select_service span{
+    color: #469BF0;
+    font-size: 1.7rem;
+}
+section.query_float li.select_service p{
+    margin-top: 5px;
+}
+section.query_float li.select_service.select_active{
+    color: #104da8;
+    background-color: #fff;
+    box-shadow: -2px -1px 2px 1px var(--box-color) inset;
+}
+section.query_float .btns{
+    padding: 20px 3px;
+}
+section.query_float .btn{
+    width: 4.5rem;
+    height: 1.5rem;
+    padding: 5px;
+    line-height: 1.2;
+    margin: 0 3px;
+    border: none;
+    border-radius: 2rem;
+    color: #889EB9;
+    background: #D8D8D8;
+    cursor: pointer;
+}
+section.query_float .btns .btn:hover{
+    color: #fff;
+    background: linear-gradient(90deg,#02C8FF,#3282FF);
+}
+section.query_float .btns .btn.btn-active{
+    color: #fff;
+    background: linear-gradient(90deg,#02C8FF,#3282FF);
+}
+section.query_float .btns span{
+    color: #FF8214;
+}
+.select-container form label{
+    display: none;
+}
+.select-container form section{
+    margin-bottom: 20px;
+}
+.select-container form .city{
+    float: left;
+    width: 75%;
+}
+.select-container form .exchange{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: right;
+    width: 36px;
+    height: 100px;
+    cursor: pointer;
+    border-radius: 18px;
+    background-color: #d3ecff;
+}
+.select-container form .exchange span{
+    font-size: 1.8rem;
+    color: #104da8;
+}
+.select-container form .exchange::after{
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+.select-container form label+input{
+    width: 100%;
+    height: 38px;
+    line-height: 40px;
+    padding: 5px 18px;
+    margin-right: 60px;
+    border: 1px dashed #88888890;
+    border-radius: 2rem;
+    box-sizing: border-box;
+}
+.select-container .submit-btn {
+    position: absolute;
+    bottom: -40px;
+    left: 150px;
+}
+.select-container .submit-btn .btn{
+    color: #FFF;
+    width: 185px;
+    height: 44px;
+    line-height: 44px;
+    background: linear-gradient(90deg,#FFA000,#FF6400);
+}

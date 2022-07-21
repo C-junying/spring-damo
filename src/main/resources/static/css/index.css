@@ -1,0 +1,247 @@
+/* 定义变量与主体字体 */
+:root {
+	/* COLORS */
+	--white: #FFF;
+	--gray: #333;
+	--blue: #0367a6;
+	--lightblue: #008997;
+	--warning:#F00;
+
+	/* RADII */
+	--button-radius: 0.7rem;
+
+	/* SIZES */
+	--max-width: 758px;
+	--max-height: 450px;
+
+	font-size: 16px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+/* 运用网格布局与背景，让内容居中 */
+body {
+	align-items: center;
+	background-color: var(--white);
+	background: url("../img/plane2.jpg");
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	display: grid;
+	height: 80vh;
+	place-items: center;
+}
+/* h2主体 */
+.container fieldset legend h2 {
+	font-weight: 700;
+	margin: 0;
+	margin-bottom: 1.25rem;
+	font-size: 1.3rem;
+	text-transform: uppercase;
+}
+/* a标签 */
+.container fieldset a {
+	color: var(--gray);
+	font-size: 0.9rem;
+	margin: 1.5rem 0;
+	text-decoration: none;
+}
+/* 组件开始 */
+.container {
+	background-color: var(--white);
+	border-radius: var(--button-radius);
+	box-shadow: 0 0.9rem 1.7rem rgba(0, 0, 0, 0.25),
+		0 0.7rem 0.7rem rgba(0, 0, 0, 0.22);
+	height: var(--max-height);
+	max-width: var(--max-width);
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+}
+/* 对注册登录表单 */
+.container .container__form {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	transition: all 0.6s ease-in-out;
+}
+/* 控制变换后的登录组件显示 */
+.container .container--signin {
+	left: 0;
+	width: 50%;
+	z-index: 2;
+}
+/* 让当前登录移动到注册位置 */
+.container.right-panel-active .container--signin {
+	transform: translateX(100%);
+}
+/* 变换后注册覆盖级小于登录并透明 */
+.container  .container--signup {
+	left: 0;
+	opacity: 0;
+	width: 50%;
+	z-index: 1;
+}
+/* 当前注册覆盖登录 */
+.container.right-panel-active .container--signup {
+	opacity: 1;
+	transform: translateX(100%);
+	z-index: 5;
+}
+/* 让变换点击按钮主体登录位置 */
+.container__overlay {
+	height: 100%;
+	left: 50%;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	transition: transform 0.6s ease-in-out;
+	width: 50%;
+	z-index: 100;
+}
+/* 变换后，移动按钮主体位置到注册位置 */
+.container.right-panel-active .container__overlay {
+	transform: translateX(-100%);
+}
+
+/* 设置变换按钮主体背景 */
+.container .container__overlay .overlay {
+	background-color: var(--lightblue);
+	background: url("../img/plane2.jpg");
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+	left: -100%;
+	position: relative;
+	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+	width: 200%;
+	opacity: 0.8;
+}
+/* 让 按钮移动*/
+.container.right-panel-active .overlay {
+	transform: translateX(50%);
+}
+/* 让按钮位于主体中心 */
+.overlay .overlay__panel {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: center;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
+	width: 50%;
+}
+/* 让变换注册按钮与登录重合 */
+.overlay .overlay--right {
+	right: 0;
+	transform: translateX(0);
+}
+/* 变换注册按钮一直中心 */
+.container.right-panel-active .overlay--right {
+	transform: translateX(20%);
+}
+/* 所有button样式设定 */
+.container .btn {
+	background-color: var(--blue);
+	background-image: linear-gradient(90deg, var(--blue) 0%, var(--lightblue) 74%);
+	border-radius: 20px;
+	border: 1px solid var(--blue);
+	color: var(--white);
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: bold;
+	letter-spacing: 0.1rem;
+	padding: 0.9rem 4rem;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+/* 表单内按钮下移 */
+.container section > .btn {
+	margin-top: 1.5rem;
+}
+/* 点击效果 */
+.container .btn:active {
+	transform: scale(0.95);
+}
+/* 让表单居中 */
+section.container__form form {
+	background-color: var(--white);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 3rem;
+	height: 100%;
+	text-align: center;
+}
+/* 设置每个按钮定位 */
+section.container__form form section{
+	position: relative;
+}
+/* 输入框样式 */
+section.container__form section input {
+	border: none;
+	border-bottom: 2px dashed var(--lightblue);
+	border-radius: 16px;
+	font-size: 1.1rem;
+	padding: 0.5rem 0.7rem;
+	margin: 0.5rem 0;
+	width: 100%;
+	cursor: pointer;
+}
+/* 设置登录注册按钮宽度 */
+section.container__form section .btn{
+	padding: 0.5rem;
+	width: 50%;
+}
+/* 让label位于输入框内 */
+section.container__form section label{
+	position: absolute;
+	top: 0.2rem;
+	left: 0;
+	padding: 0.9rem ;
+	font-size: 1rem;
+	color: 	#CDC9C9;
+	transition: .5s;
+	cursor: pointer;
+	user-select:none;
+}
+/* 设置图标大小 */
+section.container__form section label span{
+	font-size: 1.2rem;
+}
+/* 输入框聚焦效果 */
+section.container__form section input:focus ~ label,
+section.container__form section input:valid ~ label{
+	top: -20px;
+	left: 0;
+	color: #03e9f4;
+	font-size: 0.7rem;
+}
+/* 让图片与变换一致 */
+section.container__form section input:focus ~ label span,
+section.container__form section input:valid ~ label span{
+	font-size: 0.8rem;
+}
+/* 设置提示样式并能显示 */
+section.container__form aside{
+	display: none;
+	position: absolute;
+	font-size: 0.7rem;
+	color: var(--warning);
+	left: 200px;
+	z-index: 2;
+}
+/* 提示内的图标 */
+section.container__form aside span{
+	color: var(--warning);
+	font-size: 0.8rem;
+}
+

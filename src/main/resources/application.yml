@@ -1,7 +1,5 @@
 server:
   port: 8080
-  servlet:
-    context-path: /demo
 
 spring:
   datasource:
@@ -12,11 +10,9 @@ spring:
   mvc:
     view:
       prefix: /
-      suffix: .jsp
+      suffix: .html
   thymeleaf:
     cache: false
-    check-template: false
-    check-template-location: false
 
 mybatis:
   mapper-locations: classpath:mapper/**.xml

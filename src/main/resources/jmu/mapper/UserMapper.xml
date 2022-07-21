@@ -20,6 +20,9 @@
         select * from user
     </select>
     <select id="selectUser" resultType="jmu.pojo.User">
+        select * from user where user_id=#{userID} and user_password=#{userPassword}
+    </select>
+    <select id="selectID" resultType="jmu.pojo.User">
         select * from user where user_id=#{userID}
     </select>
 

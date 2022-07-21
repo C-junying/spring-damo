@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+<div id="home_container">
+    <div class="home_box">
+        <header>
+            <section class="title">
+                <embed src="img/airplane-log.svg" type="image/svg+xml" />
+                <h2>人人航空</h2>
+            </section>
+            <nav class="menu">
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">预订机票</a></li>
+                    <li><a href="#">我的订单</a></li>
+                    <li><a href="#">个人中心</a></li>
+                </ul>
+            </nav>
+            <aside class="login_register">
+                <ul>
+                    <li><a href="#">注册</a></li>
+                    <li><a href="#">登录</a></li>
+                </ul>
+            </aside>
+        </header>
+        <div class="box-shadow"></div>
+    </div>
+    <figure >
+        <figcaption style="display: none;">background_image</figcaption>
+        <img th:src="@{img/air01.jpg}" style="width:100%" class="mySlides" alt="背景图片">
+        <div class="dots" style="text-align:right"></div>
+    </figure>
+    <div class="home_box">
+        <main>
+            <div class="query">
+                <section class="query_float">
+                    <ul>
+                        <li class="select_service select_active">
+                            <span class="iconfont icon-paper-plane"></span>
+                            <p>机票预订</p>
+                        </li>
+                        <li class="select_service">
+                            <span class="iconfont icon-phone"></span>
+                            <p>机票预订</p>
+                        </li>
+                        <li class="select_service">
+                            <span class="iconfont icon-AddProducts"></span>
+                            <p>机票预订</p>
+                        </li>
+                        <li class="select_service">
+                            <span class="iconfont icon-shouji"></span>
+                            <p>机票预订</p>
+                        </li>
+                    </ul>
+                </section>
+                <section class="query_float">
+                    <nav class="btns">
+                        <button class="btn btn-active">单程</button>
+                        <button class="btn">返程</button>
+                        <button class="btn">多程</button>
+                        <span class="iconfont icon-question-circle-fill"></span>
+                    </nav>
+                    <div style="height: 1rem;"></div>
+                    <div class="select-container">
+                        <form action="#">
+                            <div class="city">
+                                <section>
+                                    <label for="startCity">出发城市</label>
+                                    <input type="text" name="startCity" id="startCity" placeholder="出发城市">
+                                </section>
+                                <section>
+                                    <label for="endCity">到达城市</label>
+                                    <input type="text" name="endCity" id="endCity" placeholder="到达城市">
+                                </section>
+                            </div>
+                            <section class="exchange">
+                                        <span class="iconfont icon-exchange30">
+                                        </span>
+                            </section>
+                            <section>
+                                <label for="takeoffDate">去程日期</label>
+                                <input type="text" name="takeoffDate" id="takeoffDate" placeholder="去程日期">
+                            </section>
+                            <section class="submit-btn">
+                                <input type="submit" value="查询" class="btn">
+                            </section>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+</div>
+<p th:if="${msg}!=null" id="alertText" style="display: none;">[[${msg}]]</p>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>

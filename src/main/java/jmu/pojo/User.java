@@ -1,5 +1,6 @@
 package jmu.pojo;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,4 +23,9 @@ public class User {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birthDate;             //出生日期
     private Integer balance;            //余额
+
+    public User(String userID,String userPassword){
+        this.userID = userID;
+        this.userPassword = userPassword;
+    }
 }

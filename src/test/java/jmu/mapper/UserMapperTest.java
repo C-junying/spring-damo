@@ -42,10 +42,13 @@ class UserMapperTest {
     }
 
     @Test
-    void selectUser() {
-        System.out.println(userMapper.selectUser("123456789123456789"));
+    void selectID() {
+        System.out.println(userMapper.selectID("123456789123456789"));
     }
-
+    @Test
+    void selectUser() {
+        System.out.println(userMapper.selectUser("520221200112252001","123456"));
+    }
     @Test
     void updateUser() throws ParseException {
         User user = new User("123456789123456789","列宽as","12345126",0,"12213456","123@qq.com"
