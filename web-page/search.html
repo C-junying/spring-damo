@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>js/jQuery实现类似百度搜索功能</title>
+  <meta name="Author" content="Michael">
+  <meta name="Keywords" content="js/jQuery实现类似百度搜索功能">
+  <meta name="Description" content="js/jQuery实现类似百度搜索功能,可用键盘控制">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.js"></script>
+  <style type="text/css">
+    #container{
+        position:absolute;
+        left:50%;
+        top: 40%;
+    }
+    #content{
+        float:left;
+        position:relative;
+        right:50%;
+    }
+    input{
+        border:0;
+        width:288px;
+        height:30px;
+        font-size:16px;
+        padding:0 5px;
+        line-height:30px;
+    }
+    .item{
+        padding:3px 5px;
+        cursor:pointer;
+    }
+    .addbg{
+        background:#87A900;
+    }
+    .first{
+        border:solid #87A900 2px;
+        width:300px;
+    }
+    #append{
+        border:solid #87A900 2px;
+        border-top:0;
+        display:none;
+    }
+  </style>
+ </head>
+
+ <body>
+    <p id="container">
+    <p id="content">
+        <p class="first"><input id="kw" onKeyup="getContent(this);" /></p>
+        <p id="append"></p>
+    </p>
+    </p>
+ </body>
+ <script type="text/javascript">
+    var data = [
+        "你好，我是Michael",
+        "你是谁",
+        "你最好啦",
+        "你最珍贵",
+        "你是我最好的朋友",
+        "你画我猜",
+        "你是笨蛋",
+        "你懂的",
+        "你为我着迷",
+        "你是我的眼"
+    ];
+    
+    $(document).ready(function(){
+        // 按键按下事件
+        $(document).keydown(function(e){
+            e = e || window.event;
+            var keycode = e.which ? e.which : e.keyCode;
+            if(keycode == 38){
+                // 向上移动
+                if(jQuery.trim($("#append").html())==""){
+                    return;
+                }
+                movePrev();
+            }else if(keycode == 40){
+                // 向下移动
+                if(jQuery.trim($("#append").html())==""){
+                    return;
+                }
+                // 退出聚焦
+                $("#kw").blur();
+                if($(".item").hasClass("addbg")){
+                    moveNext();
+                }else{
+                    // 移除背景，选取第一个，并添加背景
+                    $(".item").removeClass('addbg').eq(0).addClass('addbg');
+                }
+            }else if(keycode == 13){
+                // 回车效果
+                dojob();
+            }
+        });
+        var movePrev = function(){
+            // 退出聚焦
+            $("#kw").blur();
+            // 获取
+            var index = $(".addbg").prevAll().length;
+            if(index == 0){
+                // 当前在第一行向上移动，移除背景，选择最后一个添加背景
+                $(".item").removeClass('addbg').eq($(".item").length-1).addClass('addbg');
+            }else{
+                // 移到上一个位置，添加背景
+                $(".item").removeClass('addbg').eq(index-1).addClass('addbg');
+            }
+        }
+        var moveNext = function(){
+            var index = $(".addbg").prevAll().length;
+            if(index == $(".item").length-1){
+                // 当前在最后一行向下移动，选取第一个，并添加背景
+                $(".item").removeClass('addbg').eq(0).addClass('addbg');
+            }else{
+                // 移到下一个位置，添加背景
+                $(".item").removeClass('addbg').eq(index+1).addClass('addbg');
+            }     
+        }
+        // 点击效果
+        var dojob = function(){
+            $("#kw").blur();
+            var value = $(".addbg").text();
+            $("#kw").val(value);
+            $("#append").hide().html("");
+        }
+    });
+    // 获取数据，添加标签
+    function getContent(obj){
+        var kw = jQuery.trim($(obj).val());
+        if(kw == ""){
+            $("#append").hide().html("");
+            return false;
+        }
+        var html = "";
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].indexOf(kw) >= 0) {
+                html = html + "<p class='item' onClick='getCon(this);'>" + data[i] + "</p>"
+            }
+        }
+        if(html != ""){
+            $("#append").show().html(html);
+        }else{
+            $("#append").hide().html("");
+        }
+        var ul = document.querySelectorAll('.item');
+        for(let i of ul){
+            // 鼠标进入
+            i.addEventListener("mouseenter",function(){
+                $(this).addClass("addbg");
+            });
+            // 鼠标离开
+            i.addEventListener("mouseleave",function(){
+                $(this).removeClass("addbg");
+            });
+        }
+    }
+    // 点击效果
+    function getCon(obj){
+        var value = $(obj).text();
+        $("#kw").val(value);
+        $("#append").hide().html("");
+    }
+    
+    </script>
+    
+</html>

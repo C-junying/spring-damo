@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>登录注册</title>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/index.css">
+        <link rel="stylesheet" href="css/iconfont.css">
+    </head>
+    <body>
+        <div class="container right-panel-active">
+			<!-- Sign Up -->
+			<section class="container__form container--signup">
+				<form action="#" id="form1" method="post">
+                    <fieldset>
+                        <legend><h2>sign up</h2></legend>
+                        <section>
+                            <input type="text" id="account" name="userID" required/>
+                            <label for="account"><span class="iconfont icon-account1"></span>身份证</label>
+                        </section>
+                        <aside>
+                            <p><span class="iconfont icon-warning"></span>身份证不能为空</p>
+                        </aside>
+                        <section>
+                            <input type="text" id="username" name="userName" required/>
+                            <label for="username"><span class="iconfont icon-namecard"></span>姓名</label>
+                        </section>
+                        <aside>
+                            <p><span class="iconfont icon-warning"></span>姓名不能为空</p>
+                        </aside>
+                        <section>
+                            <input type="password" id="password" name="password" required/>
+                            <label for="password"><span class="iconfont icon-password"></span>密码</label>
+                        </section>
+                        <aside>
+                            <p><span class="iconfont icon-warning"></span>密码不能为空</p>
+                        </aside>
+                        <section>
+                            <!-- <input type="submit" value="注册" class="btn" onclick="judge(this)"> -->
+                            <button type="button" class="btn">注册</button>
+                        </section>
+                    </fieldset>
+				</form>
+			</section>
+
+			<!-- Sign In -->
+			<section class="container__form container--signin">
+				<form action="#" id="form2" method="post">
+                    <fieldset>
+                        <legend><h2>log in</h2></legend>
+                        <section>
+                            <input type="text" id="login_account" name="userID" required/>
+                            <label for="login_account"><span class="iconfont icon-account1"></span>身份证</label>
+                        </section>
+                        <aside>
+                            <p><span class="iconfont icon-warning"></span>身份证不能为空</p>
+                        </aside>
+                        <section>
+                            <input type="password" id="login_password" name="password" required/>
+                            <label for="login_password"><span class="iconfont icon-password"></span>密码</label>
+                        </section>
+                        <aside>
+                            <p><span class="iconfont icon-warning"></span>密码不能为空</p>
+                        </aside>
+                        <section>
+                            <!-- <input type="submit" value="登录" class="btn" onclick="judge(this)"> -->
+                            <button type="button" class="btn">登录</button>
+                        </section>
+                    </fieldset>
+				</form>
+			</section>
+
+			<!-- Overlay -->
+			<section class="container__overlay">
+				<div class="overlay">
+					<div class="overlay__panel overlay--left">
+						<button class="btn" id="signIn" onclick="cleaner()">Sign In</button>
+					</div>
+					<div class="overlay__panel overlay--right">
+						<button class="btn" id="signUp" onclick="cleaner()">Sign Up</button>
+					</div>
+				</div>
+			</section>
+		</div>
+        <script src="component/jquery.min.js"></script>
+        <script src="js/index.js"></script>
+    </body>
+</html>

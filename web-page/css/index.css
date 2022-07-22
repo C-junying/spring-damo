@@ -160,7 +160,7 @@ body {
 	letter-spacing: 0.1rem;
 	padding: 0.9rem 4rem;
 	text-transform: uppercase;
-	transition: transform 80ms ease-in;
+	transition: all 80ms ease-in;
 }
 /* 表单内按钮下移 */
 .container section > .btn {
@@ -229,7 +229,7 @@ section.container__form section input:valid ~ label{
 	color: #03e9f4;
 	font-size: 0.7rem;
 }
-/* 让图片与变换一致 */
+/* 让图标与变换一致 */
 section.container__form section input:focus ~ label span,
 section.container__form section input:valid ~ label span{
 	font-size: 0.8rem;

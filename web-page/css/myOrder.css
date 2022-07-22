@@ -1,0 +1,132 @@
+.inner .my-order{
+    border-radius: 10px;
+    padding: 10px 8px;
+    margin-top: 5px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #c1e5ff;
+}
+.inner .my-order+.my-order{
+    margin-top: 10px;
+}
+/* 订单布局配置 */
+.inner .my-order .order-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.inner .my-order .order-head time::before{
+    content: "创建时间";
+}
+.inner .my-order address{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #fff;
+}
+.inner .my-order address span{
+    flex-basis: 300px;
+    margin-top: 10px;
+}
+.inner .my-order address span:nth-child(even){
+    align-self:flex-end;
+}
+.inner .my-order address .user-name::before{
+    content: "联系人：";
+}
+.inner .my-order address .user-phone::before{
+    content: "手机号：";
+}
+.inner .my-order address .order-cost::before{
+    content: "总费用：";
+}
+.inner .my-order address .user-id{
+    letter-spacing: 1px;
+}
+.inner .my-order address .user-id::before{
+    content: "身份证：";
+}
+.inner .my-order .order-infor .flight-infor{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background-color: #82ccdd;
+}
+.inner .my-order .order-infor .flight-infor span{
+    flex-basis: 500px;
+}
+.inner .my-order .order-infor .flight-infor .pass-name::before{
+    content: "乘机人：";
+}
+.inner .my-order .order-infor .flight-infor .pass-phone::before{
+    content: "手机号：";
+}
+.inner .my-order .order-infor .order-plane{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-content: center;
+    justify-content: space-around;
+    text-align: center;
+    background-color: #17c0eb;
+}
+.inner .my-order .order-infor .order-refund{
+    text-align: center;
+    background-color: #fff;
+}
+/* 订单样式 */
+.inner .my-order .order-hidden{
+    display: none;
+}
+.inner .my-order .order-head{
+    padding: 10px;
+    font-size: 1rem;
+    line-height: 1.1;
+    cursor: pointer;
+}
+.inner .my-order .order-head span:last-child{
+    color: #f0000090;
+    font-size: 1.1rem;
+    text-shadow:2px 0 2px #f9cb61;
+}
+.inner .my-order address{
+    border-radius: 10px 0 10px 0;
+    padding-bottom: 10px;
+    font-size: 0.9rem;
+    line-height: 1.1;
+}
+.inner .my-order .order-infor+.order-infor{
+    margin-top: 10px;
+}
+.inner .my-order .order-infor .flight-infor{
+    padding: 10px 10px 20px;
+    border-radius: 10px 10px 0 10px;
+}
+.inner .my-order .order-infor .flight-infor span{
+    margin-top: 10px;
+    margin-right: 20px;
+    font-size: 1rem;
+    line-height: 1.2;
+    text-shadow:2px 0 2px #f9cb61;
+}
+.inner .my-order .order-infor .order-plane{
+    padding: 10px;
+    border-radius: 0 10px 0 10px;
+    font-size: 1.2rem;
+    line-height: 1.2;
+}
+.inner .my-order .order-infor .order-plane span{
+    font-size: 1.4rem;
+}
+.inner .my-order .order-infor .order-refund{
+    padding: 5px;
+    border-radius: 0 0 10px 10px;
+}
+.inner .my-order .order-infor .order-refund button{
+    border: none;
+    border-radius: 13px;
+    padding: 4px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    background-color: #f8c291;
+}

@@ -1,0 +1,91 @@
+
+.inner .city-search{
+    position: absolute;
+    top: 35px;
+    right: 30px;
+}
+.inner .city-search form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inner .city-search section{
+    position: relative;
+}
+.inner .city-search section #kw-key{
+    display: none;
+}
+.inner .city-search section input{
+    width: 20rem;
+    border: 2px dashed #c2e9fb;
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 8px 45px 8px 16px;
+    font-size: 1rem;
+}
+/* 让label位于输入框内 */
+.inner .city-search section label{
+	position: absolute;
+	top: -3px;
+	left: 0;
+	padding: 0.9rem ;
+	font-size: 1rem;
+	color:#CDC9C9;
+	transition: .5s;
+	user-select:none;
+}
+/* 输入框聚焦效果 */
+.inner .city-search section input:focus ~ label,
+.inner .city-search section input:valid ~ label{
+	top: -30px;
+	left: 0;
+	color: #ff8177;
+	font-size: 0.7rem;
+}
+.inner .city-search section button{
+    position: absolute;
+    top: -13px;
+    left: -40px;
+    border: none;
+    color: #0072CE;
+    background-color: #fff;
+    cursor: pointer;
+}
+.inner .city-search section button span{
+    font-size: 1.4rem;
+}
+.inner .city-search .append{
+    display: none;
+    position: absolute;
+    top: 50px;
+    width: 90%;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 18%);
+    padding: 12px 10px;
+    background-color: #FFF;
+    z-index: 1;
+}
+.append ul li{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    align-items: center;
+    padding: 10px 5px;
+    font-size: 0.8rem;
+    transition: all .5s;
+    cursor: pointer;
+}
+.addbg{
+    background-color: #C1E5FF;
+}
+.inner .passenger .pa_ta table tr{
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+}
+.passenger .pa_ta .city-sp-bg:hover{
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+.modal #MemberId{
+    border: none;
+    cursor: default;
+}
+.modal #MemberId:focus{
+    background-color: transparent;
+}
