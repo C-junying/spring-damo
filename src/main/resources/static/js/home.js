@@ -1,6 +1,7 @@
+
 var slideIndex = 0;     //图片指定位置
 //图片
-var imgs = ["../img/air01.jpg","../img/air02.jpg","../img/air04.jpg","../img/air05.jpg","../img/air06.jpg"];
+var imgs = ["/img/air01.jpg","/img/air02.jpg","/img/air04.jpg","/img/air05.jpg","/img/air06.jpg"];
 //获取点，并插入点
 var dotlist = document.getElementsByClassName("dots");
 for(let i = 0;i<imgs.length;i++){

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>个人中心</title>
+        <link rel="stylesheet" th:href="@{/css/reset.css}">
+        <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+        <link rel="stylesheet" th:href="@{/css/home.css}">
+        <link rel="stylesheet" th:href="@{/css/center.css}">
+        <link rel="stylesheet" th:href="@{/css/passenger.css}">
+    </head>
+    <body>
+        <div id="home_container">
+            <div class="home_box">
+                <header>
+                    <section class="title">
+                        <embed th:src="@{/img/airplane-log.svg}" type="image/svg+xml" />
+                        <h2>人人航空</h2>
+                    </section>
+                    <nav class="menu">
+                        <ul>
+                            <li><a href="/user/home">首页</a></li>
+                            <li><a href="#">预订机票</a></li>
+                            <li><a href="#">我的订单</a></li>
+                            <li><a href="/user/user_center">个人中心</a></li>
+                        </ul>
+                    </nav>
+                    <aside class="login_register">
+                        <ul th:if="${session.userID} == null">
+                            <li><a href="/user/login">注册</a></li>
+                            <li><a href="/user/login">登录</a></li>
+                        </ul>
+                        <span th:if="${session.userID} != null">欢迎，[[${session.userName}]]</span>
+                    </aside>
+                </header>
+                <div class="box-shadow"></div>
+            </div>
+            <div class="home_box">
+                <main>
+                    <nav class="center-infor">
+                        <ul>
+                            <li class="ref-infor"><span class="iconfont icon-gerenxinxi_o"></span><span>个人信息</span></li>
+                            <li class="ref-passenger li-action"><span class="iconfont icon-Customermanagement"></span><span>我的乘机人</span></li>
+                            <li class="ref-order"><span class="iconfont icon-manage-order"></span><span>我的订单</span></li>
+                            <li class="ref-pay"><span class="iconfont icon-jinbi_o"></span><span>充值中心</span></li>
+                            <li class="ref-city"><span class="iconfont icon-logistic-logo"></span><span>城市信息</span></li>
+                            <li class="ref-airport"><span class="iconfont icon-flight2"></span><span>机场信息</span></li>
+                            <li class="ref-flight"><span class="iconfont icon-terminal"></span><span>航班信息</span></li>
+                            <li class="ref-user"><span class="iconfont icon-user-group"></span><span>用户信息</span></li>
+                            <li class="ref-add"><span class="iconfont icon-database-plus"></span><span>添加信息</span></li>
+                        </ul>
+                    </nav>
+                    <section class="inner">
+                        <div class="icon">
+                            <h2>我的乘机人</h2>
+                            <div></div>
+                        </div>
+                        <div class="passenger">
+                            <div class="pa_btn">
+                                <button type="button"><span class="iconfont icon-add"></span>添加乘机人</button>
+                            </div>
+						    <div class="pa_ta">
+                                <table>
+                                    <tr><th>姓名</th><th>账号</th><th>手机号</th><th>删除</th></tr>
+                                    <tr th:each="item:${userPassenger}">
+                                        <td th:text="${item.passengerName}">张三</td>
+                                        <td th:text="${item.passengerID}">123456789123456789</td>
+                                        <td th:text="${item.phone}">12345678912</td>
+                                        <td class="pa_td"><span class="iconfont icon-shanchu_o"></span></td>
+                                    </tr>
+                                </table>
+						    </div>
+                        </div>
+                        <div class="modal">
+                            <form class="lg-box-outer passenger-form">
+                                <div class="lg-box-title">
+                                    <span class="iconfont icon-close close"></span>
+                                    <h2>用户注册</h2>
+                                </div>
+                                <fieldset>
+                                    <legend>
+                                        <h2>用户注册</h2>
+                                    </legend>
+                                    <section class="form-group">
+                                        <label for="MemberId">账号</label>
+                                        <input id="MemberId" name="passengerID" type="text" required />
+                                    </section>
+                                    <aside>
+                                        <p><span class="iconfont icon-warning"></span>账号不能为空</p>
+                                    </aside>
+                                    <section class="form-group">
+                                        <label for="MemberName">姓名</label>
+                                        <input id="MemberName" name="passengerName" type="text" required />
+                                    </section>
+                                    <aside>
+                                        <p><span class="iconfont icon-warning"></span>姓名不能为空</p>
+                                    </aside>
+                                    <section class="form-group">
+                                        <label for="teleph">电话</label>
+                                        <input id="teleph" name="phone" type="text" required />
+                                    </section>
+                                    <aside>
+                                        <p><span class="iconfont icon-warning"></span>电话不能为空</p>
+                                    </aside>
+                                    <section class="form-group">
+                                        <button type="button" class="passenger-submit">添加</button>
+                                        <button type="reset">重置</button>
+                                    </section>
+                                </fieldset>
+                            </form>
+                            <footer></footer>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+        <script th:src="@{/component/jquery.min.js}"></script>
+        <script th:src="@{/js/index.js}"></script>
+        <script th:src="@{/js/center.js}"></script>
+        <script th:src="@{/js/air.js}"></script>
+        <script>
+            $("table").delegate(".pa_td","click",function (){
+                let list = $(this).siblings();
+                let passenger = {
+                    "passengerID":list[1].innerHTML,
+                    "passengerName":list[0].innerHTML,
+                    "phone":list[2].innerHTML
+                };
+                if(confirm("是否确认删除"+passenger.passengerID)){
+                    $.ajax({
+                        url: "/user/passenger_delete",
+                        type: "post",
+                        data: passenger,
+                        dataType: "json",
+                        // contentType : 'application/json',
+                        success:function (json){
+                            if(json.state == 200){
+                                alert("删除成功");
+                                $(".pa_ta table").html("");
+                                var html = "<tr><th>姓名</th><th>账号</th><th>手机号</th><th>删除</th></tr>";
+                                json.data.forEach(function (item){
+                                    html = html+`<tr><td>${item.passengerName}</td><td>${item.passengerID}</td><td>${item.phone}</td><td class="pa_td"><span class="iconfont icon-shanchu_o"></span></td></tr>`;
+                                });
+                                $(".pa_ta table").html(html);
+                            }else{
+                                alert(json.message);
+                            }
+                        },
+                        error:function (xhr){
+                            alert("删除时产生未知的异常",xhr.message);
+                        }
+                    });
+                }else{
+                    alert("取消删除");
+                }
+            });
+        </script>
+    </body>
+</html>

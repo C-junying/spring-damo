@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>个人中心</title>
+        <link rel="stylesheet" th:href="@{/css/reset.css}">
+        <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+        <link rel="stylesheet" th:href="@{/css/home.css}">
+        <link rel="stylesheet" th:href="@{/css/center.css}">
+        <link rel="stylesheet" th:href="@{css/myOrder.css}">
+    </head>
+    <body>
+        <div id="home_container">
+            <div class="home_box">
+                <header>
+                    <section class="title">
+                        <embed th:src="@{/img/airplane-log.svg}" type="image/svg+xml" />
+                        <h2>人人航空</h2>
+                    </section>
+                    <nav class="menu">
+                        <ul>
+                            <li><a href="/user/home">首页</a></li>
+                            <li><a href="#">预订机票</a></li>
+                            <li><a href="#">我的订单</a></li>
+                            <li><a href="/user/user_center">个人中心</a></li>
+                        </ul>
+                    </nav>
+                    <aside class="login_register">
+                        <ul th:if="${session.userID} == null">
+                            <li><a href="/user/login">注册</a></li>
+                            <li><a href="/user/login">登录</a></li>
+                        </ul>
+                        <span th:if="${session.userID} != null">欢迎，[[${session.userName}]]</span>
+                    </aside>
+                </header>
+                <div class="box-shadow"></div>
+            </div>
+            <div class="home_box">
+                <main>
+                    <nav class="center-infor">
+                        <ul>
+                            <li class="ref-infor"><span class="iconfont icon-gerenxinxi_o"></span><span>个人信息</span></li>
+                            <li class="ref-passenger"><span class="iconfont icon-Customermanagement"></span><span>我的乘机人</span></li>
+                            <li class="ref-order li-action"><span class="iconfont icon-manage-order"></span><span>我的订单</span></li>
+                            <li class="ref-pay"><span class="iconfont icon-jinbi_o"></span><span>充值中心</span></li>
+                            <li class="ref-city"><span class="iconfont icon-logistic-logo"></span><span>城市信息</span></li>
+                            <li class="ref-airport"><span class="iconfont icon-flight2"></span><span>机场信息</span></li>
+                            <li class="ref-flight"><span class="iconfont icon-terminal"></span><span>航班信息</span></li>
+                            <li class="ref-user"><span class="iconfont icon-user-group"></span><span>用户信息</span></li>
+                            <li class="ref-add"><span class="iconfont icon-database-plus"></span><span>添加信息</span></li>
+                        </ul>
+                    </nav>
+                    <section class="inner">
+                        <div class="icon">
+                            <h2>我的订单</h2>
+                            <div></div>
+                        </div>
+                        <div class="my-order">
+                            <section class="order-head">
+                                <span>订单号123456</span>
+                                <time>2020-12-25</time>
+                                <span>支付状态</span>
+                            </section>
+                            <div class="order-hidden">
+                                <address>
+                                    <span class="user-name">张三</span>
+                                    <span class="user-phone">123456789</span>
+                                    <span class="user-id">123456789123456789</span>
+                                    <span class="order-cost">123456</span>
+                                </address>
+                                <div class="order-infor">
+                                    <section class="flight-infor">
+                                        <div>
+                                            <span>航班号123456</span>
+                                            <span>机型123456</span>
+                                        </div>
+                                        <div>
+                                            <span>商务舱123456</span>
+                                            <span>起飞日期123456</span>
+                                        </div>
+                                        <span class="pass-name">张三</span>
+                                        <span class="pass-phone">12345678912</span>
+                                    </section>
+                                    <section class="order-plane">
+                                        <time>10:30:00</time>
+                                        <div>
+                                            <span class="iconfont icon-angle-double-right"></span>
+                                            <span class="iconfont icon-angle-double-right"></span>
+                                        </div>
+                                        <time>12:25:00</time>
+                                        <span>厦门高崎国际机场</span>
+                                        <time>1小时55分钟</time>
+                                        <span>西安咸阳国际机场</span>
+                                    </section>
+                                    <section class="order-refund">
+                                        <button type="button">退票</button>
+                                    </section>
+                                </div>
+                                <div class="order-infor">
+                                    <section class="flight-infor">
+                                        <div>
+                                            <span>航班号123456</span>
+                                            <span>机型123456</span>
+                                        </div>
+                                        <div>
+                                            <span>商务舱123456</span>
+                                            <span>起飞日期123456</span>
+                                        </div>
+                                        <span class="pass-name">张三</span>
+                                        <span class="pass-phone">12345678912</span>
+                                    </section>
+                                    <section class="order-plane">
+                                        <time>10:30:00</time>
+                                        <div>
+                                            <span class="iconfont icon-angle-double-right"></span>
+                                            <span class="iconfont icon-angle-double-right"></span>
+                                        </div>
+                                        <time>12:25:00</time>
+                                        <span>厦门高崎国际机场</span>
+                                        <time>1小时55分钟</time>
+                                        <span>西安咸阳国际机场</span>
+                                    </section>
+                                    <section class="order-refund">
+                                        <button type="button">退票</button>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-order">
+                            <section class="order-head">
+                                <span>订单号123456</span>
+                                <time>2020-12-25</time>
+                                <span>支付状态</span>
+                            </section>
+                            <div class="order-hidden">
+                                <address>
+                                    <span class="user-name">张三</span>
+                                    <span class="user-phone">123456789</span>
+                                    <span class="user-id">123456789123456789</span>
+                                    <span class="order-cost">123456</span>
+                                </address>
+                                <div class="order-infor">
+                                    <section class="flight-infor">
+                                        <div>
+                                            <span>航班号123456</span>
+                                            <span>机型123456</span>
+                                        </div>
+                                        <div>
+                                            <span>商务舱123456</span>
+                                            <span>起飞日期123456</span>
+                                        </div>
+                                        <span class="pass-name">张三</span>
+                                        <span class="pass-phone">12345678912</span>
+                                    </section>
+                                    <section class="order-plane">
+                                        <time>10:30:00</time>
+                                        <div>
+                                            <span class="iconfont icon-angle-double-right"></span>
+                                            <span class="iconfont icon-angle-double-right"></span>
+                                        </div>
+                                        <time>12:25:00</time>
+                                        <span>厦门高崎国际机场</span>
+                                        <time>1小时55分钟</time>
+                                        <span>西安咸阳国际机场</span>
+                                    </section>
+                                    <section class="order-refund">
+                                        <button type="button">退票</button>
+                                    </section>
+                                </div>
+                                <div class="order-infor">
+                                    <section class="flight-infor">
+                                        <div>
+                                            <span>航班号123456</span>
+                                            <span>机型123456</span>
+                                        </div>
+                                        <div>
+                                            <span>商务舱123456</span>
+                                            <span>起飞日期123456</span>
+                                        </div>
+                                        <span class="pass-name">张三</span>
+                                        <span class="pass-phone">12345678912</span>
+                                    </section>
+                                    <section class="order-plane">
+                                        <time>10:30:00</time>
+                                        <div>
+                                            <span class="iconfont icon-angle-double-right"></span>
+                                            <span class="iconfont icon-angle-double-right"></span>
+                                        </div>
+                                        <time>12:25:00</time>
+                                        <span>厦门高崎国际机场</span>
+                                        <time>1小时55分钟</time>
+                                        <span>西安咸阳国际机场</span>
+                                    </section>
+                                    <section class="order-refund">
+                                        <button type="button">退票</button>
+                                    </section>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="my-order">
+                            <section class="order-head">
+                                <span>订单号123456</span>
+                                <time>2020-12-25</time>
+                                <span>支付状态</span>
+                            </section>
+                            <div class="order-hidden">
+                                <address>
+                                    <span class="user-name">张三</span>
+                                    <span class="user-phone">123456789</span>
+                                    <span class="user-id">123456789123456789</span>
+                                    <span class="order-cost">123456</span>
+                                </address>
+                                <div class="order-infor">
+                                    <section class="flight-infor">
+                                        <div>
+                                            <span>航班号123456</span>
+                                            <span>机型123456</span>
+                                        </div>
+                                        <div>
+                                            <span>商务舱123456</span>
+                                            <span>起飞日期123456</span>
+                                        </div>
+                                        <span class="pass-name">张三</span>
+                                        <span class="pass-phone">12345678912</span>
+                                    </section>
+                                    <section class="order-plane">
+                                        <time>10:30:00</time>
+                                        <div>
+                                            <span class="iconfont icon-angle-double-right"></span>
+                                            <span class="iconfont icon-angle-double-right"></span>
+                                        </div>
+                                        <time>12:25:00</time>
+                                        <span>厦门高崎国际机场</span>
+                                        <time>1小时55分钟</time>
+                                        <span>西安咸阳国际机场</span>
+                                    </section>
+                                    <section class="order-refund">
+                                        <button type="button">退票</button>
+                                    </section>
+                                </div>
+                                <div class="order-infor">
+                                    <section class="flight-infor">
+                                        <div>
+                                            <span>航班号123456</span>
+                                            <span>机型123456</span>
+                                        </div>
+                                        <div>
+                                            <span>商务舱123456</span>
+                                            <span>起飞日期123456</span>
+                                        </div>
+                                        <span class="pass-name">张三</span>
+                                        <span class="pass-phone">12345678912</span>
+                                    </section>
+                                    <section class="order-plane">
+                                        <time>10:30:00</time>
+                                        <div>
+                                            <span class="iconfont icon-angle-double-right"></span>
+                                            <span class="iconfont icon-angle-double-right"></span>
+                                        </div>
+                                        <time>12:25:00</time>
+                                        <span>厦门高崎国际机场</span>
+                                        <time>1小时55分钟</time>
+                                        <span>西安咸阳国际机场</span>
+                                    </section>
+                                    <section class="order-refund">
+                                        <button type="button">退票</button>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>        
+                    </section>
+                </main>
+            </div>
+        </div>
+        <script th:src="@{/component/jquery.min.js}"></script>
+        <script th:src="@{/js/center.js}"></script>
+        <script th:src="@{/js/air.js}"></script>
+    </body>
+</html>

@@ -7,8 +7,12 @@
     </insert>
 
     <update id="updateUser">
-        update user set user_name=#{userName},user_password=#{userPassword},permission=#{permission},phone=#{phone},email=#{email},birth_date=#{birthDate},
-        balance=#{balance}
+        update user set user_name=#{userName},user_password=#{userPassword},phone=#{phone},email=#{email}
+        where user_id=#{userID}
+    </update>
+
+    <update id="updateUserBalance">
+        update user set balance=#{balance}
         where user_id=#{userID}
     </update>
 

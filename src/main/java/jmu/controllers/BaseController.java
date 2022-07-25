@@ -23,13 +23,28 @@ public class BaseController {
             result.setMessage("用户已存在");
         } else if (e instanceof InsertException) {
             result.setState(5000);
-            result.setMessage("注册时产生未知异常");
+            result.setMessage("插入时产生未知异常");
         }else if (e instanceof UserNotFoundException) {
             result.setState(5001);
             result.setMessage("用户数据不存在的异常");
         }else if (e instanceof PasswordNotMatchException) {
             result.setState(5002);
             result.setMessage("用户密码错误的异常");
+        }else if (e instanceof UserUpdateException) {
+            result.setState(5003);
+            result.setMessage("更新用户数据产生未知异常");
+        }else if (e instanceof PassengerDuplicateException) {
+            result.setState(5004);
+            result.setMessage("用户乘机人重复异常");
+        }else if (e instanceof PassengerNotFoundException) {
+            result.setState(5005);
+            result.setMessage("乘机人不存在异常");
+        }else if (e instanceof PassengerDeleteException) {
+            result.setState(5006);
+            result.setMessage("删除乘机人时产生未知异常");
+        }else if (e instanceof PayException) {
+            result.setState(5007);
+            result.setMessage("支付异常");
         }
         return result;
     }

@@ -19,6 +19,7 @@ mybatis:
   type-aliases-package: jmu.pojo
   config-location: classpath:mybatis-config.xml
 
+
 #showSql
 logging:
   level:

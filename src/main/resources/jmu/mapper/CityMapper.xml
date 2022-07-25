@@ -5,6 +5,7 @@
     <select id="selectAllCities" resultType="java.util.Map">
         select *
         from city
+        order by city_id asc
     </select>
 
     <select id="queryCityByID" resultType="jmu.pojo.City">

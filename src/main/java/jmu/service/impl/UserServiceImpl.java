@@ -1,12 +1,11 @@
 package jmu.service.impl;
 
+import jmu.mapper.PassengerMapper;
 import jmu.mapper.UserMapper;
+import jmu.pojo.Passenger;
 import jmu.pojo.User;
 import jmu.service.UserService;
-import jmu.service.ex.InsertException;
-import jmu.service.ex.PasswordNotMatchException;
-import jmu.service.ex.UserNotFoundException;
-import jmu.service.ex.UserIDDuplicateException;
+import jmu.service.ex.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +17,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private PassengerMapper passengerMapper;
     @Override
     public List<User> selectAll() {
         return userMapper.selectAll();
@@ -41,6 +42,7 @@ public class UserServiceImpl implements UserService {
         }
         //设置用户权限
         user.setPermission(0);
+        user.setBalance(0);
         // 调用持久层Integer insert(User user)方法，执行注册并获取返回值(受影响的行数)
         Integer rows = userMapper.insertUser(user);
         // 判断受影响的行数是否不为1
@@ -69,16 +71,66 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectID(userID);
     }
 
-    @Override
-    public boolean selectUser(User user) {
-        if(userMapper.selectUser(user.getUserID(),user.getUserPassword())!=null){
-            return true;
-        }
-        return false;
-    }
 
     @Transactional
-    public boolean updateUser(User user) {
-        return userMapper.updateUser(user) > 0;
+    public void updateUser(User user) {
+        User result = userMapper.selectID(user.getUserID());
+        if(result == null){
+            throw new UserNotFoundException("用户数据不存在");
+        }
+        Integer rows = userMapper.updateUser(user);
+        if(rows!=1){
+            throw new UserUpdateException("更新用户数据产生未知异常");
+        }
+//        return userMapper.updateUser(user) > 0;
+    }
+    @Override
+    public List<Passenger> userPassenger(String userID) {
+        User result = userMapper.selectID(userID);
+        if(result == null){
+            throw new UserNotFoundException("用户数据不存在");
+        }
+        List<Passenger> list = passengerMapper.selectUserByID(userID);
+        return list;
+    }
+
+    @Override
+    public void passengerAdd(Passenger passenger) {
+        User userResult = userMapper.selectID(passenger.getUserID());
+        if(userResult == null){
+            throw new UserNotFoundException("用户数据不存在");
+        }
+        Passenger passengerResult = passengerMapper.selectByID(passenger.getUserID(),passenger.getPassengerID());
+        if(passengerResult !=null){
+            throw new PassengerDuplicateException("用户乘机人重复异常");
+        }
+        Integer rows = passengerMapper.insertPassenger(passenger);
+        if(rows!=1){
+            throw new InsertException("添加用户乘机人数据出现未知错误，请联系系统管理员");
+        }
+    }
+
+    @Override
+    public void passengerDelete(String userID, String passengerID) {
+        Passenger passenger = passengerMapper.selectByID(userID,passengerID);
+        if(passenger == null){
+            throw new PassengerNotFoundException("乘机人不存在异常");
+        }
+        Integer rows = passengerMapper.deleteByID(userID,passengerID);
+        if(rows!=1){
+            throw new PassengerDeleteException("删除乘机人时产生未知异常");
+        }
+    }
+
+    @Override
+    public void userPay(String userID, Integer balance) {
+        User result = userMapper.selectID(userID);
+        if(result == null){
+            throw new UserNotFoundException("用户数据不存在");
+        }
+        Integer rows = userMapper.updateUserBalance(userID,balance+result.getBalance());
+        if(rows != 1){
+            throw new PayException("支付异常");
+        }
     }
 }

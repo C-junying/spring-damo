@@ -18,8 +18,8 @@ class CityMapperTest {
     CityMapper cityMapper;
     @Test
     void selectAllCities() {
-        Map<String,City> map = cityMapper.selectAllCities();
-        System.out.println(map);
+        List<City> list = cityMapper.selectAllCities();
+        System.out.println(list);
     }
     @Test
     void queryCityByID(){

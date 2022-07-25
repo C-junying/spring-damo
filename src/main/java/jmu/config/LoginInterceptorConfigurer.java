@@ -16,7 +16,7 @@ import java.util.List;
  * 添加黑名单(在用户登录的状态才可以访问)
  */
 //处理器拦截器的注册
-@Configuration
+//@Configuration
 public class LoginInterceptorConfigurer implements WebMvcConfigurer {
 
     @Override

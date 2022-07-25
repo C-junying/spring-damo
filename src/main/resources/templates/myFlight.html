@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>个人中心</title>
+        <link rel="stylesheet" th:href="@{/css/reset.css}">
+        <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+        <link rel="stylesheet" th:href="@{/css/home.css}">
+        <link rel="stylesheet" th:href="@{/css/center.css}">
+        <link rel="stylesheet" th:href="@{/css/passenger.css}">
+        <link rel="stylesheet" th:href="@{/css/city.css}">
+        <style>
+            section.inner section.form-group label{
+                width: 140px;
+            }
+            .modal #MemberRemainingTickets{
+                border: none;
+                cursor: default;
+            }
+            .modal #MemberRemainingTickets:focus{
+                background-color: transparent;
+            }
+            .append ul li{
+                grid-template-columns: 1fr 2fr 2fr;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="home_container">
+            <div class="home_box">
+                <header>
+                    <section class="title">
+                        <embed th:src="@{/img/airplane-log.svg}" type="image/svg+xml" />
+                        <h2>人人航空</h2>
+                    </section>
+                    <nav class="menu">
+                        <ul>
+                            <li><a href="/user/home">首页</a></li>
+                            <li><a href="#">预订机票</a></li>
+                            <li><a href="#">我的订单</a></li>
+                            <li><a href="/user/user_center">个人中心</a></li>
+                        </ul>
+                    </nav>
+                    <aside class="login_register">
+                        <ul th:if="${session.userID} == null">
+                            <li><a href="/user/login">注册</a></li>
+                            <li><a href="/user/login">登录</a></li>
+                        </ul>
+                        <span th:if="${session.userID} != null">欢迎，[[${session.userName}]]</span>
+                    </aside>
+                </header>
+                <div class="box-shadow"></div>
+            </div>
+            <div class="home_box">
+                <main>
+                    <nav class="center-infor">
+                        <ul>
+                            <li class="ref-infor"><span class="iconfont icon-gerenxinxi_o"></span><span>个人信息</span></li>
+                            <li class="ref-passenger"><span class="iconfont icon-Customermanagement"></span><span>我的乘机人</span></li>
+                            <li class="ref-order"><span class="iconfont icon-manage-order"></span><span>我的订单</span></li>
+                            <li class="ref-pay"><span class="iconfont icon-jinbi_o"></span><span>充值中心</span></li>
+                            <li class="ref-city"><span class="iconfont icon-logistic-logo"></span><span>城市信息</span></li>
+                            <li class="ref-airport"><span class="iconfont icon-flight2"></span><span>机场信息</span></li>
+                            <li class="ref-flight li-action"><span class="iconfont icon-terminal"></span><span>航班信息</span></li>
+                            <li class="ref-user"><span class="iconfont icon-user-group"></span><span>用户信息</span></li>
+                            <li class="ref-add"><span class="iconfont icon-database-plus"></span><span>添加信息</span></li>
+                        </ul>
+                    </nav>
+                    <section class="inner">
+                        <div class="icon">
+                            <h2>航班信息</h2>
+                            <div></div>
+                        </div>
+                        <div class="city-search">
+                            <form>
+                                <section>
+                                    <span id="kw-city-key"></span>
+                                    <span id="kw-airport-key"></span>
+                                    <input id="kw" onKeyup="getContent(this);" required/>
+                                    <label for="kw">关键字搜索</label>
+                                </section>
+                                <section>
+                                    <button type="button"><span class="iconfont icon-search"></span></button>
+                                </section>
+                            </form>
+                            <div class="append">
+                                <ul class="append-ul">
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="passenger">
+						    <div class="pa_ta">
+                                <table>
+                                    <tr><th>航班ID</th><th>机型</th><th>机票ID</th><th>状态</th><th>预计起飞</th><th>编辑机票</th><th>删除</th></tr>
+                                    <tr><td>CA1234</td><td>波音747</td><td>XMN2022072518</td><td>空闲</td><td>2022-07-25 18:00:00</td><td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
+                                    <tr><td>CA1234</td><td>波音747</td><td>XMN2022072518</td><td>空闲</td><td>2022-07-25 18:00:00</td><td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
+                                    <tr><td>CA1234</td><td>波音747</td><td>XMN2022072518</td><td>空闲</td><td>2022-07-25 18:00:00</td><td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
+                                    <tr><td>CA1234</td><td>波音747</td><td>XMN2022072518</td><td>空闲</td><td>2022-07-25 18:00:00</td><td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
+                                    
+                                </table>
+						    </div>
+                        </div>
+                        <div class="modal">
+                            <form class="lg-box-outer">
+                                <div class="lg-box-title">
+                                    <span class="iconfont icon-close close"></span>
+                                    <h2>机票修改</h2>
+                                </div>
+                                <fieldset>
+                                    <legend>
+                                        <h2>机票修改</h2>
+                                    </legend>
+                                    <section class="form-group">
+                                        <label for="MemberId">机票ID</label>
+                                        <input id="MemberId" name="ticketTypeID" type="text" readonly />
+                                    </section>
+                                    <section class="form-group">
+                                        <label for="MemberStartAirId">起始站机场ID</label>
+                                        <input id="MemberStartAirId" name="startAirportID" type="text" required />
+                                    </section>
+                                    <aside>
+                                        <p><span class="iconfont icon-warning"></span>起始站机场ID不能为空</p>
+                                    </aside>
+                                    <section class="form-group">
+                                        <label for="MemberStartStationID">起始站ID</label>
+                                        <input id="MemberStartStationID" name="startStationID" type="text" required />
+                                    </section>
+                                    <aside>
+                                        <p><span class="iconfont icon-warning"></span>城市名不能为空</p>
+                                    </aside>
+                                    <section class="form-group">
+                                        <label for="MemberEndAirportID">终点站机场ID</label>
+                                        <input id="MemberEndAirportID" name="endAirportID" type="text" required />
+                                    </section>
+                                    <aside>
+                                        <p><span class="iconfont icon-warning"></span>终点站机场ID不能为空</p>
+                                    </aside>
+                                    <section class="form-group">
+                                        <label for="MemberEndStationID">终点站ID</label>
+                                        <input id="MemberEndStationID" name="endStationID" type="text" required />
+                                    </section>
+                                    <aside>
+                                        <p><span class="iconfont icon-warning"></span>终点站ID不能为空</p>
+                                    </aside>
+                                    <section class="form-group">
+                                        <label for="MemberTicketPricing">机票定价</label>
+                                        <input id="MemberTicketPricing" name="ticketPricing" type="text" required />
+                                    </section>
+                                    <aside>
+                                        <p><span class="iconfont icon-warning"></span>机票定价不能为空</p>
+                                    </aside>
+                                    <section class="form-group">
+                                        <label for="MemberDiscount">折扣</label>
+                                        <input id="MemberDiscount" name="discount" type="text" required />
+                                    </section>
+                                    <aside>
+                                        <p><span class="iconfont icon-warning"></span>折扣不能为空</p>
+                                    </aside>
+                                    <section class="form-group">
+                                        <label for="MemberInsuranceCosts">保险费用</label>
+                                        <input id="MemberInsuranceCosts" name="insuranceCosts" type="text" required />
+                                    </section>
+                                    <aside>
+                                        <p><span class="iconfont icon-warning"></span>保险费用不能为空</p>
+                                    </aside>
+                                    <section class="form-group">
+                                        <label for="MemberTicketCount">总数</label>
+                                        <input id="MemberTicketCount" name="ticketCount" type="text" required />
+                                    </section>
+                                    <aside>
+                                        <p><span class="iconfont icon-warning"></span>总数不能为空</p>
+                                    </aside>
+                                    <section class="form-group">
+                                        <label for="MemberRemainingTickets">余量</label>
+                                        <input id="MemberRemainingTickets" name="remainingTickets" type="text" readonly />
+                                    </section>
+                                    <section class="form-group">
+                                        <button type="button" class="form-submit">修改</button>
+                                        <button type="button" class="pa-reset">重置</button>
+                                    </section>
+                                </fieldset>
+                            </form>
+                            <footer></footer>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+        <script th:src="@{/component/jquery.min.js}"></script>
+        <script th:src="@{/js/MouseMove.js}"></script>
+        <script th:src="@{/js/flight.js}"></script>
+        <script th:src="@{/js/air.js}"></script>
+    </body>
+</html>

@@ -1,5 +1,6 @@
 package jmu.service;
 
+import jmu.pojo.Passenger;
 import jmu.pojo.User;
 
 import java.util.List;
@@ -14,7 +15,11 @@ public interface UserService {
     User login(User user);          //登录操作
     User selectID(String userID);     //根据ID返回用户
 
-    boolean selectUser(User user);     //判断用户是否存在
+    void updateUser(User user);          //更新用户
+    List<Passenger> userPassenger(String userID);   //返回用户的乘机人
 
-    boolean updateUser(User user);          //更新用户
+    void passengerAdd(Passenger passenger); //添加乘机人
+    void passengerDelete(String userID,String passengerID); //删除乘机人
+
+    void userPay(String userID,Integer balance);    //充值
 }

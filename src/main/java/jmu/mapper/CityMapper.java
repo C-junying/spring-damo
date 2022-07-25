@@ -11,8 +11,7 @@ import java.util.Map;
 @Mapper
 @Repository
 public interface CityMapper {
-    @MapKey("city_id")
-    Map<String, City> selectAllCities();       //返回所有城市
+    List<City> selectAllCities();       //返回所有城市
 
     City queryCityByID(String cityID);  //根据ID返回城市
 

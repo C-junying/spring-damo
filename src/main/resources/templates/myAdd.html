@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>个人中心</title>
+        <link rel="stylesheet" th:href="@{/css/reset.css}">
+        <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+        <link rel="stylesheet" th:href="@{/css/home.css}">
+        <link rel="stylesheet" th:href="@{/css/center.css}">
+        <link rel="stylesheet" th:href="@{/css/passenger.css}">
+        <link rel="stylesheet" th:href="@{/css/addInfor.css}">
+        <style>
+            section.inner section.form-group label{
+                width: 140px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="home_container">
+            <div class="home_box">
+                <header>
+                    <section class="title">
+                        <embed th:src="@{/img/airplane-log.svg}" type="image/svg+xml" />
+                        <h2>人人航空</h2>
+                    </section>
+                    <nav class="menu">
+                        <ul>
+                            <li><a href="/user/home">首页</a></li>
+                            <li><a href="#">预订机票</a></li>
+                            <li><a href="#">我的订单</a></li>
+                            <li><a href="/user/user_center">个人中心</a></li>
+                        </ul>
+                    </nav>
+                    <aside class="login_register">
+                        <ul th:if="${session.userID} == null">
+                            <li><a href="/user/login">注册</a></li>
+                            <li><a href="/user/login">登录</a></li>
+                        </ul>
+                        <span th:if="${session.userID} != null">欢迎，[[${session.userName}]]</span>
+                    </aside>
+                </header>
+                <div class="box-shadow"></div>
+            </div>
+            <div class="home_box">
+                <main>
+                    <nav class="center-infor">
+                        <ul>
+                            <li class="ref-infor"><span class="iconfont icon-gerenxinxi_o"></span><span>个人信息</span></li>
+                            <li class="ref-passenger"><span class="iconfont icon-Customermanagement"></span><span>我的乘机人</span></li>
+                            <li class="ref-order"><span class="iconfont icon-manage-order"></span><span>我的订单</span></li>
+                            <li class="ref-pay"><span class="iconfont icon-jinbi_o"></span><span>充值中心</span></li>
+                            <li class="ref-city"><span class="iconfont icon-logistic-logo"></span><span>城市信息</span></li>
+                            <li class="ref-airport"><span class="iconfont icon-flight2"></span><span>机场信息</span></li>
+                            <li class="ref-flight"><span class="iconfont icon-terminal"></span><span>航班信息</span></li>
+                            <li class="ref-user"><span class="iconfont icon-user-group"></span><span>用户信息</span></li>
+                            <li class="ref-add li-action"><span class="iconfont icon-database-plus"></span><span>添加信息</span></li>
+                        </ul>
+                    </nav>
+                    <section class="inner">
+                        <div class="icon">
+                            <h2>添加信息</h2>
+                            <div></div>
+                        </div>
+                        <div class="add-box">
+                            <div class="add-infor">
+                                <span>增加城市</span>
+                            </div>
+                            <div class="modal">
+                                <form class="lg-box-outer add-city">
+                                    <div class="lg-box-title">
+                                        <span class="iconfont icon-close close"></span>
+                                        <h2>增加城市</h2>
+                                    </div>
+                                    <fieldset>
+                                        <legend>
+                                            <h2>增加城市</h2>
+                                        </legend>
+                                        <section class="form-group">
+                                            <label for="MemberCityId">城市ID</label>
+                                            <input id="MemberCityId" name="cityID" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>城市ID不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberCityName">城市名</label>
+                                            <input id="MemberCityName" name="cityName" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>城市名不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <button type="button" class="form-submit">添加</button>
+                                            <button type="button" class="pa-reset">重置</button>
+                                        </section>
+                                    </fieldset>
+                                </form>
+                                <footer></footer>
+                            </div>
+                            <div class="add-infor">
+                                <span>增加机场</span>
+                            </div>
+                            <div class="modal">
+                                <form class="lg-box-outer add-air">
+                                    <div class="lg-box-title">
+                                        <span class="iconfont icon-close close"></span>
+                                        <h2>增加机场</h2>
+                                    </div>
+                                    <fieldset>
+                                        <legend>
+                                            <h2>增加机场</h2>
+                                        </legend>
+                                        <section class="form-group">
+                                            <label for="MemberAirCityId">城市ID</label>
+                                            <input id="MemberAirCityId" name="cityID" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>城市ID不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberAirId">机场三字码</label>
+                                            <input id="MemberAirId" name="airportID" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>机场三字码不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberAirName">机场名</label>
+                                            <input id="MemberAirName" name="airportName" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>机场名不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <button type="button" class="form-submit">添加</button>
+                                            <button type="button" class="pa-reset">重置</button>
+                                        </section>
+                                    </fieldset>
+                                </form>
+                                <footer></footer>
+                            </div>
+                            <div class="add-infor">
+                                <span>增加航班</span>
+                            </div>
+                            <div class="modal">
+                                <form class="lg-box-outer add-flight">
+                                    <div class="lg-box-title">
+                                        <span class="iconfont icon-close close"></span>
+                                        <h2>增加航班</h2>
+                                    </div>
+                                    <fieldset>
+                                        <legend>
+                                            <h2>增加航班</h2>
+                                        </legend>
+                                        <section class="form-group">
+                                            <label for="MemberFlightId">航班ID</label>
+                                            <input id="MemberFlightId" name="onFlightID" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>航班ID不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberTypeID">机型ID</label>
+                                            <input id="MemberTypeID" name="typeID" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>机型ID不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberEstimatedTakeoffTime">预计起飞时间</label>
+                                            <input id="MemberEstimatedTakeoffTime" name="estimatedTakeoffTime" type="datetime-local" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>预计起飞时间不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberEstimatedArrivalTime">预计到达时间</label>
+                                            <input id="MemberEstimatedArrivalTime" name="estimatedArrivalTime" type="datetime-local" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>预计到达时间不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberBoardingGate">登机口</label>
+                                            <input id="MemberBoardingGate" name="boardingGate" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>登机口不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <button type="button" class="form-submit">添加</button>
+                                            <button type="button" class="pa-reset">重置</button>
+                                        </section>
+                                    </fieldset>
+                                </form>
+                                <footer></footer>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+        <script th:src="@{/component/jquery.min.js}"></script>
+        <script th:src="@{/js/air.js}"></script>
+        <script th:src="@{js/myAdd.js}"></script>
+    </body>
+</html>

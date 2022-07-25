@@ -1,0 +1,207 @@
+:root{
+    /* 背景颜色 */
+    --color:#ecf2f7;
+    --warning:#F00;
+    /* box-shadow color */
+    --box-color:#88888880;
+    
+}
+body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* 设置主体颜色与宽 */
+.home_box:last-child{
+    position: relative;
+    min-height: 570px;
+    top: -3px;
+    padding-bottom: 60px;
+    background-color: var(--color);
+    z-index: 200;
+}
+/* 清除浮动的影响 */
+.home_box::after{
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+/* 为nav与内容添加浮动 */
+.home_box nav.center-infor,.home_box section.inner{
+    position: relative;
+    top: 10px;
+    left: 20px;
+    float: left;
+
+}
+/* 弹性布局，让span向两边靠拢 */
+nav.center-infor li{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #00000070;
+    cursor: pointer;
+    background-color: #fff;
+}
+/* 添加横线 */
+nav.center-infor li+li{
+    border-top: 2px solid #89898950;
+}
+/* 设置li左上角为背景色 */
+nav.center-infor li::before{
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    border: 0.7em solid;
+    border-color: var(--color) transparent transparent var(--color);
+    z-index: 2;
+}
+nav.center-infor li::after{
+    content: "";
+    position: absolute;
+    top: -1px;
+    right:  0; 
+    height: 100%;
+    width: 0px;
+    box-shadow: 2px 0 4px 2px var(--box-color);
+    z-index: 2;
+}
+/* li悬浮效果 */
+nav.center-infor li:hover{
+    font-weight: 500;
+    color: #000;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+/* 点击li后应该显示的效果 */
+nav.center-infor li.li-action{
+    font-weight: 500;
+    color: #000;
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+/* 设置图标大小 */
+nav.center-infor li > span:first-child{
+    font-size: 1.7rem;
+    margin-right: 10px;
+    
+}
+/* 设定内容宽 */
+.home_box section.inner{
+    width: 75%;
+    min-height: 400px;
+    margin-left: 3px;
+    padding: 10px;
+    padding-bottom: 60px;
+    background-color: #fff;
+    /* border: 1px solid red; */
+}
+/* 设置标题盒子 */
+section.inner div.icon{
+    position: relative;
+    left: 18px;
+    top: 5px;
+    width: 22%;
+    margin-bottom: 30px;
+}
+/* 设置标题 */
+section.inner div.icon h2{
+    text-align: right;
+    font-size: 1.7rem;
+    font-style: italic;
+    color: #a6c1eebb;
+}
+/* 为标题设置箭头图标 */
+section.inner div.icon div{
+    position: relative;
+    height: 6px;
+    margin-top: 8px;
+    border-radius: 8px;
+    background-color: #a6c0fe;
+    z-index: 1;
+}
+/* 图标 */
+section.inner div.icon div::after{
+    content: "";
+    position: absolute;
+    top: -15px;
+    right: 4px;
+    height: 36px;
+    width: 36px;
+    border-color: #a6c0fe;
+    border-style: solid;
+    border-width: 0 6px 0 0;
+    border-radius: 0 5px 8px 0;
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+}
+/* 内容格式 */
+section.inner form#infor{
+    padding-bottom: 50px;
+    text-align: center;
+}
+/* 隐藏 */
+section.inner form#infor legend{
+    display: none;
+}
+/* 拉长底部 */
+section.inner form#infor section{
+    margin-bottom: 15px;
+}
+/* label样式 */
+section.inner section.form-group label{
+    display: inline-block;
+	margin-bottom: 5px;
+    width: 120px;
+	font-size: 1.2rem;
+	text-align: right;
+	color:#004385;
+}
+/* 添加后缀 */
+section.inner section.form-group label::after{
+    content: "：";
+}
+/* input样式 */
+section.inner section.form-group input{
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-left: 20px;
+    padding: 6px;
+    width: 50%;
+    height: 34px;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color:#004385;
+    background-color: #fff;
+}
+/* input聚焦 */
+section.inner section.form-group input:focus{
+    outline: none;
+	background-color: #eaeaea;
+}
+/* 取消userID,balance的边框 */
+section.inner form#infor #userID,section.inner form#infor #balance{
+    border: none;
+    cursor: default;
+}
+/* 聚焦背景 */
+section.inner form#infor #userID:focus,section.inner form#infor #balance:focus{
+    background-color: #fff;
+}
+/* 提交与修改按钮 */
+section.inner section.form-group button{
+    width: 80px;
+	height: 30px;
+	border: none;
+	border-radius: 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+	background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+/* 隐藏提交按钮 */
+section.inner form#infor section button:first-child{
+    display: none;
+}

@@ -1,0 +1,26 @@
+.inner .add-box{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 60px;
+    font-size: 2.5rem;
+    font-family: sans-serif;
+}
+.add-box .add-infor{
+    position: relative;
+    padding: 20px 80px;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    color: transparent;
+    font-weight: 600;
+    text-align: center;
+    writing-mode: vertical-rl;
+    cursor: pointer;
+    background-image: linear-gradient(to top, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
+}
+.add-box .add-infor span{
+    background-image: linear-gradient(to top, #f43b47 0%, #453a94 100%);
+    -webkit-background-clip: text;
+}

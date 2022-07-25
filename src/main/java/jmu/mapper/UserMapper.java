@@ -20,4 +20,6 @@ public interface UserMapper {
     User selectUser(String userID,String userPassword);     //判断用户是否存在
 
     int updateUser(User user);          //更新用户
+
+    int updateUserBalance(String userID,Integer balance); //充值
 }
