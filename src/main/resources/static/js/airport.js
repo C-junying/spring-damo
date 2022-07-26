@@ -1,35 +1,4 @@
-var data = [
-    {
-        "cityID":"123456",
-        "airportID":"ASD",
-        "airportName":"前思后想"
-    },
-    {
-        "cityID":"123456",
-        "airportID":"ASAZXD",
-        "airportName":"朝思暮想"
-    },
-    {
-        "cityID":"123456",
-        "airportID":"fsD",
-        "airportName":"思前想后"
-    },
-    {
-        "cityID":"123456",
-        "airportID":"asdfg",
-        "airportName":"博览群书"
-    },
-    {
-        "cityID":"123456",
-        "airportID":"AfdsSD",
-        "airportName":"知书识字"
-    },
-    {
-        "cityID":"123456",
-        "airportID":"xsdx",
-        "airportName":"书思践行"
-    }
-];
+var data = [];
 var mouse = new MouseMove(".item",".addbg","addbg");
 $(function(){
     //显示搜索框内容
@@ -37,26 +6,42 @@ $(function(){
         if($("#kw").val() == ""){
             alert("输入框不能为空");
         }
-        let passenger = {
-            "cityID":$("#kw-city-key").text(),
-            "airportID":$("#kw-airport-key").text(),
+        let airport = {
+            "cityID":$("#kw").val(),
+            "airportID":$("#kw").val(),
             "airportName":$("#kw").val()
         }
-        console.log(passenger);
+        console.log(airport);
+        location.href = `/admin/airport-search?cityID=${airport.cityID}&airportID=${airport.airportID}&airportName=${airport.airportName}&page=1`;
     });
 
     //机场信息，编辑信息,弹出
     $(".city-sp-bg").click(function(){
-        $(".modal").show();
+        $(".tb-edit").show();
         let list = $(this).siblings();
         $("#MemberId").val(list[0].innerHTML);
         $("#MemberAirId").val(list[1].innerHTML);
         $("#MemberName").val(list[2].innerHTML);
     });
+    //机场信息，航站楼,弹出
+    $(".airport-td").click(function(){
+        $(".tb-terminal").show();
+        let list = $(this).siblings();
+        console.log(list);
+    });
     // 机场信息，提交
     $(".form-submit").click(function(){
         if(!checkInforEmpty()){
             console.log("正在提交");
+            let airport = {
+                "cityID":$("#MemberId").val(),
+                "airportID":$("#MemberAirId").val(),
+                "airportName":$("#MemberName").val()
+            };
+            let page = $(".current-page").text();
+            location.href = `/admin/airport-edit?cityID=${airport.cityID}&airportID=${airport.airportID}&airportName=${airport.airportName}&page=${page}`;
+            $(".modal").find("aside").hide();
+            $(".modal").hide(400);
         }
     });
 
@@ -69,10 +54,37 @@ $(function(){
             "airportName":list[2].innerHTML
         };
         console.log(airport);
-        if(confirm("是否确认删除"+airport.cityID+"    "+airport.airportID+"   "+airport.airportName)){
-            alert("删除成功");
+        if(confirm("是否确认删除:"+airport.airportName)){
+            let page = $(".current-page").text();
+            location.href = `/admin/airport-delete?cityID=${airport.cityID}&airportID=${airport.airportID}&airportName=${airport.airportName}&page=${page}`;
         }else{
             alert("取消删除");
+        }
+    });
+    //跳转
+    $(".first-page,.prev-page,.next-page,.jump-page").click(function() {
+        let value = parseInt($(this).val());
+        if (isNaN(value)) {
+            value = parseInt($(".input-page").val());
+            if (isNaN(value)) {
+                alert("请输入跳转页数")
+                return;
+            }
+            let max = parseInt($(".size-page").text());
+            if (value > max) {
+                alert(`请输入正确的跳转页数\n输入跳转页数：${value}，最大跳转页数：${max}`);
+                return;
+            }
+        }
+        if ($(".airportName").text() == "")
+            location.href = "/admin/airport?page=" + value;
+        else {
+            let airport = {
+                "cityID":$(".cityID").text(),
+                "airportID":$(".airportID").text(),
+                "airportName":$(".airportName").text()
+            };
+            location.href = `/admin/airport-search?cityID=${airport.cityID}&airportID=${airport.airportID}&airportName=${airport.airportName}&page=${value}`;
         }
     });
 });

@@ -89,7 +89,7 @@
     background-color: transparent;
 }
  /* 弹窗内容 */
-.inner .modal form.lg-box-outer{
+.inner .modal .lg-box-outer{
     background:#fff;
     padding:10px 10px 30px;
     box-shadow:0px 0px 3px 0px rgba(0,0,0,0.3);

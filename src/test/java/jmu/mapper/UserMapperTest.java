@@ -20,6 +20,11 @@ class UserMapperTest {
     void selectAll() {
         System.out.println(userMapper.selectAll());
     }
+    @Test
+    void userSearch() {
+
+        System.out.println(userMapper.userSearch(new User("","张",null,null,null,null,null,null)));
+    }
 
     @Test
     void deleteUser() {

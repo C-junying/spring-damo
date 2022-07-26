@@ -11,6 +11,7 @@ import java.util.List;
 public interface UserMapper {
 
     List<User> selectAll();     //返回所有用户
+    List<User> userSearch(User user);     //返回所有用户
     int deleteUser(String userID);      //删除用户
 
     int insertUser(User user);          //插入用户

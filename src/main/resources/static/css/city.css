@@ -82,6 +82,9 @@
 .passenger .pa_ta .city-sp-bg:hover{
     background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
 }
+.passenger .pa_ta .airport-td:hover{
+    background-image: linear-gradient(to left, #fda34b 0%, #ff7882 100%);
+}
 .modal #MemberId{
     border: none;
     cursor: default;

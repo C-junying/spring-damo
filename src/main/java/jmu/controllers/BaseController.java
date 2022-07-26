@@ -45,6 +45,27 @@ public class BaseController {
         }else if (e instanceof PayException) {
             result.setState(5007);
             result.setMessage("支付异常");
+        }else if (e instanceof CityNotFoundException) {
+            result.setState(5008);
+            result.setMessage("城市不存在异常");
+        }else if (e instanceof CityDeleteException) {
+            result.setState(5009);
+            result.setMessage("删除城市时产生未知异常");
+        }else if (e instanceof CityUpdateException) {
+            result.setState(5009);
+            result.setMessage("更新城市时产生未知异常");
+        }else if (e instanceof AirportNotFoundException) {
+            result.setState(5010);
+            result.setMessage("机场不存在异常");
+        }else if (e instanceof AirportDeleteException) {
+            result.setState(5011);
+            result.setMessage("删除机场时产生未知异常");
+        }else if (e instanceof AirportUpdateException) {
+            result.setState(5012);
+            result.setMessage("更新机场时产生未知异常");
+        }else if (e instanceof UserDeleteException) {
+            result.setState(5013);
+            result.setMessage("删除用户时产生未知异常");
         }
         return result;
     }

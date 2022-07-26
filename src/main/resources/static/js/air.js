@@ -35,11 +35,16 @@ $(function(){
         }
     });
     //编辑信息，关闭
-    $(".close").click(function(){
+    $(".home_box").delegate(".close","click",function (){
         $(".modal").find("aside").hide();
         $(".modal").find("input").val('');
         $(".modal").hide(400);
     });
+    // $(".close").click(function(){
+    //     $(".modal").find("aside").hide();
+    //     $(".modal").find("input").val('');
+    //     $(".modal").hide(400);
+    // });
 
     //nav导航栏跳转
     //个人信息
@@ -64,7 +69,7 @@ $(function(){
     });
     //机场信息
     $(".ref-airport").click(function (){
-
+        location.href = "/admin/airport";
     });
     //航班信息
     $(".ref-flight").click(function (){
@@ -72,11 +77,11 @@ $(function(){
     });
     //用户信息
     $(".ref-user").click(function (){
-
+        location.href = "/admin/admin_user";
     });
     //添加信息
     $(".ref-add").click(function (){
-
+        location.href = "/admin/admin_add"
     });
 });
 // 检查信息是否为空，并提示

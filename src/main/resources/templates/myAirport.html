@@ -92,15 +92,58 @@
                         <div class="passenger">
 						    <div class="pa_ta">
                                 <table>
-                                    <tr><th>城市ID</th><th>机场三字码</th><th>机场名</th><th>编辑</th><th>删除</th></tr>
-                                    <tr><td>123456</td><td>ASS</td><td>厦门市</td><td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                    <tr><td>123456</td><td>ASS</td><td>厦门市</td><td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                    <tr><td>123456</td><td>ASS</td><td>厦门市</td><td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                    <tr><td>123456</td><td>ASS</td><td>厦门市</td><td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
+                                    <tr><th>城市ID</th><th>机场三字码</th><th>机场名</th><th>查看</th><th>编辑</th><th>删除</th></tr>
+                                    <tr th:each="item:${airportPageInfo.list}">
+                                        <td th:text="${item.cityID}">123456</td>
+                                        <td th:text="${item.airportID}">ASS</td>
+                                        <td th:text="${item.airportName}">厦门市</td>
+                                        <td class="pa_td airport-td"><span class="iconfont icon-image-text"></span></td>
+                                        <td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td>
+                                        <td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td>
+                                    </tr>
                                 </table>
 						    </div>
+                            <div class="page-btn">
+                                <button class="first-page" th:value="1">首页</button>
+                                <button class="prev-page" th:if="${!(airportPageInfo.isFirstPage)}" th:value="${airportPageInfo.prePage}">上一页</button>
+                                <span><span class="current-page" th:text="${airportPageInfo.pageNum}">1</span>/<span class="size-page" th:text="${airportPageInfo.pages}">10</span></span>
+                                <button class="next-page" th:if="${!(airportPageInfo.isLastPage)}" th:value="${(airportPageInfo.pageNum+1)}">下一页</button>
+                                <input type="text" class="input-page" onkeyup="value=value.replace(/^(0+)|[^\d]+$/g,'')" maxlength="8">
+                                <button class="jump-page">跳转</button>
+                            </div>
+                            <div style="display: none">
+                                <span th:if="${airport_data}!=null" th:text="${airport_data.cityID}" class="cityID"></span>
+                                <span th:if="${airport_data}!=null" th:text="${airport_data.airportID}" class="airportID"></span>
+                                <span th:if="${airport_data}!=null" th:text="${airport_data.airportName}" class="airportName"></span>
+                            </div>
                         </div>
-                        <div class="modal">
+                        <div class="modal tb-terminal">
+                            <div class="lg-box-outer">
+                                <div class="lg-box-title">
+                                    <span class="iconfont icon-close close"></span>
+                                    <h2>航站楼</h2>
+                                </div>
+                                <div class="passenger">
+                                    <div class="pa_ta">
+                                        <table>
+                                            <tr><th>机场三字码</th><th>航站楼ID</th><th>航站楼名</th></tr>
+                                            <tr th:each="item:${airportPageInfo.list}" th:if="${item.terminals[0]}!=null">
+                                                <td th:text="${item.terminals[0].airportID}">123456</td>
+                                                <td th:text="${item.terminals[0].terminalID}">t1</td>
+                                                <td th:text="${item.terminals[0].terminalName}">厦门</td>
+                                            </tr>
+                                            <tr th:each="item:${airportPageInfo.list}" th:if="${item.terminals[1]}!=null">
+                                                <td th:text="${item.terminals[1].airportID}">123456</td>
+                                                <td th:text="${item.terminals[1].terminalID}">t1</td>
+                                                <td th:text="${item.terminals[1].terminalName}">厦门</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer></footer>
+                        </div>
+                        <div class="modal tb-edit">
                             <form class="lg-box-outer">
                                 <div class="lg-box-title">
                                     <span class="iconfont icon-close close"></span>
@@ -139,7 +182,7 @@
         </div>
         <script th:src="@{/component/jquery.min.js}"></script>
         <script th:src="@{/js/MouseMove.js}"></script>
-        <script th:src="@{js/airport.js}"></script>
+        <script th:src="@{/js/airport.js}"></script>
         <script th:src="@{/js/air.js}"></script>
     </body>
 </html>

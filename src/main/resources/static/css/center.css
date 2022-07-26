@@ -205,3 +205,26 @@ section.inner section.form-group button{
 section.inner form#infor section button:first-child{
     display: none;
 }
+
+/* pagebtn */
+.page-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    color: #88888880;
+}
+.page-btn button{
+    border: none;
+    color: #88888880;
+    font-size: 1.1rem;
+    cursor: pointer;
+    background-color: transparent;
+}
+.page-btn button:hover{
+    color: #3984fb;
+}
+.page-btn input{
+    width: 70px;
+    color: #3984fb;
+}

@@ -1,27 +1,4 @@
-var data = [
-    {
-        "userID":"520221200112252001",
-        "userName":"张三",
-    },
-    {
-        "userID":"520221200112252001",
-        "userName":"张三",
-    },
-    {
-        "userID":"520221200112252001",
-        "userName":"张三",
-    },
-    {
-        "userID":"520221200112252001",
-        "userName":"张三",
-    },
-    {
-        "userID":"520221200112252001",
-        "userName":"张三",
-    }
-    
-    
-];
+var data = [];
 var mouse = new MouseMove(".item",".addbg","addbg");
 $(function(){
     //显示搜索框内容
@@ -29,25 +6,15 @@ $(function(){
         if($("#kw").val() == ""){
             alert("输入框不能为空");
         }
-        let onFlight = {
-            "userName":$("#kw-airport-key").text(),
+        let user = {
+            "userName":$("#kw").val(),
             "userID":$("#kw").val()
         }
-        console.log(onFlight);
+        console.log(user);
+        location.href = `/admin/user-search?userID=${user.userID}&userName=${user.userName}&page=1`;
     });
 
-    //航班信息，编辑信息,弹出
-    $(".city-sp-bg").click(function(){
-        $(".modal").show();
-        
-    });
-    // 航班信息，提交
-    $(".form-submit").click(function(){
-        if(!checkInforEmpty()){
-            console.log("正在提交");
-        }
-    });
-    // 航班信息，删除显示当行信息
+    // 用户信息，删除显示当行信息
     $(".pa-cl").click(function(){
         let list = $(this).siblings();
         let user = {
@@ -56,9 +23,35 @@ $(function(){
         };
         console.log(user);
         if(confirm("是否确认删除"+user.userID+"    "+user.userName)){
-            alert("删除成功");
+            let page = $(".current-page").text();
+            location.href = `/admin/user-delete?userID=${user.userID}&userName=${user.userName}&page=${page}`;
         }else{
             alert("取消删除");
+        }
+    });
+    //跳转
+    $(".first-page,.prev-page,.next-page,.jump-page").click(function() {
+        let value = parseInt($(this).val());
+        if (isNaN(value)) {
+            value = parseInt($(".input-page").val());
+            if (isNaN(value)) {
+                alert("请输入跳转页数")
+                return;
+            }
+            let max = parseInt($(".size-page").text());
+            if (value > max) {
+                alert(`请输入正确的跳转页数\n输入跳转页数：${value}，最大跳转页数：${max}`);
+                return;
+            }
+        }
+        if ($(".userName").text() == "")
+            location.href = "/admin/admin_user?page=" + value;
+        else {
+            let user = {
+                "userID": $(".userID").text(),
+                "userName": $(".userName").text()
+            }
+            location.href = `/admin/user-search?userID=${user.userID}&userName=${user.userName}&page=${value}`;
         }
     });
 });

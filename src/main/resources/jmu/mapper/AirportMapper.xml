@@ -18,6 +18,15 @@
         from airport,terminal
         where airport.airport_id = terminal.airport_id
     </select>
+    <select id="airportSearch" resultMap="airportMap">
+        select *
+        from airport join terminal on airport.airport_id = terminal.airport_id
+        <where>
+            <if test="airportID!=null and airportID!=''">or airport.airport_id like concat('%',#{airportID},'%')</if>
+            <if test="cityID!=null and cityID!=''">or airport.city_id like concat('%',#{cityID},'%')</if>
+            <if test="airportName!=null and airportName!=''">or airport.airport_name like concat('%',#{airportName},'%')</if>
+        </where>
+    </select>
 
     <select id="queryAirportByID" resultType="jmu.pojo.Airport">
         select *

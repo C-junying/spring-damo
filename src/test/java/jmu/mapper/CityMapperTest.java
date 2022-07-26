@@ -29,7 +29,8 @@ class CityMapperTest {
 
     @Test
     void queryCityByName(){
-        List<City> city = cityMapper.queryCityByName("上海");
+        City data = new City("400","400");
+        List<City> city = cityMapper.queryCityByNameAndID(data);
         System.out.println(city);
     }
     @Test

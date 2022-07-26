@@ -21,7 +21,11 @@ class AirportMapperTest {
         List<Airport> list = airportMapper.selectAllAirports();
         System.out.println(list);
     }
-
+    @Test
+    void airportSearch() {
+        List<Airport> list = airportMapper.airportSearch(new Airport("XMN","XMN","百色",null));
+        System.out.println(list);
+    }
     @Test
     void queryAirportByID(){
         Airport airport = airportMapper.queryAirportByID("XMN");

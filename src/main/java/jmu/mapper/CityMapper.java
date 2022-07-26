@@ -15,7 +15,7 @@ public interface CityMapper {
 
     City queryCityByID(String cityID);  //根据ID返回城市
 
-    List<City> queryCityByName(String cityName);  //根据名字返回城市
+    List<City> queryCityByNameAndID(City city);  //根据名字返回城市
 
     int deleteCityByID(String cityID);  //根据ID删除城市
 

@@ -84,14 +84,30 @@
 						    <div class="pa_ta">
                                 <table>
                                     <tr><th>用户ID</th><th>姓名</th><th>密码</th><th>权限</th><th>电话号码</th><th>邮箱</th><th>余额</th><th>删除</th></tr>
-                                    <tr><td>520221200112252001</td><td>张三</td><td>123456</td><td>0</td><td>19859252970</td><td>124@qq.com</td><td>100</td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                    <tr><td>520221200112252001</td><td>张三</td><td>123456</td><td>0</td><td>19859252970</td><td>124@qq.com</td><td>100</td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                    <tr><td>520221200112252001</td><td>张三</td><td>123456</td><td>0</td><td>19859252970</td><td>124@qq.com</td><td>100</td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                    <tr><td>520221200112252001</td><td>张三</td><td>123456</td><td>0</td><td>19859252970</td><td>124@qq.com</td><td>100</td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                    <tr><td>520221200112252001</td><td>张三</td><td>123456</td><td>0</td><td>19859252970</td><td>124@qq.com</td><td>100</td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                    
+                                    <tr th:each="item:${userPageInfo.list}">
+                                        <td th:text="${item.userID}">520221200112252001</td>
+                                        <td th:text="${item.userName}">张三</td>
+                                        <td th:text="${item.userPassword}">123456</td>
+                                        <td th:text="${item.permission}">0</td>
+                                        <td th:text="${item.phone}">19859252970</td>
+                                        <td th:text="${item.email}">124@qq.com</td>
+                                        <td th:text="${item.balance}">100</td>
+                                        <td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td>
+                                    </tr>
                                 </table>
 						    </div>
+                            <div class="page-btn">
+                                <button class="first-page" th:value="1">首页</button>
+                                <button class="prev-page" th:if="${!(userPageInfo.isFirstPage)}" th:value="${userPageInfo.prePage}">上一页</button>
+                                <span><span class="current-page" th:text="${userPageInfo.pageNum}">1</span>/<span class="size-page" th:text="${userPageInfo.pages}">10</span></span>
+                                <button class="next-page" th:if="${!(userPageInfo.isLastPage)}" th:value="${(userPageInfo.pageNum+1)}">下一页</button>
+                                <input type="text" class="input-page" onkeyup="value=value.replace(/^(0+)|[^\d]+$/g,'')" maxlength="8">
+                                <button class="jump-page">跳转</button>
+                            </div>
+                            <div style="display: none">
+                                <span th:if="${user_data}!=null" th:text="${user_data.userID}" class="userID"></span>
+                                <span th:if="${user_data}!=null" th:text="${user_data.userName}" class="userName"></span>
+                            </div>
                         </div>
                     </section>
                 </main>
@@ -99,7 +115,7 @@
         </div>
         <script th:src="@{/component/jquery.min.js}"></script>
         <script th:src="@{/js/MouseMove.js}"></script>
-        <script th:src="@{/user.js}"></script>
+        <script th:src="@{/js/user.js}"></script>
         <script th:src="@{/js/air.js}"></script>
     </body>
 </html>

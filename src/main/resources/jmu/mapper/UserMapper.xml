@@ -23,6 +23,11 @@
     <select id="selectAll" resultType="jmu.pojo.User">
         select * from user
     </select>
+    <select id="userSearch" resultType="jmu.pojo.User">
+        select *
+        from user
+        where user_id like concat('%',#{userID},'%') or user_name like concat('%',#{userName},'%')
+    </select>
     <select id="selectUser" resultType="jmu.pojo.User">
         select * from user where user_id=#{userID} and user_password=#{userPassword}
     </select>

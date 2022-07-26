@@ -11,6 +11,8 @@ import java.util.List;
 public interface AirportMapper {
     List<Airport> selectAllAirports();          //返回所有与机场
 
+    List<Airport> airportSearch(Airport airport);   //查询机场
+
     Airport queryAirportByID(String airportID);    //通过ID查找机场
 
     int deleteAirportByID(String airportID);    //通过ID删除机场
