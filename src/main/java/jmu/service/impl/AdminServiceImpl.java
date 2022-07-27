@@ -2,12 +2,8 @@ package jmu.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import jmu.mapper.AirportMapper;
-import jmu.mapper.CityMapper;
-import jmu.mapper.UserMapper;
-import jmu.pojo.Airport;
-import jmu.pojo.City;
-import jmu.pojo.User;
+import jmu.mapper.*;
+import jmu.pojo.*;
 import jmu.service.AdminService;
 import jmu.service.ex.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +20,10 @@ public class AdminServiceImpl implements AdminService {
     private CityMapper cityMapper;
     @Autowired
     private AirportMapper airportMapper;
+    @Autowired
+    private TerminalMapper terminalMapper;
+    @Autowired
+    private AircraftTypeMapper aircraftTypeMapper;
     @Autowired
     private UserMapper userMapper;
     @Override
@@ -132,5 +132,61 @@ public class AdminServiceImpl implements AdminService {
         List<User> list =  userMapper.userSearch(user);
         PageInfo<User> pageInfo = new PageInfo<>(list);
         return pageInfo;
+    }
+
+    @Override
+    public void addCity(City city) {
+        City result = cityMapper.queryCityByID(city.getCityID());
+        if(result!=null){
+            throw new CityIDDuplicateException("城市已存在");
+        }
+        Integer rows = cityMapper.insertCity(city);
+        if(rows!=1){
+            throw new InsertException("插入城市时产生未知异常");
+        }
+    }
+
+    @Override
+    public void addAirport(Airport airport) {
+        Airport result = airportMapper.queryAirportByID(airport.getAirportID());
+        if(result!=null){
+            throw new AirportIDDuplicateException("机场已存在");
+        }
+        Integer rows = airportMapper.insertAirport(airport);
+        if(rows!=1){
+            throw new InsertException("插入机场时产生未知异常");
+        }
+    }
+
+    @Override
+    public void addTerminal(Terminal terminal) {
+        Terminal result = terminalMapper.queryTerminalByTAID(terminal.getTerminalID(), terminal.getAirportID());
+        if(result!=null){
+            throw new TerminalDuplicateException("航站楼已存在");
+        }
+        Integer rows = terminalMapper.insertTerminal(terminal);
+        if(rows!=1){
+            throw new InsertException("插入机场时产生未知异常");
+        }
+    }
+
+    @Override
+    public void addFlight(OnFlight flight) {
+
+    }
+
+    @Override
+    public List<City> queryAllCities() {
+        return cityMapper.selectAllCities();
+    }
+
+    @Override
+    public List<Airport> queryAllAirports() {
+        return airportMapper.selectAllAirports();
+    }
+
+    @Override
+    public List<AircraftType> queryAllAircraftTypes() {
+        return aircraftTypeMapper.selectAll();
     }
 }

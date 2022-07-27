@@ -9,7 +9,7 @@ $(function(){
                 return;
             }
             // 退出聚焦
-            $("#kw").blur();
+            $("#kw,.add-box #MemberTerminalAirID,.add-box #MemberAirCityID,.add-box #MemberTypeID").blur();
             mouse.movePrev();
         }else if(keycode == 40){
             // 向下移动
@@ -17,11 +17,11 @@ $(function(){
                 return;
             }
             // 退出聚焦
-            $("#kw").blur();
+            $("#kw,.add-box #MemberTerminalAirID,.add-box #MemberAirCityID,.add-box #MemberTypeID").blur();
             mouse.moveNext();
         }else if(keycode == 13){
             // 回车效果
-            $("#kw").blur();
+            $("#kw,.add-box #MemberTerminalAirID,.add-box #MemberAirCityID,.add-box #MemberTypeID").blur();
             getCon();
         }
     });
@@ -39,6 +39,8 @@ $(function(){
         $(".modal").find("aside").hide();
         $(".modal").find("input").val('');
         $(".modal").hide(400);
+        $(".append").hide(400);
+        $(".append-ul").html("");
     });
     // $(".close").click(function(){
     //     $(".modal").find("aside").hide();

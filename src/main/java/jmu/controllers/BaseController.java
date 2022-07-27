@@ -66,6 +66,15 @@ public class BaseController {
         }else if (e instanceof UserDeleteException) {
             result.setState(5013);
             result.setMessage("删除用户时产生未知异常");
+        }else if (e instanceof CityIDDuplicateException) {
+            result.setState(5014);
+            result.setMessage("城市已存在");
+        }else if (e instanceof AirportIDDuplicateException) {
+            result.setState(5015);
+            result.setMessage("机场已存在");
+        }else if (e instanceof TerminalDuplicateException) {
+            result.setState(5016);
+            result.setMessage("航站楼已存在");
         }
         return result;
     }

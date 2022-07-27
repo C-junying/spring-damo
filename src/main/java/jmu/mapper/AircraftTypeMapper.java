@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 @Mapper
@@ -18,6 +19,5 @@ public interface AircraftTypeMapper {
 
     int updateAircraftType(AircraftType aircraftType);  //修改机型
 
-    @MapKey("type_id")
-    Map<String, AircraftType> selectAll();         //返回所有机型
+    List<AircraftType> selectAll();         //返回所有机型
 }

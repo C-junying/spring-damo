@@ -1,9 +1,7 @@
 package jmu.controllers;
 
 import com.github.pagehelper.PageInfo;
-import jmu.pojo.Airport;
-import jmu.pojo.City;
-import jmu.pojo.User;
+import jmu.pojo.*;
 import jmu.service.AdminService;
 import jmu.service.impl.AdminServiceImpl;
 import jmu.utils.JsonResult;
@@ -101,5 +99,35 @@ public class AdminController extends BaseController{
     public ModelAndView adminAdd(@RequestParam(value = "page",defaultValue = "1") Integer currentPage){
         ModelAndView modelAndView = new ModelAndView("myAdd");
         return modelAndView;
+    }
+    @RequestMapping("/add-city")
+    public JsonResult<Void> addCity(City city){
+        adminService.addCity(city);
+        return new JsonResult<>(OK);
+    }
+    @RequestMapping("/add-airport")
+    public JsonResult<Void> addAirport(Airport airport){
+        adminService.addAirport(airport);
+        return new JsonResult<>(OK);
+    }
+    @RequestMapping("/add-terminal")
+    public JsonResult<Void> addTerminal(Terminal terminal){
+        adminService.addTerminal(terminal);
+        return new JsonResult<>(OK);
+    }
+    @RequestMapping("/query-city")
+    public JsonResult<List<City>> queryCity(){
+        List<City> list = adminService.queryAllCities();
+        return new JsonResult<>(OK,list);
+    }
+    @RequestMapping("/query-airport")
+    public JsonResult<List<Airport>> queryAirport(){
+        List<Airport> list = adminService.queryAllAirports();
+        return new JsonResult<>(OK,list);
+    }
+    @RequestMapping("/query-type")
+    public JsonResult<List<AircraftType>> queryType(){
+        List<AircraftType> list = adminService.queryAllAircraftTypes();
+        return new JsonResult<>(OK,list);
     }
 }

@@ -19,7 +19,7 @@
         select * from aircrafttype where type_id=#{typeID}
     </select>
 
-    <select id="selectAll" resultType="java.util.Map">
+    <select id="selectAll" resultType="jmu.pojo.AircraftType">
         select * from aircrafttype;
     </select>
 

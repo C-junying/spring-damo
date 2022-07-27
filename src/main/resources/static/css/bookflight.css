@@ -1,0 +1,340 @@
+.home_box:last-child{
+    z-index: 1;
+}
+.home_box section.inner{
+    width: 920px;
+}
+.or_content{
+	min-height: 150px;
+	margin-top: 20px;
+    margin-bottom: 20px;
+	padding: 15px 20px;
+	border-radius: 20px;
+	background-color: #FFF;
+	box-shadow: 2px 2px 10px 1px #d1ccc0;
+}
+.t_form{
+	margin-top: 10px;
+}
+.t_form button{
+	border:none;
+	border-radius: 20px;
+	width: 80px;
+	height: 40px;
+	margin-left: 10px;
+}
+.t_form .btn{
+	color: #30336B;
+	font-size: 15px;
+    cursor: pointer;
+	background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+}
+.or_box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.city{
+	clear: both;
+	font-size: 15px;
+	color: #474787;
+}
+.city .city_in{
+	margin-top: 20px;
+	padding: 10px;
+	border-radius: 20px;
+	border: 1px dashed #bdc3c7;
+	width: 170px;
+}
+.city .city_in:focus{
+	outline: none;
+}
+.city .calendar-item{
+	height: 38px;
+	color: #757575;
+	font-size: 15px;
+	padding-top: 6px;
+	text-align: left;
+	background-color: #FFFFFF;
+}
+
+.or_ex{
+	display: inline;
+	margin:0 5px;
+    cursor: pointer;
+	padding-top: 10px;
+    user-select: none;
+}
+.or_ex .or_ex_btn{
+	border: none;
+	padding: 5px 15px;
+    color: #1389ff;
+    font-size: 1.3rem;
+    font-weight: bold;
+	border-radius: 25px;
+	background-color: #d3ecff;
+}
+.or_pl_content{
+	min-height: 400px;
+	margin-top: 20px;
+	padding: 1px 10px;
+	border-radius: 20px;
+}
+.flight-query{
+	width: 120px;
+	height: 40px;
+	font-size: 1.1rem;
+	border: none;
+	border-radius: 25px;
+    margin-top: 10px;
+    margin-right: 100px;
+    color: #FFF;
+    cursor: pointer;
+	background-image: linear-gradient(to right, #f9d423 0%, #ff4e50 100%);
+}
+/* 设置标题盒子 */
+section.inner div.icon{
+    position: relative;
+    left: 18px;
+    top: 5px;
+    width: 22%;
+    margin-bottom: 30px;
+}
+/* 设置标题 */
+section.inner div.icon h2{
+    text-align: right;
+    font-size: 1.7rem;
+    font-style: italic;
+    color: #a6c1eebb;
+}
+/* 为标题设置箭头图标 */
+section.inner div.icon div{
+    position: relative;
+    height: 6px;
+    margin-top: 8px;
+    border-radius: 8px;
+    background-color: #a6c0fe;
+    z-index: 1;
+}
+/* 图标 */
+section.inner div.icon div::after{
+    content: "";
+    position: absolute;
+    top: -15px;
+    right: 4px;
+    height: 36px;
+    width: 36px;
+    border-color: #a6c0fe;
+    border-style: solid;
+    border-width: 0 6px 0 0;
+    border-radius: 0 5px 8px 0;
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+}
+.flight-head{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 40px;
+	padding: 0 20px;
+	color: #FFF;
+	line-height: 38px;
+	background-color: #2f71bd;
+}
+.select-container form .city{
+    width: 75%;
+}
+.select-container form .exchange{
+    float: left;
+    margin-left: 20px;
+}
+.select-container form{
+    position: relative;
+}
+.select-container form .submit-btn{
+    position: absolute;
+    top: 0;
+    left: 630px;
+    bottom: 0;
+    writing-mode: vertical-lr;
+    clear: both;
+}
+.select-container form .submit-btn .btn{
+    color: #FFF;
+    width: 60px;
+    height: 100px;
+    box-sizing: border-box;
+    padding: 5px 20px;
+    word-wrap: break-word;
+    writing-mode: vertical-lr;
+    font-size: 1.2rem;
+    line-height: 44px;
+    writing-mode: vertical-lr;
+    background: linear-gradient(90deg,#FFA000,#FF6400);
+}
+.book-passenger{
+    display: none;
+}
+.book-passenger .flight-head{
+    justify-content: flex-start;
+}
+.book-passenger .flight-head span{
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.flight-nav{
+    text-align: center;
+}
+.flight-nav button{
+    width: 120px;
+    min-height: 30px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+}
+.flight-nav button+button{
+    margin-left: 20px;
+    background-color: #ffb199;
+}
+.append{
+    display: none;
+    position: absolute;
+    top: 55px;
+    min-width: 100px;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 18%);
+    padding: 12px 10px;
+    background-color: #FFF;
+    z-index: 1;
+}
+.append ul li{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    padding: 10px 5px;
+    font-size: 0.8rem;
+    transition: all .5s;
+    cursor: pointer;
+}
+.append ul li:hover{
+    background-color: #C1E5FF;
+}
+
+/* 订单 */
+.book-order{
+    display: none;
+}
+ /* 内容 */
+.inner .order{
+    display: block;
+}
+.inner .order .lg-box-outer{
+    background:#fff;
+    padding:10px 10px 30px;
+    margin: 0 auto;
+    text-align: center;
+    width:600px;
+}
+/* 内容头部 */
+.inner .order .lg-box-title{
+    padding:5px 10px;
+    border-bottom:2px solid #004385;
+    height: 50px;
+    line-height: 50px;
+}
+.inner .order .lg-box-title::after{
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+.inner .order .lg-box-title h2{
+    float:left;
+    color:#004385;
+    font-size:20px;
+}
+
+.inner .order form fieldset{
+    padding: 10px;
+}
+.inner .order form legend{
+    display: none;
+}
+.inner .order form fieldset>section{
+    margin-top: 15px;
+}
+.inner .order form section:last-child{
+    border-top: 1px solid #ecf0f1;
+    margin-top: 40px;
+    padding-top: 20px;
+}
+.inner .order form section button{
+    font-size: 1.2rem;
+    padding: 6px 10px;
+    line-height: 1;
+}
+.inner .order form section label{
+    width: 150px;
+}
+.inner .order form section input{
+    border: none;
+}
+.inner .order form section input:focus{
+    background-color: #FFF;
+}
+.inner .order form section button:last-child{
+    margin-left: 20px;
+}
+/* 添加动画 */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+.order-ul ul li{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 5px;
+}
+.order-ul ul li+li{
+    margin-top: 10px;
+}
+.order-ul ul+ul{
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid #004385;
+}
+.order-passenger .flight-head{
+    display: flex;
+    position: relative;
+    width: 100px;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 30px;
+}
+.order-passenger .flight-head::after{
+    content: "";
+    position: absolute;
+    right: -80px;
+    bottom: 0;
+    font-size: 0;
+    height: 0;
+    border-width: 15px 40px 15px 40px;
+    border-style: solid;
+    border-color: transparent transparent transparent #2f71bd;
+    z-index: 1;
+}
+section.inner section.form-group button{
+    width: 125px;
+}

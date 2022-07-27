@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/reset.css}">
     <link rel="stylesheet" th:href="@{/css/iconfont.css}">
     <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/datepicker.css}">
 </head>
 <body>
 <div id="home_container">
@@ -86,8 +87,9 @@
                                         </span>
                             </section>
                             <section>
-                                <label for="takeoffDate">去程日期</label>
-                                <input type="text" name="takeoffDate" id="takeoffDate" placeholder="去程日期">
+<!--                                <label for="takeoffDate">去程日期</label>-->
+<!--                                <input type="text" name="takeoffDate" id="takeoffDate" placeholder="去程日期">-->
+                                <button class="calendar-item" id="takeoffDate" type="button" name="date">选择日期</button>
                             </section>
                             <section class="submit-btn">
                                 <input type="submit" value="查询" class="btn">
@@ -100,6 +102,9 @@
     </div>
 </div>
 <p th:if="${msg}!=null" id="alertText" style="display: none;">[[${msg}]]</p>
+<script th:src="@{/component/jquery.min.js}"></script>
+<script th:src="@{/js/datepicker.js}"></script>
 <script th:src="@{/js/home.js}"></script>
+<script th:src="@{/js/bookflight.js}"></script>
 </body>
 </html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>首页</title>
+        <link rel="stylesheet" th:href="@{/css/reset.css}">
+        <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+        <link rel="stylesheet" th:href="@{/css/home.css}">
+        <link rel="stylesheet" th:href="@{/css/datepicker.css}">
+        <link rel="stylesheet" th:href="@{/css/center.css}">
+        <link rel="stylesheet" th:href="@{/css/passenger.css}">
+        <link rel="stylesheet" th:href="@{/css/bookflight.css}">
+    </head>
+    <body>
+        <div id="home_container">
+            <div class="home_box">
+                <header>
+                    <section class="title">
+                        <embed src="img/airplane-log.svg" type="image/svg+xml" />
+                        <h2>人人航空</h2>
+                    </section>
+                    <nav class="menu">
+                        <ul>
+                            <li><a href="#">首页</a></li>
+                            <li><a href="#">预订机票</a></li>
+                            <li><a href="#">我的订单</a></li>
+                            <li><a href="#">个人中心</a></li>
+                        </ul>
+                    </nav>
+                    <aside class="login_register">
+                        <ul>
+                            <li><a href="#">注册</a></li>
+                            <li><a href="#">登录</a></li>
+                        </ul>
+                    </aside>
+                </header>
+                <div class="box-shadow"></div>
+            </div>
+            <div class="home_box">
+                <main>
+                    <section class="inner book-flight">
+                        <div class="icon">
+                            <h2>预订航班</h2>
+                            <div></div>
+                        </div>
+                        <div class="or_content">
+                            <div class="t_form">
+                                <button type="button" class="btn">单程</button>
+                                <button type="button" class="btn">返程</button>
+                                <button type="button" class="btn">多程</button>
+                            </div>
+                            <hr color="#17C0EB" />
+                            <div class="or_box">
+                                <div class="city">
+                                    <input class="city_in" type="text" id="startCity" placeholder="出发城市" name="startCity"/>
+                                    <div class="or_ex swap">
+                                        <span class="iconfont icon-exchange4jiaohuan or_ex_btn"></span>
+                                    </div>
+                                    <input class="city_in" id="endCity" type="text" placeholder="到达城市" name="endCity" />
+                                    <button class="city_in calendar-item" id="bu_city" type="button" name="date">选择日期</button>
+                                </div>
+                                <div class="or_que">
+                                    <button class="flight-query" type="button">查询</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="flight-head">
+                            <div>
+                                <span>单程：</span>
+                                <span class="flight-takeoff">厦门</span>
+                                <span class="iconfont icon-jiantou_xiangyouliangci"></span>
+                                <span class="flight-arrive">上海</span>
+                            </div>
+                            <span>2022-7-16</span>
+                        </div>
+                        <div class="passenger">
+                            <div class="pa_ta">
+                                <table>
+                                    <tr><th>航班号</th><th>机型</th><th>起飞地址</th><th>起飞时间</th><th>到达地址</th><th>到达时间</th><th>余票</th><th>预订</th></tr>
+                                    <tr><td>CA1789</td><td>波音767</td><td>厦门高崎国际机场T2</td><td>2022-07-25 18:00:00</td><td>上海浦东国际机场T2</td><td>2022-07-25 20:00:00</td><td>123</td><td class="pa_td"><span class="iconfont icon-cart-Empty"></span></td></tr>
+                                    <tr><td>CA1789</td><td>波音767</td><td>厦门高崎国际机场T2</td><td>2022-07-25 18:00:00</td><td>上海浦东国际机场T2</td><td>2022-07-25 20:00:00</td><td>123</td><td class="pa_td"><span class="iconfont icon-cart-Empty"></span></td></tr>
+                                    <tr><td>CA1789</td><td>波音767</td><td>厦门高崎国际机场T2</td><td>2022-07-25 18:00:00</td><td>上海浦东国际机场T2</td><td>2022-07-25 20:00:00</td><td>123</td><td class="pa_td"><span class="iconfont icon-cart-Empty"></span></td></tr>
+                                    <tr><td>CA1789</td><td>波音767</td><td>厦门高崎国际机场T2</td><td>2022-07-25 18:00:00</td><td>上海浦东国际机场T2</td><td>2022-07-25 20:00:00</td><td>123</td><td class="pa_td"><span class="iconfont icon-cart-Empty"></span></td></tr>
+                                    
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="inner book-passenger">
+                        <div class="or_content">
+                            <div class="flight-head">
+                                <span>我的乘机人</span>
+                            </div>
+                            <div class="passenger">
+                                <div class="pa_btn">
+                                    <button type="button"><span class="iconfont icon-add"></span>添加乘机人</button>
+                                    <div class="append">
+                                        <ul class="append-ul">
+                                            <li><span>张三</span><span>123456789123456789</span><span>12345678912</span></li>
+                                            <li><span>张三</span><span>123456789123456789</span><span>12345678912</span></li>
+                                            <li><span>张三</span><span>123456789123456789</span><span>12345678912</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="pa_ta">
+                                    <table>
+                                        <tr><th>姓名</th><th>账号</th><th>手机号</th><th>删除</th></tr>
+                                        <tr><td>张三</td><td>123456789123456789</td><td>12345678912</td><td class="pa_td td_delete"><span class="iconfont icon-shanchu_o"></span></td></tr>
+                                        <tr><td>李四</td><td>123456789123456789</td><td>12345678912</td><td class="pa_td td_delete"><span class="iconfont icon-shanchu_o"></span></td></tr>
+                                        <tr><td>王五</td><td>123456789123456789</td><td>12345678912</td><td class="pa_td td_delete"><span class="iconfont icon-shanchu_o"></span></td></tr>
+                                        <tr><td>李白</td><td>123456789123456789</td><td>12345678912</td><td class="pa_td td_delete"><span class="iconfont icon-shanchu_o"></span></td></tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="flight-nav">
+                                <button type="button" class="flight-prev">上一步</button>
+                                <button type="button" class="flight-next">下一步</button>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="inner book-order">
+                        <div class="icon">
+                            <h2>订单生成</h2>
+                            <div></div>
+                        </div>
+                        <div class="order">
+                            <form class="lg-box-outer">
+                                <fieldset>
+                                    <legend>
+                                        <h2>订单信息</h2>
+                                    </legend>
+                                    <section class="form-group">
+                                        <label for="ticketTypeID">航班ID</label>
+                                        <input id="ticketTypeID" name="ticketTypeID" type="text" readonly />
+                                    </section>
+                                    <section class="form-group">
+                                        <label for="startStation">起始站机场</label>
+                                        <input id="startStation" name="startStation" type="text" readonly />
+                                    </section>
+                                    <section class="form-group">
+                                        <label for="endStation">终点站机场</label>
+                                        <input id="endStation" name="endStation" type="text" readonly />
+                                    </section>
+                                    <section class="form-group">
+                                        <label for="takeoffTime">起飞时间</label>
+                                        <input id="takeoffTime" name="takeoffTime" type="text" readonly />
+                                    </section>
+                                    <section class="form-group">
+                                        <label for="arrivalTime">到达时间</label>
+                                        <input id="arrivalTime" name="arrivalTime" type="text" readonly />
+                                    </section>
+                                    <section class="form-group">
+                                        <label for="ticketPricing">机票定价</label>
+                                        <input id="ticketPricing" name="ticketPricing" type="text" readonly />
+                                    </section>
+                                    <section class="form-group">
+                                        <label for="discount">折扣</label>
+                                        <input id="discount" name="discount" type="text" readonly />
+                                    </section>
+                                    <section class="form-group">
+                                        <label for="insuranceCosts">保险费用</label>
+                                        <input id="insuranceCosts" name="insuranceCosts" type="text" readonly />
+                                    </section>
+                                    <section class="form-group">
+                                        <label for="ticketCost">总费用</label>
+                                        <input id="ticketCost" name="ticketCost" type="text" readonly />
+                                    </section>
+                                    <section class="order-passenger">
+                                        <div class="order-ul">
+                                            <div class="flight-head">
+                                                <span>乘机人</span>
+                                            </div>
+                                            <ul>
+                                                <li><span>乘机人</span><span>姓名</span><span></span><span>身份证</span></li>
+                                                <li><span>联系人手机</span><span>12345679812</span></li>
+                                            </ul>
+                                            <ul>
+                                                <li><span>乘机人</span><span>姓名</span><span></span><span>身份证</span></li>
+                                                <li><span>联系人手机</span><span>12345679812</span></li>
+                                            </ul>
+                                        </div>
+                                    </section>
+                                    <section class="form-group">
+                                        <button type="button" class="order-prev">上一步</button>
+                                        <button type="button" class="form-submit">确定支付</button>
+                                    </section>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+        <script th:src="@{/component/jquery.min.js}"></script>
+        <script th:src="@{/js/datepicker.js}"></script>
+        <script th:src="@{/js/bookflight.js}"></script>
+    </body>
+</html>

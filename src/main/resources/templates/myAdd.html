@@ -13,6 +13,43 @@
             section.inner section.form-group label{
                 width: 140px;
             }
+            .modal form{
+                position: relative;
+            }
+            .append{
+                display: none;
+                position: absolute;
+                top: 150px;
+                right: 70px;
+                width: 45%;
+                height: 250px;
+                overflow-y: scroll;
+                box-shadow: 0 2px 5px 0 rgb(0 0 0 / 18%);
+                padding: 12px 10px;
+                background-color: #FFF;
+                z-index: 10;
+            }
+            .append ul li{
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                align-items: center;
+                padding: 10px 5px;
+                font-size: 0.8rem;
+                transition: all .5s;
+                cursor: pointer;
+            }
+            .add-terminal .append{
+                top: 220px;
+            }
+            .add-terminal .append ul li{
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            .add-flight .append{
+                top: 220px;
+            }
+            .addbg{
+                background-color: #C1E5FF;
+            }
         </style>
     </head>
     <body>
@@ -77,7 +114,7 @@
                                         </legend>
                                         <section class="form-group">
                                             <label for="MemberCityID">城市ID</label>
-                                            <input id="MemberCityID" name="cityID" type="text" required />
+                                            <input id="MemberCityID" name="cityID" type="text" autocomplete="off" required />
                                         </section>
                                         <aside>
                                             <p><span class="iconfont icon-warning"></span>城市ID不能为空</p>
@@ -97,7 +134,7 @@
                                 </form>
                                 <footer></footer>
                             </div>
-                            <div class="add-infor">
+                            <div class="add-infor query-city">
                                 <span>增加机场</span>
                             </div>
                             <div class="modal">
@@ -112,7 +149,7 @@
                                         </legend>
                                         <section class="form-group">
                                             <label for="MemberAirCityID">城市ID</label>
-                                            <input id="MemberAirCityID" name="cityID" type="text" required />
+                                            <input id="MemberAirCityID" name="cityID" type="text" autocomplete="off" onKeyup="getContent(this);" required />
                                         </section>
                                         <aside>
                                             <p><span class="iconfont icon-warning"></span>城市ID不能为空</p>
@@ -136,10 +173,15 @@
                                             <button type="button" class="pa-reset">重置</button>
                                         </section>
                                     </fieldset>
+                                    <div class="append">
+                                        <ul class="append-ul">
+
+                                        </ul>
+                                    </div>
                                 </form>
-                                <footer></footer>
+
                             </div>
-                            <div class="add-infor">
+                            <div class="add-infor query-type">
                                 <span>增加航班</span>
                             </div>
                             <div class="modal">
@@ -161,7 +203,7 @@
                                         </aside>
                                         <section class="form-group">
                                             <label for="MemberTypeID">机型ID</label>
-                                            <input id="MemberTypeID" name="typeID" type="text" required />
+                                            <input id="MemberTypeID" name="typeID" type="text" autocomplete="off" onKeyup="getContent3(this);" required />
                                         </section>
                                         <aside>
                                             <p><span class="iconfont icon-warning"></span>机型ID不能为空</p>
@@ -192,10 +234,15 @@
                                             <button type="button" class="pa-reset">重置</button>
                                         </section>
                                     </fieldset>
+                                    <div class="append">
+                                        <ul class="append-ul">
+
+                                        </ul>
+                                    </div>
                                 </form>
                                 <footer></footer>
                             </div>
-                            <div class="add-infor">
+                            <div class="add-infor query-airport">
                                 <span>增加航站楼</span>
                             </div>
                             <div class="modal">
@@ -217,7 +264,7 @@
                                         </aside>
                                         <section class="form-group">
                                             <label for="MemberTerminalAirID">机场ID</label>
-                                            <input id="MemberTerminalAirID" name="airportID" type="text" required />
+                                            <input id="MemberTerminalAirID" name="airportID" type="text" autocomplete="off" onKeyup="getContent2(this);"  required />
                                         </section>
                                         <aside>
                                             <p><span class="iconfont icon-warning"></span>机场ID不能为空</p>
@@ -234,8 +281,12 @@
                                             <button type="button" class="pa-reset">重置</button>
                                         </section>
                                     </fieldset>
+                                    <div class="append">
+                                        <ul class="append-ul">
+
+                                        </ul>
+                                    </div>
                                 </form>
-                                <footer></footer>
                             </div>
                         </div>
                     </section>
@@ -243,7 +294,8 @@
             </div>
         </div>
         <script th:src="@{/component/jquery.min.js}"></script>
+        <script th:src="@{/js/MouseMove.js}"></script>
         <script th:src="@{/js/air.js}"></script>
-        <script th:src="@{js/myAdd.js}"></script>
+        <script th:src="@{/js/myAdd.js}"></script>
     </body>
 </html>
