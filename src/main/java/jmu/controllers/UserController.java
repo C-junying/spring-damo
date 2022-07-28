@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -124,12 +125,23 @@ public class UserController extends BaseController{
         return new JsonResult<>(OK,result);
     }
     @RequestMapping("/order-create")
-    public JsonResult<Void> orderCreate(@RequestParam("flight_kay")String flight_kay,
-                                        @RequestParam("flight_value")String flight_value,
+    public JsonResult<Void> orderCreate(@RequestParam("flight")String flight_infor,
                                         @RequestParam("passList") String passList,
-                                        HttpSession session){
-        userService.orderCreate(flight_kay,flight_value,passList,getUserIDFromSession(session));
+                                        HttpSession session) throws ParseException {
+        userService.orderCreate(flight_infor,passList,getUserIDFromSession(session));
         return new JsonResult<>(OK);
+    }
+    @RequestMapping("/order-success")
+    public ModelAndView orderSuccess(){
+        return new ModelAndView("orderSuccess");
+    }
+    @RequestMapping("/myorder")
+    public ModelAndView myorder(HttpSession session){
+        ModelAndView modelAndView = new ModelAndView("myOrder");
+        User user = userService.selectID(getUserIDFromSession(session));
+
+        modelAndView.addObject("user",user);
+        return modelAndView;
     }
 }
 /**

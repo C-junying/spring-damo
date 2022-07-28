@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
@@ -26,8 +28,8 @@ class OrderMapperTest {
 
     @Test
     void insertOrder() {
-        Order order1 = new Order(UUIDUtils.getUUID(16),"520221200112252001",200,"已支付");
-        Order order2 = new Order(UUIDUtils.getUUID(16),"520221200112252001",200,"已支付");
+        Order order1 = new Order(UUIDUtils.getUUID(16),"520221200112252001",200,"已支付",null);
+        Order order2 = new Order(UUIDUtils.getUUID(16),"520221200112252001",200,"已支付",null);
         if(orderMapper.insertOrder(order1)>0){
             System.out.println("插入成功");
         }else{
@@ -52,11 +54,16 @@ class OrderMapperTest {
 
     @Test
     void updateOrder() {
-        Order order = new Order("7fce75c558ac4640","520221200112252001",500,"未支付");
+        Order order = new Order("7fce75c558ac4640","520221200112252001",500,"未支付",null);
         if(orderMapper.updateOrder(order)>0){
             System.out.println("更新成功");
         }else{
             System.out.println("更新失败");
         }
+    }
+    @Test
+    void queryAllUserOrder(){
+        List<Order> list = orderMapper.queryAllUserOrder("520221200112252001");
+        System.out.println(list);
     }
 }

@@ -75,6 +75,12 @@ public class BaseController {
         }else if (e instanceof TerminalDuplicateException) {
             result.setState(5016);
             result.setMessage("航站楼已存在");
+        }else if (e instanceof RemainingException) {
+            result.setState(5017);
+            result.setMessage("航班剩余票不足或小于您的订购");
+        }else if (e instanceof BalanceException) {
+            result.setState(5018);
+            result.setMessage("尊敬的顾客您好，您的账户余额不足，请充值后，再订票");
         }
         return result;
     }

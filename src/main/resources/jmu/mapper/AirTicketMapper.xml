@@ -4,10 +4,17 @@
 
     <insert id="insertAirTicket">
         insert into airticket(air_ticket_id,passenger_id, order_id, ticket_type_id,total_costs,seat_number,book_time,cabin_id)
-        VALUES (#{airTicketID},#{passengerID}, #{orderID}, #{ticketTypeID},
-                #{totalCosts}, #{seatNumber}, #{bookTime},#{cabinID})
+        VALUES (#{airTicketID},#{passengerID}, #{orderID}, #{ticketTypeID},#{totalCosts}, #{seatNumber}, #{bookTime},#{cabinID})
     </insert>
-
+    
+    <insert id="insertAirTickets">
+        insert into airticket(air_ticket_id,passenger_id, order_id, ticket_type_id,total_costs,seat_number,book_time,cabin_id)
+        values
+        <foreach collection="airTickets" item="airTicket" separator=",">
+            (#{airTicket.airTicketID},#{airTicket.passengerID},#{airTicket.orderID},#{airTicket.ticketTypeID},#{airTicket.totalCosts},#{airTicket.seatNumber},#{airTicket.bookTime},#{airTicket.cabinID})
+        </foreach>
+    </insert>
+    
     <update id="updateAirTicket">
         update airticket
         set passenger_id=#{passengerID},
@@ -56,7 +63,7 @@
     <resultMap id="airTicketPassenger" type="jmu.pojo.AirTicket">
         <id column="air_ticket_id" property="airTicketID" />
         <id column="book_time" property="bookTime" />
-        <result column="passenger_id" property="passengerID" />
+        <id column="passenger_id" property="passengerID" />
         <result column="order_id" property="orderID" />
         <result column="ticket_type_id" property="ticketTypeID" />
         <result column="total_costs" property="totalCosts" />

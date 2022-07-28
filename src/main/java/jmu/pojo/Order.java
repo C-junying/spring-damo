@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,4 +14,6 @@ public class Order {
     private String userID;          //用户ID
     private Integer orderCosts;     //总费用
     private String paymentStatus;   //支付状态
+
+    List<AirTicket> airTickets;
 }

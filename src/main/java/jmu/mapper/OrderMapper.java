@@ -18,4 +18,6 @@ public interface OrderMapper {
     List<Order> selectByUserID(String userID);      //查询用户所有订单
 
     int updateOrder(Order order);          //更新订单
+
+    List<Order> queryAllUserOrder(String userID);   //订单所有信息
 }

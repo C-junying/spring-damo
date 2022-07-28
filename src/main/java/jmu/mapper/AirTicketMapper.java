@@ -2,6 +2,7 @@ package jmu.mapper;
 
 import jmu.pojo.AirTicket;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -13,6 +14,8 @@ public interface AirTicketMapper {
     int deleteByIDTime(String airTicketID, Date bookTime);          //删除机票
 
     int insertAirTicket(AirTicket airTicket);                   //插入机票
+
+    int insertAirTickets(@Param("airTickets") List<AirTicket> airTickets);                   //插入机票
 
     AirTicket selectByIDTime(String airTicketID , Date bookTime);   //返回机票
 

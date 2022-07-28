@@ -23,5 +23,40 @@
     <select id="selectByUserID" resultType="jmu.pojo.Order">
         select * from `order` where user_id=#{userID}
     </select>
+
+    <resultMap id="order_map" type="jmu.pojo.Order">
+        <id column="order_id" property="orderID" />
+        <result column="user_id" property="userID" />
+        <result column="order_costs" property="orderCosts" />
+        <result column="payment_status" property="paymentStatus" />
+        <collection property="airTickets" ofType="jmu.pojo.AirTicket">
+            <id column="air_ticket_id" property="airTicketID" />
+            <id column="book_time" property="bookTime" />
+            <id column="passenger_id" property="passengerID" />
+            <result column="order_id" property="orderID" />
+            <result column="ticket_type_id" property="ticketTypeID" />
+            <result column="total_costs" property="totalCosts" />
+            <result column="seat_number" property="seatNumber" />
+            <result column="cabin_id" property="cabinID" />
+            <association property="passenger" javaType="jmu.pojo.Passenger">
+                <id column="passenger_id" property="passengerID" />
+                <result column="passenger_name" property="passengerName" />
+                <result column="sex" property="sex" />
+                <result column="phone" property="phone" />
+            </association>
+            <association property="flight" javaType="jmu.vo.Flight">
+
+            </association>
+            <association property="cabin" javaType="jmu.pojo.Cabin">
+                <id column="cabin_id" property="cabinID" />
+                <result column="cabin_class" property="cabinClass" />
+            </association>
+        </collection>
+    </resultMap>
+    <select id="queryAllUserOrder" resultMap="order_map">
+        select *
+        from `order` join airticket air using(order_id) join passenger p using(passenger_id) join cabin using(cabin_id) join order_air using(ticket_type_id)
+        where `order`.user_id = #{userID}
+    </select>
 </mapper>
 

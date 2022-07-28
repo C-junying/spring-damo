@@ -56,8 +56,15 @@
 .inner .my-order .order-infor .flight-infor span{
     flex-basis: 500px;
 }
+.inner .my-order .order-infor .flight-infor .pass-infor{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
 .inner .my-order .order-infor .flight-infor .pass-name::before{
     content: "乘机人：";
+}
+.inner .my-order .order-infor .flight-infor .pass-ID::before{
+    content: "身份证：";
 }
 .inner .my-order .order-infor .flight-infor .pass-phone::before{
     content: "手机号：";

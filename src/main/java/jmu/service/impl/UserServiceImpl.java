@@ -1,20 +1,20 @@
 package jmu.service.impl;
 
 import com.mysql.cj.xdevapi.JsonArray;
-import jmu.mapper.OnFlightMapper;
-import jmu.mapper.PassengerMapper;
-import jmu.mapper.UserMapper;
+import jmu.mapper.*;
 import jmu.pojo.*;
 import jmu.service.UserService;
 import jmu.service.ex.*;
 import jmu.utils.UUIDUtils;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.UUID;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 @Transactional
@@ -25,6 +25,12 @@ public class UserServiceImpl implements UserService {
     private PassengerMapper passengerMapper;
     @Autowired
     private OnFlightMapper onFlightMapper;
+    @Autowired
+    private TicketTypeMapper ticketTypeMapper;
+    @Autowired
+    private OrderMapper orderMapper;
+    @Autowired
+    private AirTicketMapper airTicketMapper;
     @Override
     public List<User> selectAll() {
         return userMapper.selectAll();
@@ -149,29 +155,55 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void orderCreate(String flight_kay, String flight_value, String passList,String userID) {
-        JSONArray jsonArray_key = JSONArray.fromObject(flight_kay);
-        JSONArray jsonArray_value = JSONArray.fromObject(flight_value);
+    public void orderCreate(String flight_infor,String passList,String userID) throws ParseException {
+        /**
+         * 数据转化成实体类
+         */
+        JSONObject jsonFlight = JSONObject.fromObject(flight_infor);
         JSONArray jsonPassList = JSONArray.fromObject(passList);
+        System.out.println(jsonPassList.get(0));
         Order order = new Order();
-        AirTicket airTicket = new AirTicket();
+        List<AirTicket> airTicketList = new ArrayList<>();
         String uuid = UUIDUtils.getUUID(16);
-        Integer cost = jsonPassList.size()*jsonArray_value.getInt(9);
+        Integer cost = jsonPassList.size()*jsonFlight.getInt("ticketCost");
         order.setOrderID(uuid);
         order.setUserID(userID);
         order.setOrderCosts(cost);
         order.setPaymentStatus("已支付");
-//        private String airTicketID;        //用户机票(身份证)
-//    private String passengerID;         //乘机人ID
-//    private String orderID;            //订单ID
-//    private String ticketTypeID;       //机票类型ID
-//    private Integer totalCosts;         //总费用
-//    private Integer seatNumber;          //座位号
-//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-//    private Date bookTime;              //订票时间
-//    private Integer cabinID;            //舱位ID
-        airTicket.setAirTicketID(userID);
-        airTicket.setOrderID(uuid);
-        airTicket.setPassengerID("ads");
+        SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-ss HH:mm:ss");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        String now = simpleDateFormat.format(new Date());
+        Date date = simpleDateFormat.parse(now);
+        for(int i = 0;i<jsonPassList.size();i++){
+            AirTicket airTicket = new AirTicket();
+            airTicket.setAirTicketID(userID);
+            String str = (String) jsonPassList.get(i);
+            airTicket.setPassengerID(str);
+            airTicket.setOrderID(uuid);
+            airTicket.setTicketTypeID(jsonFlight.getString("ticketTypeID"));
+            airTicket.setTotalCosts(jsonFlight.getInt("ticketCost"));
+            airTicket.setSeatNumber((int)(1+Math.random()*(120)));
+            airTicket.setBookTime(date);
+            airTicket.setCabinID(1);
+            airTicketList.add(airTicket);
+        }
+        //余额判断
+        User userResult = userMapper.selectID(userID);
+        if(userResult.getBalance()<cost){
+            throw new BalanceException("尊敬的顾客您好，您的账户余额不足，请充值后，再订票");
+        }
+        //开始插入
+        TicketType result = ticketTypeMapper.selectByID(jsonFlight.getString("ticketTypeID"));
+        if(result.getRemainingTickets()<airTicketList.size()){
+            throw new RemainingException("航班剩余票不足或小于您的订购");
+        }
+        Integer rows =  orderMapper.insertOrder(order);
+        if(rows!=1){
+            throw new InsertException("插入订单时产生未知异常");
+        }
+        Integer airRows = airTicketMapper.insertAirTickets(airTicketList);
+        if(rows == 0){
+            throw new InsertException("插入机票时产生未知异常");
+        }
     }
 }

@@ -87,12 +87,12 @@ $(function(){
             "estimatedTakeoffTime":list[3].innerHTML,
             "endStationName":list[4].innerHTML,
             "estimatedArrivalTime":list[5].innerHTML,
-            "ticketPricing":list[7].innerHTML,
-            "discount":list[8].innerHTML,
-            "insuranceCosts":list[9].innerHTML,
+            "ticketPricing":parseInt(list[7].innerHTML),
+            "discount":parseInt(list[8].innerHTML),
+            "insuranceCosts":parseInt(list[9].innerHTML),
             "ticketCost":parseInt(list[7].innerHTML)-parseInt(list[8].innerHTML)+parseInt(list[9].innerHTML),
             "ticketTypeID":list[10].innerHTML,
-            "remainingTickets":list[6].innerHTML
+            "remainingTickets":parseInt(list[6].innerHTML)
         };
         $.ajax({
             url: "/user/query-passenger",
@@ -194,18 +194,11 @@ $(function(){
         $(".order-ul ul").remove();
     });
     $(".book-order .form-submit").click(function (){
-        let flight_key = [];
-        let flight_value = [];
-        for(let i in flight_infor){
-            flight_key.push(i);
-            flight_value.push(flight_infor[i]);
-        }
         $.ajax({
             url: "/user/order-create",
             type: "post",
             data: {
-                "flight_kay":JSON.stringify(flight_key),
-                "flight_value":JSON.stringify(flight_value),
+                "flight":JSON.stringify(flight_infor),
                 "passList":JSON.stringify(passIDList)
             },
             dataType: "json",
@@ -213,7 +206,7 @@ $(function(){
             success:function (json){
                 if(json.state == 200){
                     console.log(json);
-
+                    location.href = "/user/order-success";
                 }else{
                     alert(json.message);
                 }

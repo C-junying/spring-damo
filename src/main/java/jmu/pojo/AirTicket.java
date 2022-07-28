@@ -1,5 +1,6 @@
 package jmu.pojo;
 
+import jmu.vo.Flight;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class AirTicket {
     private Date bookTime;              //订票时间
     private Integer cabinID;            //舱位ID
 
+    private Flight flight;              //航班信息
     private Passenger passenger;        //乘客
     private Cabin cabin;                //舱位
 }
