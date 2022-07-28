@@ -92,3 +92,36 @@
 .modal #MemberId:focus{
     background-color: transparent;
 }
+
+/* 我的航班的乘机人信息 */
+.inner .flight-passenger{
+    display: none;
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    height: 280px;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 18%);
+    overflow-y: scroll;
+    z-index: 10;
+    background-color: #FFF;
+}
+.inner .flight-passenger li{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    padding: 10px 20px 10px 5px;
+    font-size: 0.8rem;
+    transition: all .5s;
+    text-align: center;
+}
+.inner .flight-passenger li+li:hover{
+    cursor: pointer;
+    background-color: #C1E5FF;
+}
+.inner .flight-passenger li span{
+    padding: 5px;
+    font-size: 1rem;
+}
+.inner .flight-passenger li span+span{
+    border-left: 2px solid 	#e5F5F5;
+}

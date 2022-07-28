@@ -29,9 +29,9 @@ class AirTicketMapperTest {
     @Test
     void insertAirTicket() throws ParseException {
         AirTicket airTicket = new AirTicket("520221200112252001","520221200112252001","402f09848391485f","XMN2022072508",500,25,
-                new SimpleDateFormat("yyyy-MM-ss HH:mm:ss").parse("2022-3-4 14:12:00"),1,null,null);
+                new SimpleDateFormat("yyyy-MM-ss HH:mm:ss").parse("2022-3-4 14:12:00"),1,null,null,null);
         AirTicket airTicket1 = new AirTicket("520221200112252001","520221200112252003","402f09848391485f","XMN2022072508",500,27,
-                new SimpleDateFormat("yyyy-MM-ss HH:mm:ss").parse("2022-5-16 14:12:00"),2,null,null);
+                new SimpleDateFormat("yyyy-MM-ss HH:mm:ss").parse("2022-5-16 14:12:00"),2,null,null,null);
         if(airTicketMapper.insertAirTicket(airTicket)>0){
             System.out.println("插入成功");
         }else {
@@ -57,7 +57,7 @@ class AirTicketMapperTest {
     @Test
     void updateAirTicket() throws ParseException {
         AirTicket airTicket = new AirTicket("520221200112252001","520221200112252003","402f09848391485f","XMN2022072508",400,11,
-                new SimpleDateFormat("yyyy-MM-ss HH:mm:ss").parse("2022-5-16 14:12:00"),2,null,null);
+                new SimpleDateFormat("yyyy-MM-ss HH:mm:ss").parse("2022-5-16 14:12:00"),2,null,null,null);
         if(airTicketMapper.updateAirTicket(airTicket)>0){
             System.out.println("更新成功");
         }else {

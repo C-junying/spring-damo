@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -74,6 +75,39 @@ public class AdminController extends BaseController{
         modelAndView.addObject("airport_data",airport);
         return modelAndView;
     }
+    @RequestMapping("/flight")
+    public ModelAndView flightPage(@RequestParam(value = "page",defaultValue = "1") Integer currentPage){
+        ModelAndView modelAndView = new ModelAndView("myFlight");
+        PageInfo<OnFlight> pageInfo = adminService.selectAllOnFlights(currentPage,10);
+        modelAndView.addObject("onFlightPageInfo",pageInfo);
+        return modelAndView;
+    }
+    @RequestMapping("/flight-ticket")
+    public JsonResult<TicketType> flightPage(@RequestParam("ticketTypeID") String ticketTypeID){
+        TicketType result = adminService.selectByTicketID(ticketTypeID);
+        return new JsonResult<>(OK,result);
+    }
+    @RequestMapping("/flight-passengers")
+    public JsonResult<List<Passenger>> flightPassengers(@RequestParam("ticketTypeID") String ticketTypeID){
+        List<Passenger> result = adminService.selectFlightAllPassenger(ticketTypeID);
+        return new JsonResult<>(OK,result);
+    }
+    @RequestMapping("/flight-delete")
+    public ModelAndView flightDelete(@RequestParam("onFlightID") String onFlightID,
+                                     @RequestParam("estimatedTakeoffTime") String estimatedTakeoffTime,
+                                     @RequestParam(value = "page") Integer currentPage) throws ParseException {
+        adminService.onFlightDelete(onFlightID,estimatedTakeoffTime);
+        return flightPage(currentPage);
+    }
+    @RequestMapping("/flight-search")
+    public ModelAndView flightSearch(OnFlight onFlight,@RequestParam(value = "page",defaultValue = "1") Integer currentPage){
+        ModelAndView modelAndView = new ModelAndView("myFlight");
+        System.out.println(onFlight);
+        PageInfo<OnFlight> pageInfo = adminService.onFlightSearch(onFlight,currentPage,10);
+        modelAndView.addObject("onFlightPageInfo",pageInfo);
+        modelAndView.addObject("onflight_data",onFlight);
+        return modelAndView;
+    }
     @RequestMapping("/admin_user")
     public ModelAndView adminUserPage(@RequestParam(value = "page",defaultValue = "1") Integer currentPage){
         ModelAndView modelAndView = new ModelAndView("myUser");
@@ -113,6 +147,16 @@ public class AdminController extends BaseController{
     @RequestMapping("/add-terminal")
     public JsonResult<Void> addTerminal(Terminal terminal){
         adminService.addTerminal(terminal);
+        return new JsonResult<>(OK);
+    }
+    @RequestMapping("/add-flight")
+    public JsonResult<Void> addFlight(@RequestParam("onFlightID") String onFlightID,
+                                      @RequestParam("typeID") String typeID,
+                                      @RequestParam("estimatedTakeoffTime") String estimatedTakeoffTime,
+                                      @RequestParam("estimatedArrivalTime") String estimatedArrivalTime,
+                                      @RequestParam("boardingGate") String boardingGate,
+                                      TicketType ticketType) throws ParseException {
+        adminService.addFlight(onFlightID,typeID,estimatedTakeoffTime,estimatedArrivalTime,boardingGate,ticketType);
         return new JsonResult<>(OK);
     }
     @RequestMapping("/query-city")

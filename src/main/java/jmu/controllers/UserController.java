@@ -1,15 +1,13 @@
 package jmu.controllers;
 
-import jmu.pojo.City;
-import jmu.pojo.OnFlight;
-import jmu.pojo.Passenger;
-import jmu.pojo.User;
+import jmu.pojo.*;
 import jmu.service.UserService;
 import jmu.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.util.DateUtils;
 
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
@@ -139,8 +137,9 @@ public class UserController extends BaseController{
     public ModelAndView myorder(HttpSession session){
         ModelAndView modelAndView = new ModelAndView("myOrder");
         User user = userService.selectID(getUserIDFromSession(session));
-
+        List<Order> orderList = userService.queryAllOrder(getUserIDFromSession(session));
         modelAndView.addObject("user",user);
+        modelAndView.addObject("orderList",orderList);
         return modelAndView;
     }
 }

@@ -59,7 +59,7 @@ $(function(){
     });
     //我的订单
     $(".ref-order").click(function (){
-
+        location.href = "/user/myorder";
     });
     //充值中心
     $(".ref-pay").click(function (){
@@ -75,7 +75,7 @@ $(function(){
     });
     //航班信息
     $(".ref-flight").click(function (){
-
+        location.href = "/admin/flight";
     });
     //用户信息
     $(".ref-user").click(function (){
@@ -83,7 +83,7 @@ $(function(){
     });
     //添加信息
     $(".ref-add").click(function (){
-        location.href = "/admin/admin_add"
+        location.href = "/admin/admin_add";
     });
 });
 // 检查信息是否为空，并提示

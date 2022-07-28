@@ -13,15 +13,19 @@
             section.inner section.form-group label{
                 width: 140px;
             }
-            .modal #MemberRemainingTickets{
+            section.inner section.form-group  input{
                 border: none;
                 cursor: default;
             }
-            .modal #MemberRemainingTickets:focus{
+            section.inner section.form-group input:focus{
                 background-color: transparent;
             }
             .append ul li{
                 grid-template-columns: 1fr 2fr 2fr;
+            }
+            section.inner section.form-group .form-submit{
+                width: 120px;
+                height: 40px;
             }
         </style>
     </head>
@@ -36,8 +40,8 @@
                     <nav class="menu">
                         <ul>
                             <li><a href="/user/home">首页</a></li>
-                            <li><a href="#">预订机票</a></li>
-                            <li><a href="#">我的订单</a></li>
+                            <li><a href="/user/flight">预订机票</a></li>
+                            <li><a href="/user/myorder">我的订单</a></li>
                             <li><a href="/user/user_center">个人中心</a></li>
                         </ul>
                     </nav>
@@ -93,13 +97,29 @@
 						    <div class="pa_ta">
                                 <table>
                                     <tr><th>航班ID</th><th>机型</th><th>机票ID</th><th>状态</th><th>预计起飞</th><th>编辑机票</th><th>删除</th></tr>
-                                    <tr><td>CA1234</td><td>波音747</td><td>XMN2022072518</td><td>空闲</td><td>2022-07-25 18:00:00</td><td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                    <tr><td>CA1234</td><td>波音747</td><td>XMN2022072518</td><td>空闲</td><td>2022-07-25 18:00:00</td><td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                    <tr><td>CA1234</td><td>波音747</td><td>XMN2022072518</td><td>空闲</td><td>2022-07-25 18:00:00</td><td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                    <tr><td>CA1234</td><td>波音747</td><td>XMN2022072518</td><td>空闲</td><td>2022-07-25 18:00:00</td><td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td><td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                    
+                                    <tr th:each="item:${onFlightPageInfo.list}">
+                                        <td th:text="${item.onFlightID}">CA1234</td>
+                                        <td th:text="${item.typeID}">波音747</td>
+                                        <td th:text="${item.ticketTypeID}">XMN2022072518</td>
+                                        <td th:text="${item.currentStatus}">空闲</td>
+                                        <td th:text="${item.estimatedTakeoffTime}">2022-07-25 18:00:00</td>
+                                        <td class="pa_td city-sp-bg"><span class="iconfont icon-edit"></span></td>
+                                        <td class="pa_td pa-cl"><span class="iconfont icon-shanchu_o"></span></td>
+                                    </tr>
                                 </table>
 						    </div>
+                            <div class="page-btn">
+                                <button class="first-page" th:value="1">首页</button>
+                                <button class="prev-page" th:if="${!(onFlightPageInfo.isFirstPage)}" th:value="${onFlightPageInfo.prePage}">上一页</button>
+                                <span><span class="current-page" th:text="${onFlightPageInfo.pageNum}">1</span>/<span class="size-page" th:text="${onFlightPageInfo.pages}">10</span></span>
+                                <button class="next-page" th:if="${!(onFlightPageInfo.isLastPage)}" th:value="${(onFlightPageInfo.pageNum+1)}">下一页</button>
+                                <input type="text" class="input-page" onkeyup="value=value.replace(/^(0+)|[^\d]+$/g,'')" maxlength="8">
+                                <button class="jump-page">跳转</button>
+                            </div>
+                            <div style="display: none">
+                                <span th:if="${onflight_data}!=null" th:text="${onflight_data.onFlightID}" class="onFlightID"></span>
+                                <span th:if="${onflight_data}!=null" th:text="${onflight_data.ticketTypeID}" class="ticketTypeID"></span>
+                            </div>
                         </div>
                         <div class="modal">
                             <form class="lg-box-outer">
@@ -109,79 +129,59 @@
                                 </div>
                                 <fieldset>
                                     <legend>
-                                        <h2>机票修改</h2>
+                                        <h2>机票信息</h2>
                                     </legend>
                                     <section class="form-group">
                                         <label for="MemberId">机票ID</label>
-                                        <input id="MemberId" name="ticketTypeID" type="text" readonly />
+                                        <input id="MemberId" name="ticketTypeID" type="text" readonly value="123456"/>
                                     </section>
                                     <section class="form-group">
                                         <label for="MemberStartAirId">起始站机场ID</label>
-                                        <input id="MemberStartAirId" name="startAirportID" type="text" required />
+                                        <input id="MemberStartAirId" name="startAirportID" type="text" readonly />
                                     </section>
-                                    <aside>
-                                        <p><span class="iconfont icon-warning"></span>起始站机场ID不能为空</p>
-                                    </aside>
                                     <section class="form-group">
                                         <label for="MemberStartStationID">起始站ID</label>
-                                        <input id="MemberStartStationID" name="startStationID" type="text" required />
+                                        <input id="MemberStartStationID" name="startStationID" type="text" readonly />
                                     </section>
-                                    <aside>
-                                        <p><span class="iconfont icon-warning"></span>城市名不能为空</p>
-                                    </aside>
                                     <section class="form-group">
                                         <label for="MemberEndAirportID">终点站机场ID</label>
-                                        <input id="MemberEndAirportID" name="endAirportID" type="text" required />
+                                        <input id="MemberEndAirportID" name="endAirportID" type="text" readonly />
                                     </section>
-                                    <aside>
-                                        <p><span class="iconfont icon-warning"></span>终点站机场ID不能为空</p>
-                                    </aside>
                                     <section class="form-group">
                                         <label for="MemberEndStationID">终点站ID</label>
-                                        <input id="MemberEndStationID" name="endStationID" type="text" required />
+                                        <input id="MemberEndStationID" name="endStationID" type="text" readonly />
                                     </section>
-                                    <aside>
-                                        <p><span class="iconfont icon-warning"></span>终点站ID不能为空</p>
-                                    </aside>
                                     <section class="form-group">
                                         <label for="MemberTicketPricing">机票定价</label>
-                                        <input id="MemberTicketPricing" name="ticketPricing" type="text" required />
+                                        <input id="MemberTicketPricing" name="ticketPricing" type="text" readonly />
                                     </section>
-                                    <aside>
-                                        <p><span class="iconfont icon-warning"></span>机票定价不能为空</p>
-                                    </aside>
                                     <section class="form-group">
                                         <label for="MemberDiscount">折扣</label>
-                                        <input id="MemberDiscount" name="discount" type="text" required />
+                                        <input id="MemberDiscount" name="discount" type="text" readonly />
                                     </section>
-                                    <aside>
-                                        <p><span class="iconfont icon-warning"></span>折扣不能为空</p>
-                                    </aside>
                                     <section class="form-group">
                                         <label for="MemberInsuranceCosts">保险费用</label>
-                                        <input id="MemberInsuranceCosts" name="insuranceCosts" type="text" required />
+                                        <input id="MemberInsuranceCosts" name="insuranceCosts" type="text" readonly />
                                     </section>
-                                    <aside>
-                                        <p><span class="iconfont icon-warning"></span>保险费用不能为空</p>
-                                    </aside>
                                     <section class="form-group">
                                         <label for="MemberTicketCount">总数</label>
-                                        <input id="MemberTicketCount" name="ticketCount" type="text" required />
+                                        <input id="MemberTicketCount" name="ticketCount" type="text" readonly />
                                     </section>
-                                    <aside>
-                                        <p><span class="iconfont icon-warning"></span>总数不能为空</p>
-                                    </aside>
                                     <section class="form-group">
                                         <label for="MemberRemainingTickets">余量</label>
                                         <input id="MemberRemainingTickets" name="remainingTickets" type="text" readonly />
                                     </section>
                                     <section class="form-group">
-                                        <button type="button" class="form-submit">修改</button>
-                                        <button type="button" class="pa-reset">重置</button>
+                                        <button type="button" class="form-submit">查看乘客</button>
                                     </section>
                                 </fieldset>
                             </form>
                             <footer></footer>
+                        </div>
+                        <div class="flight-passenger">
+                            <ul>
+
+                            </ul>
                         </div>
                     </section>
                 </main>

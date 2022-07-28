@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -94,5 +95,17 @@ class OnFlightMapperTest {
     void queryTakeoffAndArrive() throws ParseException {
         List<OnFlight> list = onFlightMapper.queryTakeoffAndArrive("厦门市","上海市","2022-08-25 00:00:00","2022-08-25 24:00:00");
         System.out.println(list);
+    }
+    @Test
+    void timeTest() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+        SimpleDateFormat simple = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = sdf.parse("Mon Aug 29 14:00:00 CST 2022");
+        Date date1 =simple.parse(simple.format(date));
+        System.out.println(date);
+        System.out.println(date1);
+        SimpleDateFormat simple2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        Date date2 = simple2.parse("2022-08-01T08:00:00");
+        System.out.println(date2);
     }
 }

@@ -1,9 +1,15 @@
 package jmu.vo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Flight {
     private String onFlightID;          //执飞航班ID
     private String ticketTypeID;           //航班机票

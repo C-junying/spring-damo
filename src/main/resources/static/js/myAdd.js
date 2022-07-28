@@ -115,7 +115,7 @@ $(function(){
                 },
                 error:function (xhr){
                     hideLebal();
-                    alert("添加时产生未知的异常",xhr.message);
+                    alert("添加城市时产生未知的异常",xhr.message);
                 }
             });
         }else if(index[0].classList[1] == "add-air"){
@@ -138,7 +138,7 @@ $(function(){
                 },
                 error:function (xhr){
                     hideLebal();
-                    alert("添加时产生未知的异常",xhr.message);
+                    alert("添加机场时产生未知的异常",xhr.message);
                 }
             });
         }else if(index[0].classList[1] == "add-terminal"){
@@ -161,12 +161,32 @@ $(function(){
                 },
                 error:function (xhr){
                     hideLebal();
-                    alert("添加时产生未知的异常",xhr.message);
+                    alert("添加航站楼时产生未知的异常",xhr.message);
                 }
             });
         }else if(index[0].classList[1] == "add-flight"){
             console.log("增加航班");
             console.log(formData);
+            $.ajax({
+                url: "/admin/add-flight",
+                type: "post",
+                data: formData,
+                dataType: "json",
+                // contentType : 'application/json',
+                success:function (json){
+                    hideLebal();
+                    if(json.state == 200){
+                        alert("添加航班成功");
+                        console.log(json);
+                    }else{
+                        alert(json.message);
+                    }
+                },
+                error:function (xhr){
+                    hideLebal();
+                    alert("添加航班时产生未知的异常",xhr.message);
+                }
+            });
         }
     });
 });

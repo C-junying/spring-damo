@@ -1,6 +1,7 @@
 package jmu.service;
 
 import jmu.pojo.OnFlight;
+import jmu.pojo.Order;
 import jmu.pojo.Passenger;
 import jmu.pojo.User;
 
@@ -36,4 +37,6 @@ public interface UserService {
     List<OnFlight> queryTakeoffAndArrive(String startCityName,String endCityName,String takeoff,String arrive);
 
     void orderCreate(String flight_infor,String passList,String userID) throws ParseException;    //订单生成
+
+    List<Order> queryAllOrder(String userID);
 }

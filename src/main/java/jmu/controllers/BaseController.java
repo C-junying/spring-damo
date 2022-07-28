@@ -81,6 +81,18 @@ public class BaseController {
         }else if (e instanceof BalanceException) {
             result.setState(5018);
             result.setMessage("尊敬的顾客您好，您的账户余额不足，请充值后，再订票");
+        }else if (e instanceof OnFlightDeleteException) {
+            result.setState(5019);
+            result.setMessage("删除航班时产生未知异常");
+        }else if (e instanceof OnFlightNotFoundException) {
+            result.setState(5020);
+            result.setMessage("航班不存在异常");
+        }else if (e instanceof OnFlightDuplicateException) {
+            result.setState(5021);
+            result.setMessage("航班已存在");
+        }else if (e instanceof TicketTypeDuplicateException) {
+            result.setState(5022);
+            result.setMessage("航班机票已存在");
         }
         return result;
     }

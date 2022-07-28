@@ -63,8 +63,8 @@
                     <nav class="menu">
                         <ul>
                             <li><a href="/user/home">首页</a></li>
-                            <li><a href="#">预订机票</a></li>
-                            <li><a href="#">我的订单</a></li>
+                            <li><a href="/user/flight">预订机票</a></li>
+                            <li><a href="/user/myorder">我的订单</a></li>
                             <li><a href="/user/user_center">个人中心</a></li>
                         </ul>
                     </nav>
@@ -228,6 +228,62 @@
                                         </section>
                                         <aside>
                                             <p><span class="iconfont icon-warning"></span>登机口不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberStartAirId">起始站机场ID</label>
+                                            <input id="MemberStartAirId" name="startAirportID" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>起始站机场ID不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberStartStationID">起始站ID</label>
+                                            <input id="MemberStartStationID" name="startStationID" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>起始站ID不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberEndAirportID">终点站机场ID</label>
+                                            <input id="MemberEndAirportID" name="endAirportID" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>终点站机场ID不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberEndStationID">终点站ID</label>
+                                            <input id="MemberEndStationID" name="endStationID" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>终点站ID不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberTicketPricing">机票定价</label>
+                                            <input id="MemberTicketPricing" name="ticketPricing" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>机票定价不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberDiscount">折扣</label>
+                                            <input id="MemberDiscount" name="discount" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>折扣不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberInsuranceCosts">保险费用</label>
+                                            <input id="MemberInsuranceCosts" name="insuranceCosts" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>保险费用不能为空</p>
+                                        </aside>
+                                        <section class="form-group">
+                                            <label for="MemberTicketCount">总数</label>
+                                            <input id="MemberTicketCount" name="ticketCount" type="text" required />
+                                        </section>
+                                        <aside>
+                                            <p><span class="iconfont icon-warning"></span>总数不能为空</p>
                                         </aside>
                                         <section class="form-group">
                                             <button type="button" class="form-submit">添加</button>

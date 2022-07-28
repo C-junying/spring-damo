@@ -170,8 +170,7 @@ public class UserServiceImpl implements UserService {
         order.setUserID(userID);
         order.setOrderCosts(cost);
         order.setPaymentStatus("已支付");
-        SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-ss HH:mm:ss");
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String now = simpleDateFormat.format(new Date());
         Date date = simpleDateFormat.parse(now);
         for(int i = 0;i<jsonPassList.size();i++){
@@ -205,5 +204,10 @@ public class UserServiceImpl implements UserService {
         if(rows == 0){
             throw new InsertException("插入机票时产生未知异常");
         }
+    }
+
+    @Override
+    public List<Order> queryAllOrder(String userID) {
+        return orderMapper.queryAllUserOrder(userID);
     }
 }

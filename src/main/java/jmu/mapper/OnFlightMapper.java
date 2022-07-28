@@ -1,6 +1,7 @@
 package jmu.mapper;
 
 import jmu.pojo.OnFlight;
+import jmu.pojo.Passenger;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,10 @@ public interface OnFlightMapper {
     int updateOnFlight(OnFlight onFlight,String onFlightID, Date takeoff);  //更新航班
 
     //A->B航班航线信息。当参数为空，则查询所有航班航线
-    List<OnFlight> queryOnfligthAndTicket(String startCityName,String endCityName);
-    List<OnFlight> queryTakeoffAndArrive(String startCityName,String endCityName,String takeoff,String arrive);
+    List<OnFlight> queryOnfligthAndTicket(String startCityName,String endCityName);     //A->B的航班
+    List<OnFlight> queryTakeoffAndArrive(String startCityName,String endCityName,String takeoff,String arrive);//某个时间段的航班
+
+    List<OnFlight> onFlightSearch(OnFlight onFlight);   //航班模糊查询
+
+    List<Passenger> queryAllPassengers(String ticketTypeID);    //返回航班乘客
 }

@@ -45,7 +45,13 @@
                 <result column="phone" property="phone" />
             </association>
             <association property="flight" javaType="jmu.vo.Flight">
-
+                <id column="ticket_type_id" property="ticketTypeID" />
+                <result column="on_flight_id" property="onFlightID" />
+                <result column="start_terminal" property="startStationName" />
+                <result column="end_terminal" property="endStationName" />
+                <result column="type_name" property="typeName" />
+                <result column="estimated_takeoff_time" property="estimatedTakeoffTime" />
+                <result column="estimated_arrival_time" property="estimatedArrivalTime" />
             </association>
             <association property="cabin" javaType="jmu.pojo.Cabin">
                 <id column="cabin_id" property="cabinID" />

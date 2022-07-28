@@ -10,13 +10,23 @@
         select * from onflight
         where on_flight_id = #{onFlightID}
     </select>
-
+    <select id="onFlightSearch" resultType="jmu.pojo.OnFlight">
+        select * from onflight
+        <where>
+            <if test="onFlightID!=null and onFlightID!=''">or on_flight_id like concat('%',#{onFlightID},'%')</if>
+            <if test="ticketTypeID!=null and ticketTypeID!=''">or ticket_type_id like concat('%',#{ticketTypeID},'%')</if>
+        </where>
+    </select>
     <select id="selectByIDTime" resultType="jmu.pojo.OnFlight">
         select * from onflight
         where on_flight_id = #{onFlightID} and
               estimated_takeoff_time = #{takeoff}
     </select>
-
+    <select id="queryAllPassengers" resultType="jmu.pojo.Passenger">
+        SELECT passenger_id,passenger_name,phone
+        FROM `airticket` join passenger using(passenger_id)
+        where ticket_type_id = #{ticketTypeID}
+    </select>
     <insert id="insertOnFlight">
         insert into onflight values (#{onFlightID},#{typeID},#{ticketTypeID},#{currentStatus},#{estimatedTakeoffTime},
                                      #{actualTakeoffTime},#{estimatedArrivalTime},#{actualArrivalTime},#{boardingGate});

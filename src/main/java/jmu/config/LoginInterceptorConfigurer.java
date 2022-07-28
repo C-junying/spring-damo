@@ -1,5 +1,6 @@
 package jmu.config;
 
+import jmu.interceptor.AdminInterceptor;
 import jmu.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -38,11 +39,10 @@ public class LoginInterceptorConfigurer implements WebMvcConfigurer {
         patterns.add("/js/**");
 
         //页面
-        patterns.add("/user/login");
-        patterns.add("/user/register");
-        patterns.add("/user/home");
+        patterns.add("/user/**");
         patterns.add("/admin/query-city");
         registry.addInterceptor(interceptor)
                 .excludePathPatterns(patterns);
+        registry.addInterceptor(new AdminInterceptor()).addPathPatterns("/admin/**");
     }
 }

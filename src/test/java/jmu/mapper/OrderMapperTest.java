@@ -2,12 +2,17 @@ package jmu.mapper;
 
 import jmu.pojo.Order;
 import jmu.utils.UUIDUtils;
+import jmu.vo.Flight;
+import org.assertj.core.util.DateUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,8 +67,14 @@ class OrderMapperTest {
         }
     }
     @Test
-    void queryAllUserOrder(){
+    void queryAllUserOrder() throws ParseException {
         List<Order> list = orderMapper.queryAllUserOrder("520221200112252001");
+        Flight flight = list.get(0).getAirTickets().get(0).getFlight();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date1 = simpleDateFormat.parse("2022-8-1 14:24:50");
+        Date date2 = simpleDateFormat.parse("2022-8-2 13:30:30");
+        String str = DateUtil.formatTimeDifference(date2,date1);
+        System.out.println(str);
         System.out.println(list);
     }
 }
