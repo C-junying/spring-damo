@@ -42,11 +42,11 @@
                     <li class="ref-passenger"><span class="iconfont icon-Customermanagement"></span><span>我的乘机人</span></li>
                     <li class="ref-order"><span class="iconfont icon-manage-order"></span><span>我的订单</span></li>
                     <li class="ref-pay"><span class="iconfont icon-jinbi_o"></span><span>充值中心</span></li>
-                    <li class="ref-city"><span class="iconfont icon-logistic-logo"></span><span>城市信息</span></li>
-                    <li class="ref-airport"><span class="iconfont icon-flight2"></span><span>机场信息</span></li>
-                    <li class="ref-flight"><span class="iconfont icon-terminal"></span><span>航班信息</span></li>
-                    <li class="ref-user"><span class="iconfont icon-user-group"></span><span>用户信息</span></li>
-                    <li class="ref-add"><span class="iconfont icon-database-plus"></span><span>添加信息</span></li>
+                    <li th:if="${session.permission}==1" class="ref-city"><span class="iconfont icon-logistic-logo"></span><span>城市信息</span></li>
+                    <li th:if="${session.permission}==1" class="ref-airport"><span class="iconfont icon-flight2"></span><span>机场信息</span></li>
+                    <li th:if="${session.permission}==1" class="ref-flight"><span class="iconfont icon-terminal"></span><span>航班信息</span></li>
+                    <li th:if="${session.permission}==1" class="ref-user"><span class="iconfont icon-user-group"></span><span>用户信息</span></li>
+                    <li th:if="${session.permission}==1" class="ref-add"><span class="iconfont icon-database-plus"></span><span>添加信息</span></li>
                 </ul>
             </nav>
             <section class="inner">

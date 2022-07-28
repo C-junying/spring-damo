@@ -15,7 +15,7 @@
 
     <select id="selectAllAirports" resultMap="airportMap">
         select *
-        from airport left join terminal on airport.airport_id = terminal.airport_id
+        from airport join terminal on airport.airport_id = terminal.airport_id
     </select>
     <select id="airportSearch" resultMap="airportMap">
         select *

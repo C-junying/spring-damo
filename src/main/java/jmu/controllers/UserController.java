@@ -21,8 +21,9 @@ public class UserController extends BaseController{
     private UserService userService;
 
     @RequestMapping(value = {"/","/login",""})
-    public ModelAndView loginPage(){
+    public ModelAndView loginPage(HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
+        session.invalidate();
         modelAndView.setViewName("login");
         return modelAndView;
     }
