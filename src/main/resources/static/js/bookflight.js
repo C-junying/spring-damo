@@ -73,14 +73,62 @@ $(function(){
         $("#startCity").val($("#endCity").val());
         $("#endCity").val(temp);
     });
-    $(".pa_td").click(function(){
+    var flight_infor = {};
+    var user_passenger = [];
+    var passenger_flag = [];
+    $(".flight-book").click(function(){
         $(".book-flight").hide(400);
         $(".book-passenger").show(400);
+        let list = $(this).parent().children();
+        flight_infor = {
+            "onFlightID":list[0].innerHTML,
+            "typeName":list[1].innerHTML,
+            "startStationName":list[2].innerHTML,
+            "estimatedTakeoffTime":list[3].innerHTML,
+            "endStationName":list[4].innerHTML,
+            "estimatedArrivalTime":list[5].innerHTML,
+            "ticketPricing":list[7].innerHTML,
+            "discount":list[8].innerHTML,
+            "insuranceCosts":list[9].innerHTML,
+            "ticketCost":parseInt(list[7].innerHTML)-parseInt(list[8].innerHTML)+parseInt(list[9].innerHTML),
+            "ticketTypeID":list[10].innerHTML,
+            "remainingTickets":list[6].innerHTML
+        };
+        $.ajax({
+            url: "/user/query-passenger",
+            type: "post",
+            data: '',
+            dataType: "json",
+            // contentType : 'application/json',
+            success:function (json){
+                if(json.state == 200){
+                    user_passenger = json.data;
+                    console.log(user_passenger);
+                    let html = "";
+                    for(let i of user_passenger){
+                        html = html +`<li class="append-li"><span>${i.passengerName}</span><span>${i.passengerID}</span><span></span><span>${i.phone}</span></li>`;
+                    }
+                    console.log(html);
+                    $(".pa_btn .append-ul").html(html);
+                }else{
+                    alert(json.message);
+                }
+            },
+            error:function (xhr){
+                alert("返回时产生未知的异常",xhr.message);
+            }
+        });
     });
-    // 绑定删除图片的点击效果
+    // 绑定删除图标的点击效果
     $("table").delegate(".td_delete","click",function(){
         if(confirm("确定要删除吗?")) {
             $(this).parent().remove();
+            let list = $(this);
+            for(let i = 0;i<user_passenger.length;i++){
+                if(user_passenger[i].passengerID == $.trim(list[1].innerHTML)){
+                    passenger_flag[i] = false;
+                }
+            }
         }
     });
     $(".pa_btn button").click(function(e){
@@ -90,25 +138,52 @@ $(function(){
     $("body").click(function(){
         $(".append").hide(400);
     });
-    $(".append li").click(function(){
+    $(".book-passenger").delegate(".append-li","click",function (){
         $(".append").hide(400);
         let list = $(this).children();
-        let html = `<tr><td>${list[0].innerHTML}</td><td>${list[1].innerHTML}</td><td>${list[2].innerHTML}</td><td class="pa_td td_delete"><span class="iconfont icon-shanchu_o"></span></td></tr>`;
-        $(".pa_ta table").append(html);
+        let html = `<tr class="table-tr"><td>${list[0].innerHTML}</td><td>${list[1].innerHTML}</td><td>${list[3].innerHTML}</td><td class="pa_td td_delete"><span class="iconfont icon-shanchu_o"></span></td></tr>`;
+        for(let i = 0;i<user_passenger.length;i++){
+            if(user_passenger[i].passengerID == $.trim(list[1].innerHTML)){
+                if(passenger_flag[i]!= null && passenger_flag[i]){
+                    alert("该乘机人已添加："+$.trim(list[1].innerHTML));
+                    return false;
+                }else{
+                    passenger_flag[i] = true;
+                }
+            }
+        }
+        $(".book-passenger .pa_ta table").append(html);
     });
+    var passIDList = [];
     // 乘机人上一步
     $(".flight-prev").click(function(){
         $(".book-passenger").hide(400);
         $(".book-flight").show(400);
+        $(".book-passenger .pa_ta table .table-tr").remove();
     });
     // 乘机人下一步提示
     $(".flight-next").click(function(){
         let tr = $(".book-passenger table tr");
-        console.log(tr);
         if(tr.length<=1){
             alert("请添加乘机人");
             return false;
         }
+        for(let i = 1;i<tr.length;i++){
+            let value = $(tr[i]).children();
+            let html = "";
+            html = html +`<ul><li><span>乘机人</span><span>${$.trim(value[0].innerHTML)}</span><span></span><span>${$.trim(value[1].innerHTML)}</span></li><li><span>联系人手机</span><span>${$.trim(value[2].innerHTML)}</span></li></ul>`
+            passIDList.push($.trim(value[1].innerHTML));
+            $(".order-ul").append(html);
+        }
+        $("#ticketTypeID").val(flight_infor.onFlightID);
+        $("#startStation").val(flight_infor.startStationName);
+        $("#endStation").val(flight_infor.endStationName);
+        $("#takeoffTime").val(flight_infor.estimatedTakeoffTime);
+        $("#arrivalTime").val(flight_infor.estimatedArrivalTime);
+        $("#ticketPricing").val(flight_infor.ticketPricing);
+        $("#discount").val(flight_infor.discount);
+        $("#insuranceCosts").val(flight_infor.insuranceCosts);
+        $("#ticketCost").val(flight_infor.ticketCost);
         $(".book-passenger").hide(400);
         $(".book-order").show(400);
     });
@@ -116,6 +191,37 @@ $(function(){
     $(".order-prev").click(function(){
         $(".book-order").hide(400);
         $(".book-passenger").show(400);
+        $(".order-ul ul").remove();
+    });
+    $(".book-order .form-submit").click(function (){
+        let flight_key = [];
+        let flight_value = [];
+        for(let i in flight_infor){
+            flight_key.push(i);
+            flight_value.push(flight_infor[i]);
+        }
+        $.ajax({
+            url: "/user/order-create",
+            type: "post",
+            data: {
+                "flight_kay":JSON.stringify(flight_key),
+                "flight_value":JSON.stringify(flight_value),
+                "passList":JSON.stringify(passIDList)
+            },
+            dataType: "json",
+            // contentType : 'application/json',
+            success:function (json){
+                if(json.state == 200){
+                    console.log(json);
+
+                }else{
+                    alert(json.message);
+                }
+            },
+            error:function (xhr){
+                alert("返回时产生未知的异常",xhr.message);
+            }
+        });
     });
 });
 // 获取数据，添加标签

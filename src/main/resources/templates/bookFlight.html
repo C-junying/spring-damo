@@ -99,7 +99,11 @@
                                         <td th:text="${item.ticketType.endStationName}">上海浦东国际机场T2</td>
                                         <td th:text="${item.estimatedArrivalTime}">2022-07-25 20:00:00</td>
                                         <td th:text="${item.ticketType.remainingTickets}">123</td>
-                                        <td class="pa_td"><span class="iconfont icon-cart-Empty"></span></td>
+                                        <td th:text="${item.ticketType.ticketPricing}" style="display: none;"></td>
+                                        <td th:text="${item.ticketType.discount}" style="display: none;"></td>
+                                        <td th:text="${item.ticketType.insuranceCosts}" style="display: none;"></td>
+                                        <td th:text="${item.ticketType.ticketTypeID}" style="display: none;"></td>
+                                        <td class="pa_td flight-book"><span class="iconfont icon-cart-Empty"></span></td>
                                     </tr>
                                 </table>
                             </div>
@@ -115,19 +119,15 @@
                                     <button type="button"><span class="iconfont icon-add"></span>添加乘机人</button>
                                     <div class="append">
                                         <ul class="append-ul">
-                                            <li><span>张三</span><span>123456789123456789</span><span>12345678912</span></li>
-                                            <li><span>张三</span><span>123456789123456789</span><span>12345678912</span></li>
-                                            <li><span>张三</span><span>123456789123456789</span><span>12345678912</span></li>
+                                            <li><span>张三</span><span>123456789123456789</span><span></span><span>12345678912</span></li>
+                                            <li><span>张三</span><span>123456789123456789</span><span></span><span>12345678912</span></li>
+                                            <li><span>张三</span><span>123456789123456789</span><span></span><span>12345678912</span></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="pa_ta">
                                     <table>
                                         <tr><th>姓名</th><th>账号</th><th>手机号</th><th>删除</th></tr>
-                                        <tr><td>张三</td><td>123456789123456789</td><td>12345678912</td><td class="pa_td td_delete"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                        <tr><td>李四</td><td>123456789123456789</td><td>12345678912</td><td class="pa_td td_delete"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                        <tr><td>王五</td><td>123456789123456789</td><td>12345678912</td><td class="pa_td td_delete"><span class="iconfont icon-shanchu_o"></span></td></tr>
-                                        <tr><td>李白</td><td>123456789123456789</td><td>12345678912</td><td class="pa_td td_delete"><span class="iconfont icon-shanchu_o"></span></td></tr>
                                     </table>
                                 </div>
                             </div>
@@ -189,14 +189,6 @@
                                             <div class="flight-head">
                                                 <span>乘机人</span>
                                             </div>
-                                            <ul>
-                                                <li><span>乘机人</span><span>姓名</span><span></span><span>身份证</span></li>
-                                                <li><span>联系人手机</span><span>12345679812</span></li>
-                                            </ul>
-                                            <ul>
-                                                <li><span>乘机人</span><span>姓名</span><span></span><span>身份证</span></li>
-                                                <li><span>联系人手机</span><span>12345679812</span></li>
-                                            </ul>
                                         </div>
                                     </section>
                                     <section class="form-group">

@@ -1,18 +1,20 @@
 package jmu.service.impl;
 
+import com.mysql.cj.xdevapi.JsonArray;
 import jmu.mapper.OnFlightMapper;
 import jmu.mapper.PassengerMapper;
 import jmu.mapper.UserMapper;
-import jmu.pojo.OnFlight;
-import jmu.pojo.Passenger;
-import jmu.pojo.User;
+import jmu.pojo.*;
 import jmu.service.UserService;
 import jmu.service.ex.*;
+import jmu.utils.UUIDUtils;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -144,5 +146,32 @@ public class UserServiceImpl implements UserService {
         arrive = arrive+" 24:00:00";
         List<OnFlight> list =  onFlightMapper.queryTakeoffAndArrive(startCityName,endCityName,takeoff,arrive);
         return list;
+    }
+
+    @Override
+    public void orderCreate(String flight_kay, String flight_value, String passList,String userID) {
+        JSONArray jsonArray_key = JSONArray.fromObject(flight_kay);
+        JSONArray jsonArray_value = JSONArray.fromObject(flight_value);
+        JSONArray jsonPassList = JSONArray.fromObject(passList);
+        Order order = new Order();
+        AirTicket airTicket = new AirTicket();
+        String uuid = UUIDUtils.getUUID(16);
+        Integer cost = jsonPassList.size()*jsonArray_value.getInt(9);
+        order.setOrderID(uuid);
+        order.setUserID(userID);
+        order.setOrderCosts(cost);
+        order.setPaymentStatus("已支付");
+//        private String airTicketID;        //用户机票(身份证)
+//    private String passengerID;         //乘机人ID
+//    private String orderID;            //订单ID
+//    private String ticketTypeID;       //机票类型ID
+//    private Integer totalCosts;         //总费用
+//    private Integer seatNumber;          //座位号
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//    private Date bookTime;              //订票时间
+//    private Integer cabinID;            //舱位ID
+        airTicket.setAirTicketID(userID);
+        airTicket.setOrderID(uuid);
+        airTicket.setPassengerID("ads");
     }
 }

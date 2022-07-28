@@ -33,4 +33,6 @@ public interface UserService {
      * @return
      */
     List<OnFlight> queryTakeoffAndArrive(String startCityName,String endCityName,String takeoff,String arrive);
+
+    void orderCreate(String flight_infor,String flight_value,String passList,String userID);    //订单生成
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RestController
@@ -117,7 +118,19 @@ public class UserController extends BaseController{
         modelAndView.addObject("show",1);
         return modelAndView;
     }
-
+    @RequestMapping("/query-passenger")
+    public JsonResult<List<Passenger>> queryPassenger(HttpSession session){
+        List<Passenger> result = userService.userPassenger(getUserIDFromSession(session));
+        return new JsonResult<>(OK,result);
+    }
+    @RequestMapping("/order-create")
+    public JsonResult<Void> orderCreate(@RequestParam("flight_kay")String flight_kay,
+                                        @RequestParam("flight_value")String flight_value,
+                                        @RequestParam("passList") String passList,
+                                        HttpSession session){
+        userService.orderCreate(flight_kay,flight_value,passList,getUserIDFromSession(session));
+        return new JsonResult<>(OK);
+    }
 }
 /**
  * 使用@RequestBody总会报错，类型不匹配

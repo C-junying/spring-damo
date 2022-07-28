@@ -404,3 +404,13 @@ section.inner section.form-group button{
 .addbg{
     background-color: #C1E5FF;
 }
+.book-passenger .append {
+    width: 30%;
+    top: 50px;
+}
+.book-passenger .append ul li{
+    grid-template-columns: 1fr 2fr;
+}
+.passenger .pa_ta{
+    min-height: 300px;
+}
