@@ -1,5 +1,7 @@
 package jmu.controllers;
 
+import jmu.pojo.City;
+import jmu.pojo.OnFlight;
 import jmu.pojo.Passenger;
 import jmu.pojo.User;
 import jmu.service.UserService;
@@ -95,6 +97,27 @@ public class UserController extends BaseController{
     public JsonResult<Void> userOrder(){
         return new JsonResult<>(OK);
     }
+    @RequestMapping("/flight")
+    public ModelAndView userFlightView(){
+        return new ModelAndView("bookFlight").addObject("show",0);
+    }
+    @RequestMapping("/user_flight")
+    public ModelAndView userFlight(@RequestParam("startCity")String startCity,
+                                   @RequestParam("endCity")String endCity,
+                                   @RequestParam("date")String date){
+        ModelAndView modelAndView = new ModelAndView("bookFlight");
+        List<OnFlight> list = userService.queryTakeoffAndArrive(startCity,endCity,date,date);
+        if(list.size() == 0){
+            modelAndView.addObject("msg","没有任何航班信息");
+        }
+        modelAndView.addObject("startCity",startCity);
+        modelAndView.addObject("endCity",endCity);
+        modelAndView.addObject("date",date);
+        modelAndView.addObject("flightList",list);
+        modelAndView.addObject("show",1);
+        return modelAndView;
+    }
+
 }
 /**
  * 使用@RequestBody总会报错，类型不匹配

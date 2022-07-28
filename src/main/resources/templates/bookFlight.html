@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="cn" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <title>首页</title>
@@ -16,22 +16,23 @@
             <div class="home_box">
                 <header>
                     <section class="title">
-                        <embed src="img/airplane-log.svg" type="image/svg+xml" />
+                        <embed th:src="@{/img/airplane-log.svg}" type="image/svg+xml" />
                         <h2>人人航空</h2>
                     </section>
                     <nav class="menu">
                         <ul>
-                            <li><a href="#">首页</a></li>
+                            <li><a href="/user/home">首页</a></li>
                             <li><a href="#">预订机票</a></li>
                             <li><a href="#">我的订单</a></li>
-                            <li><a href="#">个人中心</a></li>
+                            <li><a href="/user/user_center">个人中心</a></li>
                         </ul>
                     </nav>
                     <aside class="login_register">
-                        <ul>
-                            <li><a href="#">注册</a></li>
-                            <li><a href="#">登录</a></li>
+                        <ul th:if="${session.userID} == null">
+                            <li><a href="/user/login">注册</a></li>
+                            <li><a href="/user/login">登录</a></li>
                         </ul>
+                        <span th:if="${session.userID} != null">欢迎，[[${session.userName}]]</span>
                     </aside>
                 </header>
                 <div class="box-shadow"></div>
@@ -52,12 +53,20 @@
                             <hr color="#17C0EB" />
                             <div class="or_box">
                                 <div class="city">
-                                    <input class="city_in" type="text" id="startCity" placeholder="出发城市" name="startCity"/>
+                                    <input class="city_in" type="text" id="startCity" th:value="${startCity}" onclick="getContent(this);" onKeyup="getContent(this);" placeholder="出发城市" name="startCity"/>
                                     <div class="or_ex swap">
                                         <span class="iconfont icon-exchange4jiaohuan or_ex_btn"></span>
                                     </div>
-                                    <input class="city_in" id="endCity" type="text" placeholder="到达城市" name="endCity" />
-                                    <button class="city_in calendar-item" id="bu_city" type="button" name="date">选择日期</button>
+                                    <input class="city_in" id="endCity" th:value="${endCity}" type="text" onclick="getContent2(this);" onKeyup="getContent2(this);" placeholder="到达城市" name="endCity" />
+                                    <button class="city_in calendar-item" id="takeoffDate" th:text="${date}" type="button" name="date">选择日期</button>
+                                </div>
+                                <div class="append start-app">
+                                    <ul class="append-ul start-ul">
+                                    </ul>
+                                </div>
+                                <div class="append end-app">
+                                    <ul class="append-ul end-ul">
+                                    </ul>
                                 </div>
                                 <div class="or_que">
                                     <button class="flight-query" type="button">查询</button>
@@ -65,24 +74,33 @@
                             </div>
                             
                         </div>
-                        <div class="flight-head">
+                        <div class="flight-head" th:if="${show}!=0">
                             <div>
                                 <span>单程：</span>
-                                <span class="flight-takeoff">厦门</span>
+                                <span class="flight-takeoff" th:text="${startCity}">厦门</span>
                                 <span class="iconfont icon-jiantou_xiangyouliangci"></span>
-                                <span class="flight-arrive">上海</span>
+                                <span class="flight-arrive" th:text="${endCity}">上海</span>
                             </div>
-                            <span>2022-7-16</span>
+                            <span th:text="${date}">2022-7-16</span>
                         </div>
-                        <div class="passenger">
+                        <div class="flight-warning" th:if="${msg}!=null and ${show}!=0">
+                            <span class="iconfont icon-warning"></span>
+                            <span>没有任何航班</span>
+                        </div>
+                        <div class="passenger" th:if="${msg}==null and ${show}!=0">
                             <div class="pa_ta">
                                 <table>
                                     <tr><th>航班号</th><th>机型</th><th>起飞地址</th><th>起飞时间</th><th>到达地址</th><th>到达时间</th><th>余票</th><th>预订</th></tr>
-                                    <tr><td>CA1789</td><td>波音767</td><td>厦门高崎国际机场T2</td><td>2022-07-25 18:00:00</td><td>上海浦东国际机场T2</td><td>2022-07-25 20:00:00</td><td>123</td><td class="pa_td"><span class="iconfont icon-cart-Empty"></span></td></tr>
-                                    <tr><td>CA1789</td><td>波音767</td><td>厦门高崎国际机场T2</td><td>2022-07-25 18:00:00</td><td>上海浦东国际机场T2</td><td>2022-07-25 20:00:00</td><td>123</td><td class="pa_td"><span class="iconfont icon-cart-Empty"></span></td></tr>
-                                    <tr><td>CA1789</td><td>波音767</td><td>厦门高崎国际机场T2</td><td>2022-07-25 18:00:00</td><td>上海浦东国际机场T2</td><td>2022-07-25 20:00:00</td><td>123</td><td class="pa_td"><span class="iconfont icon-cart-Empty"></span></td></tr>
-                                    <tr><td>CA1789</td><td>波音767</td><td>厦门高崎国际机场T2</td><td>2022-07-25 18:00:00</td><td>上海浦东国际机场T2</td><td>2022-07-25 20:00:00</td><td>123</td><td class="pa_td"><span class="iconfont icon-cart-Empty"></span></td></tr>
-                                    
+                                    <tr th:each="item:${flightList}">
+                                        <td th:text="${item.onFlightID}">CA1789</td>
+                                        <td th:text="${item.typeID}">波音767</td>
+                                        <td th:text="${item.ticketType.startStationName}">厦门高崎国际机场T2</td>
+                                        <td th:text="${item.estimatedTakeoffTime}">2022-07-25 18:00:00</td>
+                                        <td th:text="${item.ticketType.endStationName}">上海浦东国际机场T2</td>
+                                        <td th:text="${item.estimatedArrivalTime}">2022-07-25 20:00:00</td>
+                                        <td th:text="${item.ticketType.remainingTickets}">123</td>
+                                        <td class="pa_td"><span class="iconfont icon-cart-Empty"></span></td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>

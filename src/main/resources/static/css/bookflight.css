@@ -5,92 +5,101 @@
     width: 920px;
 }
 .or_content{
-	min-height: 150px;
-	margin-top: 20px;
+    min-height: 150px;
+    margin-top: 20px;
     margin-bottom: 20px;
-	padding: 15px 20px;
-	border-radius: 20px;
-	background-color: #FFF;
-	box-shadow: 2px 2px 10px 1px #d1ccc0;
+    padding: 15px 20px;
+    border-radius: 20px;
+    background-color: #FFF;
+    box-shadow: 2px 2px 10px 1px #d1ccc0;
 }
 .t_form{
-	margin-top: 10px;
+    margin-top: 10px;
 }
 .t_form button{
-	border:none;
-	border-radius: 20px;
-	width: 80px;
-	height: 40px;
-	margin-left: 10px;
+    border:none;
+    border-radius: 20px;
+    width: 80px;
+    height: 40px;
+    margin-left: 10px;
 }
 .t_form .btn{
-	color: #30336B;
-	font-size: 15px;
+    color: #30336B;
+    font-size: 15px;
     cursor: pointer;
-	background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+    background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
 }
 .or_box{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 .city{
-	clear: both;
-	font-size: 15px;
-	color: #474787;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    clear: both;
+    font-size: 15px;
+    margin-top: 20px;
+    color: #474787;
+}
+.city *{
+    margin-right: 10px;
 }
 .city .city_in{
-	margin-top: 20px;
-	padding: 10px;
-	border-radius: 20px;
-	border: 1px dashed #bdc3c7;
-	width: 170px;
+    height: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px dashed #bdc3c7;
+    width: 170px;
 }
 .city .city_in:focus{
-	outline: none;
+    outline: none;
 }
 .city .calendar-item{
-	height: 38px;
-	color: #757575;
-	font-size: 15px;
-	padding-top: 6px;
-	text-align: left;
-	background-color: #FFFFFF;
+    height: 38px;
+    color: #757575;
+    font-size: 0.9rem;
+    padding-top: 6px;
+    text-align: left;
+    background-color: #FFFFFF;
 }
 
 .or_ex{
-	display: inline;
-	margin:0 5px;
+    display: inline-block;
+    height: 20px;
+    margin-right: 0;
     cursor: pointer;
-	padding-top: 10px;
     user-select: none;
 }
 .or_ex .or_ex_btn{
-	border: none;
-	padding: 5px 15px;
+    border: none;
+    padding: 5px 15px;
     color: #1389ff;
     font-size: 1.3rem;
     font-weight: bold;
-	border-radius: 25px;
-	background-color: #d3ecff;
+    border-radius: 25px;
+    background-color: #d3ecff;
 }
 .or_pl_content{
-	min-height: 400px;
-	margin-top: 20px;
-	padding: 1px 10px;
-	border-radius: 20px;
+    min-height: 400px;
+    margin-top: 20px;
+    padding: 1px 10px;
+    border-radius: 20px;
 }
 .flight-query{
-	width: 120px;
-	height: 40px;
-	font-size: 1.1rem;
-	border: none;
-	border-radius: 25px;
+    width: 120px;
+    height: 40px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 25px;
     margin-top: 10px;
     margin-right: 100px;
     color: #FFF;
     cursor: pointer;
-	background-image: linear-gradient(to right, #f9d423 0%, #ff4e50 100%);
+    background-image: linear-gradient(to right, #f9d423 0%, #ff4e50 100%);
 }
 /* 设置标题盒子 */
 section.inner div.icon{
@@ -135,10 +144,10 @@ section.inner div.icon div::after{
     justify-content: space-around;
     align-items: center;
     height: 40px;
-	padding: 0 20px;
-	color: #FFF;
-	line-height: 38px;
-	background-color: #2f71bd;
+    padding: 0 20px;
+    color: #FFF;
+    line-height: 38px;
+    background-color: #2f71bd;
 }
 .select-container form .city{
     width: 75%;
@@ -225,7 +234,7 @@ section.inner div.icon div::after{
 .book-order{
     display: none;
 }
- /* 内容 */
+/* 内容 */
 .inner .order{
     display: block;
 }
@@ -289,7 +298,7 @@ section.inner div.icon div::after{
 }
 /* 添加动画 */
 @-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0} 
+    from {top:-300px; opacity:0}
     to {top:0; opacity:1}
 }
 
@@ -337,4 +346,61 @@ section.inner div.icon div::after{
 }
 section.inner section.form-group button{
     width: 125px;
+}
+.flight-warning{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.flight-warning span{
+    font-size: 15rem;
+    color: #ec971f;
+}
+.flight-warning span:last-child{
+    font-size: 3rem;
+}
+#takeoffDate{
+    width: 170px;
+    height:40px;
+    font-size: 0.9rem;
+    line-height: 0;
+    padding: 10px;
+    margin: 0;
+}
+
+/* search */
+/* 搜索 */
+.append{
+    display: none;
+    position: absolute;
+    top: 65px;
+    width: 20%;
+    height: 200px;
+    overflow-y: scroll;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 18%);
+    padding: 12px 10px;
+    background-color: #FFF;
+    z-index: 1;
+}
+.append ul li{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    padding: 10px 5px;
+    font-size: 0.8rem;
+    color: #000;
+    transition: all .5s;
+    cursor: pointer;
+    background-color: #FFF;
+}
+.append ul li:hover{
+    background-color: #C1E5FF;
+}
+.end-app{
+    left: 260px;
+}
+.addbg{
+    background-color: #C1E5FF;
 }

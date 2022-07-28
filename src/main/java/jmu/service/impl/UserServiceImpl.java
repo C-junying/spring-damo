@@ -1,7 +1,9 @@
 package jmu.service.impl;
 
+import jmu.mapper.OnFlightMapper;
 import jmu.mapper.PassengerMapper;
 import jmu.mapper.UserMapper;
+import jmu.pojo.OnFlight;
 import jmu.pojo.Passenger;
 import jmu.pojo.User;
 import jmu.service.UserService;
@@ -19,6 +21,8 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Autowired
     private PassengerMapper passengerMapper;
+    @Autowired
+    private OnFlightMapper onFlightMapper;
     @Override
     public List<User> selectAll() {
         return userMapper.selectAll();
@@ -132,5 +136,13 @@ public class UserServiceImpl implements UserService {
         if(rows != 1){
             throw new PayException("支付异常");
         }
+    }
+
+    @Override
+    public List<OnFlight> queryTakeoffAndArrive(String startCityName, String endCityName, String takeoff, String arrive) {
+        takeoff = takeoff+" 00:00:00";
+        arrive = arrive+" 24:00:00";
+        List<OnFlight> list =  onFlightMapper.queryTakeoffAndArrive(startCityName,endCityName,takeoff,arrive);
+        return list;
     }
 }

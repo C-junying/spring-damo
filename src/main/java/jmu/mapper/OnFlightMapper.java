@@ -24,5 +24,5 @@ public interface OnFlightMapper {
 
     //A->B航班航线信息。当参数为空，则查询所有航班航线
     List<OnFlight> queryOnfligthAndTicket(String startCityName,String endCityName);
-
+    List<OnFlight> queryTakeoffAndArrive(String startCityName,String endCityName,String takeoff,String arrive);
 }

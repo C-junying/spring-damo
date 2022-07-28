@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+        <title>首页</title>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/iconfont.css">
+        <link rel="stylesheet" href="css/home.css">
+        <link rel="stylesheet" href="css/bookflight.css">
+        <style>
+            .order-icon{
+                text-align: center;
+            }
+            .order-icon span{
+                font-size: 20rem;
+                color: #5cb85c;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="home_container">
+            <div class="home_box">
+                <header>
+                    <section class="title">
+                        <embed th:src="@{/img/airplane-log.svg}" type="image/svg+xml" />
+                        <h2>人人航空</h2>
+                    </section>
+                    <nav class="menu">
+                        <ul>
+                            <li><a href="/user/home">首页</a></li>
+                            <li><a href="#">预订机票</a></li>
+                            <li><a href="#">我的订单</a></li>
+                            <li><a href="/user/user_center">个人中心</a></li>
+                        </ul>
+                    </nav>
+                    <aside class="login_register">
+                        <ul th:if="${session.userID} == null">
+                            <li><a href="/user/login">注册</a></li>
+                            <li><a href="/user/login">登录</a></li>
+                        </ul>
+                        <span th:if="${session.userID} != null">欢迎，[[${session.userName}]]</span>
+                    </aside>
+                </header>
+                <div class="box-shadow"></div>
+            </div>
+            <div class="home_box">
+                <main>
+                    <section class="inner book-passenger" style="display: block;">
+                        <div class="or_content">
+                            <div class="flight-head">
+                                <span>订单成功</span>
+                            </div>
+                            <div class="order-icon">
+                                <span class="iconfont icon-success"></span>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,5 +1,6 @@
 package jmu.service;
 
+import jmu.pojo.OnFlight;
 import jmu.pojo.Passenger;
 import jmu.pojo.User;
 
@@ -22,4 +23,14 @@ public interface UserService {
     void passengerDelete(String userID,String passengerID); //删除乘机人
 
     void userPay(String userID,Integer balance);    //充值
+
+    /**
+     * 根据起始终止地以及时间查询
+     * @param startCityName 起始城市
+     * @param endCityName   到达城市
+     * @param takeoff   最早时间
+     * @param arrive    最晚时间
+     * @return
+     */
+    List<OnFlight> queryTakeoffAndArrive(String startCityName,String endCityName,String takeoff,String arrive);
 }

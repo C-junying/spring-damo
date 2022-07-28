@@ -90,4 +90,9 @@ class OnFlightMapperTest {
         List<OnFlight> list = onFlightMapper.queryOnfligthAndTicket("厦门市","上海市");
         System.out.println(list);
     }
+    @Test
+    void queryTakeoffAndArrive() throws ParseException {
+        List<OnFlight> list = onFlightMapper.queryTakeoffAndArrive("厦门市","上海市","2022-08-25 00:00:00","2022-08-25 24:00:00");
+        System.out.println(list);
+    }
 }

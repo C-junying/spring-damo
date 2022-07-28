@@ -361,3 +361,37 @@ section.query_float .btns span{
     text-align: left;
     background-color: #FFF;
 }
+/* 搜索 */
+.append{
+    display: none;
+    position: absolute;
+    top: 120px;
+    width: 50%;
+    height: 200px;
+    overflow-y: scroll;
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 18%);
+    padding: 12px 10px;
+    background-color: #FFF;
+    z-index: 1;
+}
+.append ul li{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    padding: 10px 5px;
+    font-size: 0.8rem;
+    color: #000;
+    transition: all .5s;
+    cursor: pointer;
+    background-color: #FFF;
+}
+.append ul li:hover{
+    background-color: #C1E5FF;
+}
+.end-app{
+    top: 178px;
+}
+.addbg{
+    background-color: #C1E5FF;
+}

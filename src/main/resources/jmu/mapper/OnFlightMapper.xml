@@ -78,4 +78,16 @@
             <if test="endCityName!=null and endCityName!=''">and end_city=#{endCityName}</if>
         </where>
     </select>
+    <select id="queryTakeoffAndArrive" resultMap="onfligthAndTicket">
+        select air_onflight.*,start_city,start_airport,start_terminal,end_city,end_airport,end_terminal
+        ,ticket_pricing,discount,insurance_costs,ticket_count,remaining_tickets
+        from air_onflight left join air_start_airport on air_onflight.ticket_type_id = air_start_airport.ticket_type_id
+        left join air_end_airport on air_start_airport.ticket_type_id = air_end_airport.ticket_type_id
+        <where>
+            <if test="startCityName!=null and startCityName!=''">and start_city =#{startCityName}</if>
+            <if test="endCityName!=null and endCityName!=''">and end_city=#{endCityName}</if>
+            <if test="takeoff!=null and takeoff!=''">and estimated_takeoff_time &gt;= #{takeoff}</if>
+            <if test="arrive!=null and arrive!=''">and estimated_takeoff_time  &lt;= #{arrive}</if>
+        </where>
+    </select>
 </mapper>
